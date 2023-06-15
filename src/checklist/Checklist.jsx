@@ -1,6 +1,6 @@
 import { Await, useLoaderData } from "react-router-dom";
 import "./Checklist.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Checklist() {
   const data = useLoaderData();
@@ -11,40 +11,49 @@ export default function Checklist() {
       <Await
         resolve={data.checklistData}
         errorElement={<p>Error loading checklist data</p>}
-        children={(item) => <ChecklistWrapper item={item} />}
+        children={(item) => <ChecklistRoot item={item} />}
       />
     </React.Suspense>
   );
 }
 
-function ChecklistWrapper({ item }) {
-  console.log("checklistwrapper", item);
+function ChecklistRoot({ item }) {
+    const [itemState, setItemState] = useState(item);
+    useEffect(() => {
+        console.log('re-rendering root', JSON.stringify(itemState, null, 2))
+    })
   const onChecked = (value, id) => {
-    console.log("checklistwrapper item checked", id, value);
-    item.checked = item;
+    console.log("checklistwrapper item checked", item.title, value);
+    // item.checked = item;
+    setItemState({ ...itemState, checked: value });
   };
   return (
     <section>
       <header>
-        <h2>{item.title}</h2>
+        <h2>{itemState.title}</h2>
       </header>
       <div className="checklist__body">
-        <ChecklistItem checkable={item} onChecked={onChecked} />
+        <ChecklistItem item={itemState} onChecked={onChecked} />
       </div>
     </section>
   );
 }
 
-function ChecklistItem({ checkable, onChecked }) {
-  console.log("checklistitem", checkable);
+function ChecklistItem({ item: checklistItem, onChecked }) {
+  const [checkable, setCheckable] = useState(checklistItem);
+  useEffect(() => {
+    console.log('re-rendering item', checkable.checked, checkable.title)
+})
+  const onSelfChecked = (value) => {
+    console.log('selfchecked', value);
+    setCheckable({ ...checkable, checked: true });
+    onChecked(value, checkable.id);
+  };
 
   const onChildChecked = (value, id) => {
-    console.log("checklistitem checked", value, id);
     checkable.items.find((item) => item.id === id).checked = value;
-    onChecked(
-      checkable.items.every((item) => item.checked),
-      checkable.id
-    );
+
+    onSelfChecked(checkable.items.every((item) => item.checked));
   };
 
   return (
@@ -54,17 +63,14 @@ function ChecklistItem({ checkable, onChecked }) {
           <span className="label__text">{checkable.title}</span>
           <input
             type="checkbox"
-            value={checkable.checked}
-            onChange={e => onChecked(e.target.checked, checkable.id)}
+            checked={checkable.checked}
+            onChange={(e) => onSelfChecked(e.target.checked)}
           />
         </label>
       </summary>
+      <h2>checked: {checkable.checked ? 'true' : 'false'}</h2>
       {checkable.items.map((item) => (
-        <ChecklistItem
-          key={item.id}
-          checkable={item}
-          onChecked={onChildChecked}
-        />
+        <ChecklistItem key={item.id} item={item} onChecked={onChildChecked} />
       ))}
       <button>+Add item under {checkable.title}</button>
     </details>
