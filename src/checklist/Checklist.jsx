@@ -46,7 +46,7 @@ function ChecklistItem({ item: checklistItem, onChecked }) {
 })
   const onSelfChecked = (value) => {
     console.log('selfchecked', value);
-    setCheckable({ ...checkable, checked: true });
+    setCheckable({ ...checkable, checked: value });
     onChecked(value, checkable.id);
   };
 
