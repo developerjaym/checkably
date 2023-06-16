@@ -2,5 +2,10 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    column-gap: var(--narrow)
+    column-gap: var(--narrow);
+
+    box-shadow: 2px 3px 8px 2px var(--shadow);
+
+    padding: var(--narrow) var(--wide);
+
 }

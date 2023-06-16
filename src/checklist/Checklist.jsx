@@ -3,6 +3,9 @@ import { Await, useLoaderData } from "react-router-dom";
 import "./Checklist.css";
 import storageService from "../services/storage/StorageService";
 import unflattenData from "../utility/unflattenData";
+import Card from "../reusable/card/Card";
+import CardHeader from "../reusable/card/CardHeader";
+import CardBody from "../reusable/card/CardBody";
 
 export default function Checklist() {
   const data = useLoaderData();
@@ -52,39 +55,52 @@ function ChecklistRoot({ list }) {
     });
   };
   return (
-    <section>
+    <>
       <header>
         <h2>{itemTree.title}</h2>
-        <form className="form" onSubmit={onMetadataChanged}>
-          <label className="label">
-            <span className="label__text">Tags (comma-separated list)</span>
-            <input
-              className="input"
-              type="text"
-              name="tags"
-              defaultValue={itemTree.tags.join(", ")}
-            />
-          </label>
-          <label className="label">
-            <span className="label__text">Description</span>
-            <textarea
-              className="input"
-              name="description"
-              defaultValue={itemTree.description}
-            />
-          </label>
-          <button>Save</button>
-        </form>
       </header>
-      <div className="checklist__body">
-        <ChecklistItem
-          item={itemTree}
-          onChecked={onChecked}
-          onTitleUpdated={onTitleChanged}
-          onItemAdded={onItemAdded}
-        />
-      </div>
-    </section>
+      <section>
+        <Card>
+          <CardHeader title={`Metadata for ${itemTree.title}`} />
+          <CardBody>
+            <form className="form" onSubmit={onMetadataChanged}>
+              <label className="label">
+                <span className="label__text">Tags (comma-separated list)</span>
+                <input
+                  className="input"
+                  type="text"
+                  name="tags"
+                  defaultValue={itemTree.tags.join(", ")}
+                />
+              </label>
+              <label className="label">
+                <span className="label__text">Description</span>
+                <textarea
+                  className="input"
+                  name="description"
+                  defaultValue={itemTree.description}
+                />
+              </label>
+              <button className="button">Save</button>
+            </form>
+          </CardBody>
+        </Card>
+      </section>
+
+      <section className="checklist__body">
+        <Card>
+          <CardHeader title={`Tree for ${itemTree.title}`} />
+          <CardBody>
+            <ChecklistItem
+              item={itemTree}
+              onChecked={onChecked}
+              onTitleUpdated={onTitleChanged}
+              onItemAdded={onItemAdded}
+            />
+          </CardBody>
+        </Card>
+      </section>
+      </>
   );
 }
 
@@ -142,7 +158,7 @@ function ChecklistItem({
           onItemAdded={onItemAdded}
         />
       ))}
-      <button onClick={() => onItemAdded(checkable.id)}>
+      <button className="button" onClick={() => onItemAdded(checkable.id)}>
         +Add item under {checkable.title}
       </button>
     </details>

@@ -1,6 +1,6 @@
 .card__header {
     padding: var(--narrow);
-    background-color: rgb(var(--foreground-rgb));
-    color: rgb(var(--background-rgb));
+    background-color: rgb(var(--accent-background-rgb));
+    color: rgb(var(--accent-foreground-rgb));
     border-radius: var(--radius) var(--radius) 0 0;
   }

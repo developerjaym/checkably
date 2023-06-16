@@ -1,6 +1,10 @@
 :root {
   --background-rgb: 25, 25, 25;
   --foreground-rgb: 255, 255, 255;
+  --accent-background-rgb: 74, 48, 141;
+  --accent-foreground-rgb: 255, 255, 255;
+  --shadow: #00000082;
+
   --narrow: 4px;
   --wide: 16px;
   --radius: 4px;
@@ -16,6 +20,10 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
+}
+
+body {
+  margin: 0;
 }
 
 .form {
@@ -45,9 +53,23 @@
 main {
   display: flex;
   flex-direction: column;
-  row-gap: 16px;
+  row-gap: var(--wide);
+
+  padding: var(--wide);
 }
 
 .input {
   padding: var(--narrow);
+}
+
+.button {
+  background-color: rgb(var(--background-rgb));
+  color: rgb(var(--foreground-rgb));
+
+  border: 1px solid rgb(var(--foreground-rgb));
+
+  padding: var(--narrow) var(--wide);
+  border-radius: var(--radius);
+
+  text-decoration: none;
 }
