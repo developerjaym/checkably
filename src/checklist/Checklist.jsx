@@ -39,7 +39,7 @@ function ChecklistRoot({ list }) {
       .filter(Boolean)
       .map((tag) => tag.toUpperCase().trim());
     storageService
-      .patch(itemState.id, formData)
+      .patch(itemTree.id, formData)
       .then((updatedItem) =>
         setItemState(
           itemState.map((item) => (item.isRoot ? updatedItem : item))
