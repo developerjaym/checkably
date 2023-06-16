@@ -1,0 +1,7 @@
+.card__menu {
+    display: flex;
+    justify-content: flex-end;
+
+    padding: 4px;
+    margin: 0;
+}

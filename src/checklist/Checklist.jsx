@@ -23,8 +23,8 @@ function ChecklistRoot({ list }) {
   const itemTree = unflattenData(itemState)[0]; // unflattenData returns an array of trees, I just need the only element
   const onChecked = (id, checked) => {
     setItemState(
-        itemState.map((item) => (item.id === id ? { ...item, checked } : item))
-      );
+      itemState.map((item) => (item.id === id ? { ...item, checked } : item))
+    );
   };
   const onTitleChanged = (id, title) => {
     setItemState(
@@ -59,6 +59,7 @@ function ChecklistRoot({ list }) {
           <label className="label">
             <span className="label__text">Tags (comma-separated list)</span>
             <input
+              className="input"
               type="text"
               name="tags"
               defaultValue={itemTree.tags.join(", ")}
@@ -66,7 +67,11 @@ function ChecklistRoot({ list }) {
           </label>
           <label className="label">
             <span className="label__text">Description</span>
-            <textarea name="description" defaultValue={itemTree.description} />
+            <textarea
+              className="input"
+              name="description"
+              defaultValue={itemTree.description}
+            />
           </label>
           <button>Save</button>
         </form>
@@ -119,6 +124,7 @@ function ChecklistItem({
             />
           </span>
           <input
+            className="input"
             type="checkbox"
             checked={checkable.checked}
             onChange={(e) => onSelfChecked(e.target.checked)}
