@@ -1,23 +1,15 @@
-export default function flattenData(nestedData) {
-    const flattened = [];
-  
-    function flattenRecursive(item, parent = null) {
-      const flattenedItem = { ...item };
-      delete flattenedItem.items;
-      flattenedItem.parent = parent;
-      flattened.push(flattenedItem);
-  
-      if (item.items && item.items.length > 0) {
-        item.items.forEach(childItem => {
-          flattenRecursive(childItem, item.id);
-        });
-      }
-    }
-  
-    nestedData.forEach(item => {
-      flattenRecursive(item);
-    });
-  
-    return flattened;
+const itemLess = (root) => {
+  const itemLessRoot = {...root};
+  delete itemLessRoot.items;
+  return itemLessRoot;
+}
+export default function flattenData (root) {
+  const flatList = [];
+  if(root.items.length) {
+    flatList.push(
+      ...root.items.map(subRoot => flattenData(subRoot)).flat()
+      )
   }
-  
+  flatList.push(itemLess(root));
+  return flatList;
+}

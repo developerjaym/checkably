@@ -3,7 +3,6 @@ import "./ChecklistResults.css";
 
 export default function ChecklistResults() {
     const data = useLoaderData();
-    console.log('checklistresults', data);
     const checklistCards = data.map(checklistObject => <section className='card' key={checklistObject.id}>
       <header className='card__header'>
   
@@ -17,5 +16,13 @@ export default function ChecklistResults() {
 
       </menu>
     </section>)
-    return (<>{checklistCards}</>)
+    return (<>
+    <section className='search'>
+        <label className='label search__label'>
+          <span className='label__text'>Search</span>
+          <input className='input input--search' type="search"/>
+        </label>
+      </section>
+    {checklistCards}
+    </>)
 }
