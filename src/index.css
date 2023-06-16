@@ -11,6 +11,17 @@
   -webkit-text-size-adjust: 100%;
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+}
+
+.form .label {
+  display: flex;
+  flex-direction: column;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

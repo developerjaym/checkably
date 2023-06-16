@@ -1,7 +1,6 @@
 export default function unflattenData(flattenedData) {
     const map = {};
     const result = [];
-  
     flattenedData.forEach((item) => {
       item.items = [];
       map[item.id] = item;

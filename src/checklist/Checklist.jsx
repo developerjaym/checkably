@@ -22,7 +22,9 @@ function ChecklistRoot({ list }) {
   const [itemState, setItemState] = useState(list);
   const itemTree = unflattenData(itemState)[0]; // unflattenData returns an array of trees, I just need the only element
   const onChecked = (id, checked) => {
-    setItemState({ ...itemState, checked });
+    setItemState(
+        itemState.map((item) => (item.id === id ? { ...item, checked } : item))
+      );
   };
   const onTitleChanged = (id, title) => {
     setItemState(
