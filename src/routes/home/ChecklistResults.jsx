@@ -1,8 +1,10 @@
 import { NavLink, useLoaderData } from "react-router-dom";
 import "./ChecklistResults.css";
+import unflattenData from "../../utility/unflattenData";
 
 export default function ChecklistResults() {
-    const data = useLoaderData();
+    const list = useLoaderData();
+    const data = unflattenData(list);
     const checklistCards = data.map(checklistObject => <section className='card' key={checklistObject.id}>
       <header className='card__header'>
   
