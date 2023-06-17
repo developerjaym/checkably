@@ -129,23 +129,32 @@ function ChecklistItem({
   };
 
   return (
-    <details className="checklist__item">
-      <summary>
+    <details className="checklist__item" open>
+      <summary className="item__summary">
+      <div className="summary__container">
+        
         <label className="label">
-          <span className="label__text">
-            <input
-              type="text"
-              value={checkable.title}
-              onChange={(e) => onSelfTitleUpdated(e.target.value)}
-            />
-          </span>
-          <input
+        <input
             className="input"
             type="checkbox"
             checked={checkable.checked}
             onChange={(e) => onSelfChecked(e.target.checked)}
           />
+          <span className="label__text">
+            <input
+              type="text"
+              className="input item__input"
+              value={checkable.title}
+              onChange={(e) => onSelfTitleUpdated(e.target.value)}
+            />
+          </span>
+          
         </label>
+        <menu className="summary__menu">
+          <button className="button button--icon">🗑</button>
+        </menu>
+
+      </div>
       </summary>
       {checkable.items.map((item) => (
         <ChecklistItem

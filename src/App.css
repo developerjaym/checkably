@@ -1,6 +1,7 @@
 .app__header {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     column-gap: var(--narrow);
 
@@ -8,4 +9,8 @@
 
     padding: var(--narrow) var(--wide);
 
+}
+
+.header__nav {
+    /* margin-left: auto; */
 }

@@ -1,3 +1,32 @@
 .checklist__item {
     margin: 1vw;
 }
+
+.item__input {
+    width: 75%;
+}
+
+.summary__container {
+    display: inline-flex;
+    align-items: center;
+    width: 90%;
+}
+
+.summary__container .label {
+    flex-grow: 2;
+
+    display: flex;
+}
+
+.summary__container .label__text {
+    display: flex;
+    flex-grow: 2;
+}
+
+.summary__container .label__text .item__input {
+    flex-grow: 2;
+}
+
+.summary__menu {
+    padding: 0;
+}

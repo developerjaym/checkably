@@ -22,7 +22,7 @@ export default function ChecklistResults() {
     return (<>
     <section className='search'>
         <label className='label search__label'>
-          <span className='label__text'>Search</span>
+          <span className='label__text'>🔍</span>
           <input className='input input--search' type="search"/>
         </label>
       </section>
