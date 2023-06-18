@@ -1,39 +1,19 @@
-import React, { useState } from "react";
-import { Await, useLoaderData } from "react-router-dom";
-import "./Checklist.css";
-import storageService from "../services/storage/StorageService";
-import unflattenData from "../utility/unflattenData";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Card from "../reusable/card/Card";
-import CardHeader from "../reusable/card/CardHeader";
 import CardBody from "../reusable/card/CardBody";
+import CardHeader from "../reusable/card/CardHeader";
+import storageService from "../services/storage/StorageService";
+import "./Checklist.css";
+import ChecklistTree from "./ChecklistTree";
 
 export default function Checklist() {
-  const data = useLoaderData();
-  return (
-    <React.Suspense fallback={<p>Loading...</p>}>
-      <Await
-        resolve={data.checklistData}
-        errorElement={<p>Error loading checklist data</p>}
-        children={(list) => <ChecklistRoot list={list} />}
-      />
-    </React.Suspense>
-  );
-}
+  const { checklistId } = useParams();
+  const [root, setRoot] = useState(null);
+  useEffect(() => {
+    storageService.readOne(checklistId).then((response) => setRoot(response));
+  }, [checklistId]);
 
-function ChecklistRoot({ list }) {
-  // TODO unflatten here;
-  const [itemState, setItemState] = useState(list);
-  const itemTree = unflattenData(itemState)[0]; // unflattenData returns an array of trees, I just need the only element
-  const onChecked = (id, checked) => {
-    setItemState(
-      itemState.map((item) => (item.id === id ? { ...item, checked } : item))
-    );
-  };
-  const onTitleChanged = (id, title) => {
-    setItemState(
-      itemState.map((item) => (item.id === id ? { ...item, title } : item))
-    );
-  };
   const onMetadataChanged = (e) => {
     e.preventDefault();
     const formData = Object.fromEntries(new FormData(e.target));
@@ -42,26 +22,20 @@ function ChecklistRoot({ list }) {
       .filter(Boolean)
       .map((tag) => tag.toUpperCase().trim());
     storageService
-      .patch(itemTree.id, formData)
-      .then((updatedItem) =>
-        setItemState(
-          itemState.map((item) => (item.isRoot ? updatedItem : item))
-        )
-      );
+      .patch(root.id, formData)
+      .then((updatedItem) => setRoot({ ...root, ...updatedItem }));
   };
-  const onItemAdded = (parentId) => {
-    storageService.post({ parent: parentId }).then((newItem) => {
-      setItemState([...itemState, newItem]);
-    });
-  };
+  if (!root) {
+    return <p>Loading!!!</p>;
+  }
   return (
     <>
       <header>
-        <h2>{itemTree.title}</h2>
+        <h2>{root.title}</h2>
       </header>
       <section>
         <Card>
-          <CardHeader title={`Metadata for ${itemTree.title}`} />
+          <CardHeader title={`Metadata for ${root.title}`} />
           <CardBody>
             <form className="form" onSubmit={onMetadataChanged}>
               <label className="label">
@@ -70,7 +44,7 @@ function ChecklistRoot({ list }) {
                   className="input"
                   type="text"
                   name="tags"
-                  defaultValue={itemTree.tags.join(", ")}
+                  defaultValue={root.tags.join(", ")}
                 />
               </label>
               <label className="label">
@@ -78,7 +52,7 @@ function ChecklistRoot({ list }) {
                 <textarea
                   className="input"
                   name="description"
-                  defaultValue={itemTree.description}
+                  defaultValue={root.description}
                 />
               </label>
               <button className="button">Save</button>
@@ -89,87 +63,22 @@ function ChecklistRoot({ list }) {
 
       <section className="checklist__body">
         <Card>
-          <CardHeader title={`Tree for ${itemTree.title}`} />
+          <CardHeader title={`Tree for ${root.title}`} />
           <CardBody>
-            <ChecklistItem
-              item={itemTree}
-              onChecked={onChecked}
-              onTitleUpdated={onTitleChanged}
-              onItemAdded={onItemAdded}
+            <ChecklistTree
+              node={root}
+              onChecked={(value) => {
+                console.log("the whole thing's checked value", value);
+              }}
+              onDeleted={() => {
+                console.log("whole thing deleted");
+              }}
             />
           </CardBody>
         </Card>
       </section>
-      </>
+    </>
   );
 }
 
-function ChecklistItem({
-  item: checklistItem,
-  onChecked,
-  onTitleUpdated,
-  onItemAdded,
-}) {
-  const [checkable, setCheckable] = useState(checklistItem);
-  const onSelfChecked = (checked) => {
-    storageService.patch(checklistItem.id, { checked });
-    setCheckable({ ...checkable, checked });
-    onChecked(checkable.id, checked);
-  };
 
-  const onSelfTitleUpdated = (title) => {
-    storageService.patch(checklistItem.id, { title });
-    setCheckable({ ...checkable, title });
-    onTitleUpdated(checkable.id, title);
-  };
-
-  const onChildChecked = (id, checked) => {
-    checkable.items.find((item) => item.id === id).checked = checked;
-    onSelfChecked(checkable.items.every((item) => item.checked));
-  };
-
-  return (
-    <details className="checklist__item" open>
-      <summary className="item__summary">
-      <div className="summary__container">
-        
-        <label className="label">
-        <input
-            className="input"
-            type="checkbox"
-            checked={checkable.checked}
-            onChange={(e) => onSelfChecked(e.target.checked)}
-          />
-          <span className="label__text">
-            <input
-              type="text"
-              className="input item__input"
-              value={checkable.title}
-              onChange={(e) => onSelfTitleUpdated(e.target.value)}
-            />
-          </span>
-          
-        </label>
-        <menu className="summary__menu">
-          <button className="button button--icon">🗑</button>
-        </menu>
-
-      </div>
-      </summary>
-      {checkable.items.map((item) => (
-        <ChecklistItem
-          key={item.id}
-          item={item}
-          onChecked={onChildChecked}
-          onTitleUpdated={() => {
-            /*NO OP*/
-          }}
-          onItemAdded={onItemAdded}
-        />
-      ))}
-      <button className="button" onClick={() => onItemAdded(checkable.id)}>
-        +Add item under {checkable.title}
-      </button>
-    </details>
-  );
-}

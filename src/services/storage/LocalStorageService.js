@@ -1,3 +1,6 @@
+import flattenData from "../../utility/flattenData";
+import unflattenData from "../../utility/unflattenData";
+
 const testData = [
   {
     id: "96ec6268-d1ac-4868-a000-bf35e51c49f1",
@@ -43,6 +46,19 @@ class LocalStorageService {
     this.#update()
     return this.#data;
   }
+  async readOne(id) {
+    // const root = this.#data.find(checklist => checklist.id === id);
+    const checklistTree = unflattenData(await this.read())
+    const root = checklistTree.find((element) => `${element.id}` === id);
+    // const flatData = flattenData(root);
+    // return flatData;
+    return root;
+
+    // return []
+    //find children, grandchildren, etc
+    // root.items = this.#findChildren(id, this.#data);
+    // return flattenData(root);
+  }
   async post(value) {
     value = {id: crypto.randomUUID(), checked: false, title: '', ...value}; // throw some default values in there
     this.#data.push(
@@ -59,8 +75,20 @@ class LocalStorageService {
     this.#update();
     return checklist;
   }
+  async deleteItem(checklistNode) {
+
+    const flatNodeIds = flattenData(checklistNode).map(checklist => checklist.id);
+    this.#data = this.#data.filter(checklist => !flatNodeIds.includes( checklist.id))
+    this.#update();
+    return true;
+  }
   #update() {
     localStorage.setItem(this.#key, JSON.stringify(this.#data, null, 2))
+  }
+  #findChildren(parentId, flatData) {
+    const children = flatData.filter(item => item.parentId === parentId);
+    children.forEach(child => child.items = this.#findChildren(child.id, flatData));
+    return children;
   }
 }
 
