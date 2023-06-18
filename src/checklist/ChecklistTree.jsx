@@ -3,11 +3,14 @@ import storageService from "../services/storage/StorageService";
 import "./Checklist.css"
 
 export default function ChecklistTree({ node: checklistNode, onChecked, onDeleted }) {
+    
     const [checkable, setCheckable] = useState(checklistNode);
+    
+
     const onSelfChecked = (checked) => {
       storageService.patch(checklistNode.id, { checked }).then(
         response=> {
-            setCheckable({ ...response });
+            setCheckable({ ...response, items: [...checkable.items] });
             onChecked(checkable.id, checked);
         }
       )
@@ -24,7 +27,7 @@ export default function ChecklistTree({ node: checklistNode, onChecked, onDelete
     const onChildItemDeleted = (node) => {
       checkable.items = checkable.items.filter((i) => i.id !== node.id);
       setCheckable({
-        ...checkable,
+        ...checkable
       });
       onSelfChecked(checkable.items.every((item) => item.checked));
     };

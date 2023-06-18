@@ -78,7 +78,9 @@ class LocalStorageService {
   async deleteItem(checklistNode) {
 
     const flatNodeIds = flattenData(checklistNode).map(checklist => checklist.id);
+    console.log('length before', this.#data.length);
     this.#data = this.#data.filter(checklist => !flatNodeIds.includes( checklist.id))
+    console.log('length after', this.#data.length);
     this.#update();
     return true;
   }
