@@ -5,14 +5,20 @@ import "./Checklist.css"
 export default function ChecklistTree({ node: checklistNode, onChecked, onDeleted }) {
     const [checkable, setCheckable] = useState(checklistNode);
     const onSelfChecked = (checked) => {
-      storageService.patch(checklistNode.id, { checked });
-      setCheckable({ ...checkable, checked });
-      onChecked(checkable.id, checked);
+      storageService.patch(checklistNode.id, { checked }).then(
+        response=> {
+            setCheckable({ ...response });
+            onChecked(checkable.id, checked);
+        }
+      )
+      
     };
   
     const onSelfTitleUpdated = (title) => {
-      storageService.patch(checklistNode.id, { title });
-      setCheckable({ ...checkable, title });
+      storageService.patch(checklistNode.id, { title }).then(
+        response =>  setCheckable({ ...response })
+      );
+     
     };
   
     const onChildItemDeleted = (node) => {
