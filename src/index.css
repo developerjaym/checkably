@@ -72,14 +72,29 @@ main {
   border-radius: var(--radius);
 
   text-decoration: none;
+  font-size: 1rem;
 }
-
 .button--icon {
   border: none;
 }
-
 .button--primary {
   background-color: rgb(var(--accent-background-rgb));
   color: rgb(var(--accent-foreground-rgb));
   border-color: rgb(var(--accent-foreground-rgb));
 }
+.button:active {
+  background-color: rgba(var(--foreground-rgb), 0.15);
+  border: inset;
+  border-width: 1.5px;
+}
+.button--icon:active {
+  border: none;
+}
+.button--primary:active {
+  background-color: rgba(var(--accent-background-rgb), 0.85);
+  border: inset;
+  border-width: 1.5px;
+}
+
+
+
