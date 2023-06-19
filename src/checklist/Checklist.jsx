@@ -6,6 +6,7 @@ import CardHeader from "../reusable/card/CardHeader";
 import storageService from "../services/storage/StorageService";
 import "./Checklist.css";
 import ChecklistTree from "./ChecklistTree";
+import {toastManager, TOAST_MOODS} from "../toast/ToastService";
 
 export default function Checklist() {
   const { checklistId } = useParams();
@@ -23,7 +24,8 @@ export default function Checklist() {
       .map((tag) => tag.toUpperCase().trim());
     storageService
       .patch(root.id, formData)
-      .then((updatedItem) => setRoot({ ...root, ...updatedItem }));
+      .then((updatedItem) => setRoot({ ...root, ...updatedItem }))
+      .then(() => toastManager.push("SAVED", TOAST_MOODS.HAPPY));
   };
   if (!root) {
     return <p>Loading!!!</p>;
@@ -74,7 +76,6 @@ export default function Checklist() {
         <Card>
           <CardHeader title={`Tree for ${root.title}`} />
           <CardBody>
-            {/* {root.items.map((node) => <ChecklistTree key={node.id} node={node} onChecked={console.log} onDeleted={console.log}/>)} */}
             <ChecklistTree
               node={root}
               isRoot={true}

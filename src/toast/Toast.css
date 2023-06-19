@@ -1,0 +1,29 @@
+.toast__container {
+    padding: 0;
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+
+    border: none;
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--narrow)
+}
+
+.toast {
+    padding: var(--narrow);
+    background-color: yellow;
+    color: black;
+    text-align: center;
+    margin: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.toast p {
+    margin-left: auto;
+}
+.toast__button {
+    margin-left: auto;
+}
