@@ -39,6 +39,15 @@ export default function Checklist() {
           <CardBody>
             <form className="form" onSubmit={onMetadataChanged}>
               <label className="label">
+                <span className="label__text">Checklist Title</span>
+                <input
+                  className="input"
+                  type="text"
+                  name="title"
+                  defaultValue={root.title}
+                />
+              </label>
+              <label className="label">
                 <span className="label__text">Tags (comma-separated list)</span>
                 <input
                   className="input"
@@ -65,8 +74,10 @@ export default function Checklist() {
         <Card>
           <CardHeader title={`Tree for ${root.title}`} />
           <CardBody>
+            {/* {root.items.map((node) => <ChecklistTree key={node.id} node={node} onChecked={console.log} onDeleted={console.log}/>)} */}
             <ChecklistTree
               node={root}
+              isRoot={true}
               onChecked={(value) => {
                 console.log("the whole thing's checked value", value);
               }}

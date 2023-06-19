@@ -77,3 +77,9 @@ main {
 .button--icon {
   border: none;
 }
+
+.button--primary {
+  background-color: rgb(var(--accent-background-rgb));
+  color: rgb(var(--accent-foreground-rgb));
+  border-color: rgb(var(--accent-foreground-rgb));
+}
