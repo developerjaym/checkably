@@ -1,11 +1,11 @@
-import { NavLink, useLoaderData, useNavigate } from "react-router-dom";
-import "./ChecklistResults.css";
-import unflattenData from "../../utility/unflattenData";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Card from "../../reusable/card/Card";
-import CardHeader from "../../reusable/card/CardHeader";
 import CardBody from "../../reusable/card/CardBody";
+import CardHeader from "../../reusable/card/CardHeader";
 import CardMenu from "../../reusable/card/CardMenu";
 import storageService from "../../services/storage/StorageService";
+import unflattenData from "../../utility/unflattenData";
+import "./ChecklistResults.css";
 
 export default function ChecklistResults() {
     const list = useLoaderData();
