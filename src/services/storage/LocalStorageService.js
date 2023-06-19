@@ -47,17 +47,9 @@ class LocalStorageService {
     return this.#data;
   }
   async readOne(id) {
-    // const root = this.#data.find(checklist => checklist.id === id);
     const checklistTree = unflattenData(await this.read())
     const root = checklistTree.find((element) => `${element.id}` === id);
-    // const flatData = flattenData(root);
-    // return flatData;
     return root;
-
-    // return []
-    //find children, grandchildren, etc
-    // root.items = this.#findChildren(id, this.#data);
-    // return flattenData(root);
   }
   async post(value) {
     value = {id: crypto.randomUUID(), checked: false, title: '', ...value}; // throw some default values in there
@@ -78,9 +70,7 @@ class LocalStorageService {
   async deleteItem(checklistNode) {
 
     const flatNodeIds = flattenData(checklistNode).map(checklist => checklist.id);
-    console.log('length before', this.#data.length);
     this.#data = this.#data.filter(checklist => !flatNodeIds.includes( checklist.id))
-    console.log('length after', this.#data.length);
     this.#update();
     return true;
   }
