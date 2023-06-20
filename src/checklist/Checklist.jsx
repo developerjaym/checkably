@@ -24,7 +24,8 @@ export default function Checklist() {
       .map((tag) => tag.toUpperCase().trim());
     storageService
       .patch(root.id, formData)
-      .then((updatedItem) => setRoot({ ...root, ...updatedItem }))
+      .then(() => storageService.readOne(checklistId))
+      .then((response) => setRoot(response))
       .then(() => toastManager.push("SAVED", TOAST_MOODS.HAPPY));
   };
   if (!root) {
@@ -35,7 +36,6 @@ export default function Checklist() {
       <header>
         <h2>{root.title}</h2>
       </header>
-      <section>
         <Card>
           <CardHeader title={`Metadata for ${root.title}`} />
           <CardBody>
@@ -70,9 +70,6 @@ export default function Checklist() {
             </form>
           </CardBody>
         </Card>
-      </section>
-
-      <section className="checklist__body">
         <Card>
           <CardHeader title={`Tree for ${root.title}`} />
           <CardBody>
@@ -88,7 +85,6 @@ export default function Checklist() {
             />
           </CardBody>
         </Card>
-      </section>
     </>
   );
 }

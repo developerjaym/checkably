@@ -44,12 +44,12 @@ class LocalStorageService {
       localStorage.getItem(this.#key) || JSON.stringify(testData)
     );
     this.#update()
-    return this.#data;
+    return structuredClone(this.#data);
   }
   async readOne(id) {
     const checklistTree = unflattenData(await this.read())
     const root = checklistTree.find((element) => `${element.id}` === id);
-    return root;
+    return structuredClone(root);
   }
   async post(value) {
     value = {id: crypto.randomUUID(), checked: false, title: '', ...value}; // throw some default values in there
@@ -57,7 +57,7 @@ class LocalStorageService {
       value
     )
     this.#update()
-    return value;
+    return structuredClone(value);
   }
   async patch(id, patchValue) {
     const checklist = this.#data.find((checklist) => checklist.id === id);
@@ -65,10 +65,9 @@ class LocalStorageService {
       checklist[key] = patchValue[key];
     }
     this.#update();
-    return checklist;
+    return structuredClone(checklist);
   }
   async deleteItem(checklistNode) {
-
     const flatNodeIds = flattenData(checklistNode).map(checklist => checklist.id);
     this.#data = this.#data.filter(checklist => !flatNodeIds.includes( checklist.id))
     this.#update();

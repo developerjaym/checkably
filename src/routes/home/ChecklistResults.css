@@ -20,3 +20,11 @@
 .search__label .input {
     flex-grow: 2;
 }
+
+.results__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-template-rows: 1fr;
+    grid-gap: 1rem;
+    grid-auto-flow: dense;
+}

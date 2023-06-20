@@ -1,15 +1,13 @@
-import React from 'react'
+import React from 'react';
 import * as ReactDOM from "react-dom/client";
 import {
   createHashRouter,
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-import App from "./App"
-import './index.css'
-import { homeLoader } from './routes/home/homeLoader';
+import App from "./App";
 import Checklist from './checklist/Checklist';
-import { checklistLoader } from './checklist/checklistLoader';
+import './index.css';
 import ChecklistResults from './routes/home/ChecklistResults';
 
 const router = createHashRouter([
@@ -19,13 +17,11 @@ const router = createHashRouter([
     children: [
       {
         path: "/",
-        element: <ChecklistResults />,
-        loader: homeLoader
+        element: <ChecklistResults />
       },
       {
         path: "/checklists/:checklistId",
-        element: <Checklist />,
-        loader: checklistLoader
+        element: <Checklist />
       },
     ],
   },
