@@ -42,6 +42,16 @@ body {
   align-items: stretch;
 }
 
+.page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page__header h2 {
+  flex-grow: 2;
+}
+
 .form {
   display: flex;
   flex-direction: column;

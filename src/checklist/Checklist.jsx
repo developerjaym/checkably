@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import Card from "../reusable/card/Card";
 import CardBody from "../reusable/card/CardBody";
 import CardHeader from "../reusable/card/CardHeader";
@@ -7,13 +7,20 @@ import storageService from "../services/storage/StorageService";
 import "./Checklist.css";
 import ChecklistTree from "./ChecklistTree";
 import {toastManager, TOAST_MOODS} from "../toast/ToastService";
+import ConfirmDeletionModal from "../reusable/modal/confirmDeletion/ConfirmDeletionModal";
 
 export default function Checklist() {
   const { checklistId } = useParams();
   const [root, setRoot] = useState(null);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
     storageService.readOne(checklistId).then((response) => setRoot(response));
   }, [checklistId]);
+
+  const onDeleted = () => {
+    navigate("/checklists")
+  }
 
   const onMetadataChanged = (e) => {
     e.preventDefault();
@@ -33,8 +40,14 @@ export default function Checklist() {
   }
   return (
     <>
-      <header>
+      <header className="page__header">
+        <nav>
+          <NavLink to="/checklists" className="button button--icon">←</NavLink>
+        </nav>
         <h2>{root.title}</h2>
+        <menu>
+          <button className="button" onClick={() => setOpenDeleteDialog(true)}>Delete</button>
+        </menu>
       </header>
         <Card>
           <CardHeader title={`Metadata for ${root.title}`} />
@@ -85,6 +98,8 @@ export default function Checklist() {
             />
           </CardBody>
         </Card>
+        <ConfirmDeletionModal open={openDeleteDialog} onCanceled={() => setOpenDeleteDialog(false)} onDeleted={onDeleted} node={root}/>
+
     </>
   );
 }

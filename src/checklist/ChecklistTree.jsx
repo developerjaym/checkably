@@ -9,7 +9,6 @@ export default function ChecklistTree({
   isRoot,
 }) {
   const [checkable, setCheckable] = useState(checklistNode);
-
   const onSelfChecked = (checked) => {
     storageService.patch(checklistNode.id, { checked }).then((response) => {
       setCheckable({ ...response, items: [...checkable.items] });
@@ -20,7 +19,7 @@ export default function ChecklistTree({
   const onSelfTitleUpdated = (title) => {
     storageService
       .patch(checklistNode.id, { title })
-      .then((response) => setCheckable({ ...response }));
+      .then((response) => setCheckable({ ...checkable, ...response }));
   };
 
   const onChildItemDeleted = (node) => {
@@ -28,7 +27,9 @@ export default function ChecklistTree({
     setCheckable({
       ...checkable,
     });
-    onSelfChecked(checkable.items.every((item) => item.checked));
+
+    // Consider self checked if self is checked OR if self has items and all items are checked
+    onSelfChecked(checkable.checked || (checkable.items.length && checkable.items.every((item) => item.checked)));
   };
 
   const onSelfDeleted = () => {
@@ -64,7 +65,7 @@ export default function ChecklistTree({
               onChange={(e) => onSelfChecked(e.target.checked)}
             />
             <span className="label__text">
-            {isRoot ? <span>{checkable.title}</span> :
+            {isRoot ? <span>{checklistNode.title}</span> :
               <input
                 type="text"
                 className="input item__input"
@@ -95,7 +96,7 @@ export default function ChecklistTree({
         />
       ))}
       <button className="button" onClick={() => onChildAddedToSelf()}>
-        +Add item under {checkable.title}
+        +Add item under {isRoot ? checklistNode.title : checkable.title}
       </button>
     </details>
   );

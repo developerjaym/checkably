@@ -3,10 +3,14 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    column-gap: var(--narrow);
+    column-gap: var(--wide);
 
     box-shadow: 2px 3px 8px 2px var(--shadow);
 
     padding: var(--narrow) var(--wide);
 
+}
+
+.app__header h1 {
+    flex-grow: 2;
 }
