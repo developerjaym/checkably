@@ -8,6 +8,7 @@ import "./Checklist.css";
 import ChecklistTree from "./ChecklistTree";
 import {toastManager, TOAST_MOODS} from "../toast/ToastService";
 import ConfirmDeletionModal from "../reusable/modal/confirmDeletion/ConfirmDeletionModal";
+import arrayifyTags from "../utility/arrayifyTags";
 
 export default function Checklist() {
   const { checklistId } = useParams();
@@ -25,10 +26,7 @@ export default function Checklist() {
   const onMetadataChanged = (e) => {
     e.preventDefault();
     const formData = Object.fromEntries(new FormData(e.target));
-    formData.tags = formData.tags
-      .split(",")
-      .filter(Boolean)
-      .map((tag) => tag.toUpperCase().trim());
+    formData.tags = arrayifyTags(formData.tags);
     storageService
       .patch(root.id, formData)
       .then(() => storageService.readOne(checklistId))
@@ -46,7 +44,7 @@ export default function Checklist() {
         </nav>
         <h2>{root.title}</h2>
         <menu>
-          <button className="button" onClick={() => setOpenDeleteDialog(true)}>Delete</button>
+          <button className="button" onClick={() => setOpenDeleteDialog(true)}><span className="button__icon">🗑</span><span className="big-screen-only">Delete</span></button>
         </menu>
       </header>
         <Card>
