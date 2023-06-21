@@ -22,7 +22,7 @@ export default function ConfirmDeletionModal({open, node, onDeleted}) {
       }
       const confirmDeletion = () => {
         closeConfirmDeletionDialog();
-        storageService.deleteItem(node).then(
+        storageService.deleteItem(node.id).then(
           () => onDeleted()
         )
         .then(() => toastManager.push("Deleted", TOAST_MOODS.NEUTRAL))

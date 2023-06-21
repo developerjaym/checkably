@@ -77,7 +77,7 @@ export default function Checklist() {
                   defaultValue={root.description}
                 />
               </label>
-              <button className="button">Save</button>
+              <button className="button button--submit"><span className="button__icon">💾</span><span className="big-screen-only">Save</span></button>
             </form>
           </CardBody>
         </Card>

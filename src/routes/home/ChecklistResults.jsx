@@ -9,6 +9,7 @@ import "./ChecklistResults.css";
 import { homeLoader } from "./homeLoader";
 import { Link } from "react-router-dom";
 import storageService from "../../services/storage/StorageService";
+import icons from "../../icons/Icons";
 
 export default function ChecklistResults() {
   const [list, setList] = useState([]);
@@ -36,7 +37,7 @@ export default function ChecklistResults() {
 
   const checklistCards = data.map((checklistObject) => (
     <Card key={checklistObject.id}>
-      <CardHeader title={checklistObject.title} />
+      <CardHeader title={checklistObject.title} icon={checklistObject.checked ? icons.checked  : null} />
       <CardBody>
         <p>{checklistObject.description}</p>
       </CardBody>

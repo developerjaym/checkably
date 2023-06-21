@@ -114,7 +114,10 @@ main {
 .button--icon {
   border: none;
 }
-.button--primary {
+.button--submit {
+  align-self: flex-end;
+}
+.button--primary, .button--submit {
   background-color: rgb(var(--accent-background-rgb));
   color: rgb(var(--accent-foreground-rgb));
   border-color: rgb(var(--accent-foreground-rgb));

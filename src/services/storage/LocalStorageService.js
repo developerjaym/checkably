@@ -80,19 +80,21 @@ class LocalStorageService {
     this.#update();
     return structuredClone(checklist);
   }
-  async deleteItem(checklistNode) {
-    const flatNodeIds = flattenData(checklistNode).map(checklist => checklist.id);
-    this.#data = this.#data.filter(checklist => !flatNodeIds.includes( checklist.id))
+  async deleteItem(id) {
+    // find all children
+    const childrenIds = this.#findDescendentIds(id, this.#data, [id]);
+    this.#data = this.#data.filter(checklist => !childrenIds.includes(checklist.id))
     this.#update();
     return true;
   }
   #update() {
     localStorage.setItem(this.#key, JSON.stringify(this.#data, null, 2))
   }
-  #findChildren(parentId, flatData) {
-    const children = flatData.filter(item => item.parentId === parentId);
-    children.forEach(child => child.items = this.#findChildren(child.id, flatData));
-    return children;
+  #findDescendentIds(parentId, flatData, array) {
+    const children = flatData.filter(item => item.parent === parentId);
+    array.push(...children.map(child => child.id))
+    children.forEach(child => this.#findDescendentIds(child.id, flatData, array));
+    return array;
   }
 }
 

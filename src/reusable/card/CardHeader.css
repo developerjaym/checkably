@@ -3,4 +3,8 @@
     background-color: rgb(var(--accent-background-rgb));
     color: rgb(var(--accent-foreground-rgb));
     border-radius: var(--radius) var(--radius) 0 0;
+
+    display: flex;
+    align-items: center;
+    column-gap: var(--wide);
   }

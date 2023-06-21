@@ -36,7 +36,7 @@ export default function ChecklistTree({
     if (isRoot) {
       return;
     }
-    storageService.deleteItem(checkable).then(() => onDeleted(checkable));
+    storageService.deleteItem(checkable.id).then(() => onDeleted(checkable));
   };
 
   const onChildChecked = (id, checked) => {
