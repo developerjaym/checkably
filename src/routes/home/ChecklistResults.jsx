@@ -8,6 +8,7 @@ import unflattenData from "../../utility/unflattenData";
 import "./ChecklistResults.css";
 import { homeLoader } from "./homeLoader";
 import { Link } from "react-router-dom";
+import storageService from "../../services/storage/StorageService";
 
 export default function ChecklistResults() {
   const [list, setList] = useState([]);
@@ -26,6 +27,13 @@ export default function ChecklistResults() {
     setOpenDeleteDialog(false);
     homeLoader().then((newList) => setList(newList));
   };
+
+  const onSearch = (e) => {
+    e.preventDefault();
+    const searchQuery = Object.fromEntries(new FormData(e.target))
+    storageService.search(searchQuery).then(results => setList(results))
+  }
+
   const checklistCards = data.map((checklistObject) => (
     <Card key={checklistObject.id}>
       <CardHeader title={checklistObject.title} />
@@ -53,12 +61,13 @@ export default function ChecklistResults() {
 
   return (
     <>
-      <section className="search">
+        <form className="search" onSubmit={onSearch}>
+
         <label className="label search__label">
           <span className="label__text">🔍</span>
-          <input className="input input--search" type="search" />
+          <input className="input input--search" type="search" name="term" />
         </label>
-      </section>
+        </form>
       <div className="results__container">{checklistCards}</div>
 
       <ConfirmDeletionModal

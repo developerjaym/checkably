@@ -1,6 +1,14 @@
 import flattenData from "../../utility/flattenData";
 import unflattenData from "../../utility/unflattenData";
 
+const textSearchMatches = (property, queryTerm) => {
+  return property.toLowerCase().includes(queryTerm.toLowerCase().trim())
+}
+
+const tagSearchMatches = (tags, queryTerm) => {
+  return tags.some(tag => textSearchMatches(tag, queryTerm))
+}
+
 const testData = [
   {
     id: "96ec6268-d1ac-4868-a000-bf35e51c49f1",
@@ -45,6 +53,11 @@ class LocalStorageService {
     );
     this.#update()
     return structuredClone(this.#data);
+  }
+  async search(queryObject) {
+    return this.#data.filter(item => item.isRoot).filter(
+      item => tagSearchMatches(item.tags, queryObject.term) || textSearchMatches(item.title, queryObject.term) || textSearchMatches(item.description, queryObject.term)
+    )
   }
   async readOne(id) {
     const checklistTree = unflattenData(await this.read())
