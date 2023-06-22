@@ -3,7 +3,7 @@
   --foreground-rgb: 255, 255, 255;
   --accent-background-rgb: 74, 48, 141;
   --accent-foreground-rgb: 255, 255, 255;
-  --shadow: #00000082;
+  --shadow: rgba(var(--foreground-rgb), 0.15);
 
   --narrow: 4px;
   --wide: 16px;
@@ -32,7 +32,7 @@ body {
 .dialog {
   padding: 0;
   border: none;
-  box-shadow: 4px 4px 20px 20px rgba(var(--foreground-rgb), 0.5);
+  box-shadow: 0 0 100vmax 100vmax rgba(var(--foreground-rgb), 0.5);
   border-radius: var(--radius);
 }
 
