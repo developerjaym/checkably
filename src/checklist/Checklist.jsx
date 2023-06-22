@@ -17,8 +17,11 @@ export default function Checklist() {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    storageService.readOne(checklistId).then((response) => setRoot(response));
-  }, [checklistId]);
+    storageService.readOne(checklistId).then((response) => setRoot(response)).catch(err => {
+      toastManager.push("Unable to display checklist", TOAST_MOODS.SAD)
+      navigate("/checklists")
+    });
+  }, [checklistId, navigate]);
 
   const onDeleted = () => {
     navigate("/checklists")

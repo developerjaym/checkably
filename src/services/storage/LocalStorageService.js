@@ -64,6 +64,9 @@ class LocalStorageService {
   async readOne(id) {
     const checklistTree = unflattenData(await this.read())
     const root = checklistTree.find((element) => `${element.id}` === id);
+    if(!root) {
+      throw Error(`Checklist with id ${id} was not found`)
+    }
     return structuredClone(root);
   }
   async post(value) {

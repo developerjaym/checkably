@@ -1,13 +1,13 @@
-import { Form, useNavigate } from "react-router-dom";
-import "./AddChecklistModal.css";
-import Card from "../../card/Card";
-import CardHeader from "../../card/CardHeader";
-import CardBody from "../../card/CardBody";
-import CardMenu from "../../card/CardMenu";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import storageService from "../../../services/storage/StorageService";
-import arrayifyTags from "../../../utility/arrayifyTags";
 import { checklistValidationRules } from "../../../services/validators/checklistValidator";
+import arrayifyTags from "../../../utility/arrayifyTags";
+import Card from "../../card/Card";
+import CardBody from "../../card/CardBody";
+import CardHeader from "../../card/CardHeader";
+import CardMenu from "../../card/CardMenu";
+import "./AddChecklistModal.css";
 
 export default function AddChecklistModal({ open, onClose }) {
   const dialogRef = useRef(null);
