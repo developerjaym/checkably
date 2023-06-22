@@ -1,5 +1,7 @@
 .checklist__item {
-    margin: 1vw;
+    border: 1px solid rgba(var(--foreground-rgb), 0.15);
+    padding: var(--narrow);
+    padding-left: var(--wide);
 }
 
 .item__input {
@@ -29,4 +31,8 @@
 
 .summary__menu {
     padding: 0;
+}
+
+.item__add-button {
+    margin-left: 2.25rem;
 }

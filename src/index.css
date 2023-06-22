@@ -135,3 +135,7 @@ main {
   border: inset;
   border-width: 1.5px;
 }
+
+.small-text {
+  font-size: small;
+}
