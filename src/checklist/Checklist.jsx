@@ -9,6 +9,7 @@ import ChecklistTree from "./ChecklistTree";
 import {toastManager, TOAST_MOODS} from "../toast/ToastService";
 import ConfirmDeletionModal from "../reusable/modal/confirmDeletion/ConfirmDeletionModal";
 import arrayifyTags from "../utility/arrayifyTags";
+import { checklistValidationRules } from "../services/validators/checklistValidator";
 
 export default function Checklist() {
   const { checklistId } = useParams();
@@ -58,6 +59,9 @@ export default function Checklist() {
                   type="text"
                   name="title"
                   defaultValue={root.title}
+                  maxLength={checklistValidationRules.title.maxLength}
+                  minLength={checklistValidationRules.title.minLength}
+                  required={checklistValidationRules.title.required}
                 />
               </label>
               <label className="label">
@@ -67,6 +71,9 @@ export default function Checklist() {
                   type="text"
                   name="tags"
                   defaultValue={root.tags.join(", ")}
+                  maxLength={checklistValidationRules.tags.maxLength}
+                  minLength={checklistValidationRules.tags.minLength}
+                  required={checklistValidationRules.tags.required}
                 />
               </label>
               <label className="label">
@@ -75,6 +82,9 @@ export default function Checklist() {
                   className="input"
                   name="description"
                   defaultValue={root.description}
+                  maxLength={checklistValidationRules.description.maxLength}
+                  minLength={checklistValidationRules.description.minLength}
+                  required={checklistValidationRules.description.required}
                 />
               </label>
               <button className="button button--submit"><span className="button__icon">💾</span><span className="big-screen-only">Save</span></button>
