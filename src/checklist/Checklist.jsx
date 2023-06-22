@@ -44,7 +44,7 @@ export default function Checklist() {
     <>
       <header className="page__header">
         <nav>
-          <NavLink to="/checklists" className="button button--icon">←</NavLink>
+          <NavLink to="/checklists" className="button button--icon">⭠</NavLink>
         </nav>
         <h2>{root.title}</h2>
         <menu>
