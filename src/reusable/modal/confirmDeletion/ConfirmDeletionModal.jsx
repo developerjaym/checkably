@@ -26,7 +26,7 @@ export default function ConfirmDeletionModal({open, node, onDeleted}) {
           () => onDeleted()
         )
         .then(() => toastManager.push("Deleted", TOAST_MOODS.NEUTRAL))
-        .catch(console.error)//(err) => toastManager.push(`Failed: ${err}`, TOAST_MOODS.SAD))
+        .catch((err) => toastManager.push(`Failed: ${err}`, TOAST_MOODS.SAD))
       }
 
     return(<dialog className="dialog" ref={confirmDeletionDialogRef}>

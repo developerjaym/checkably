@@ -51,6 +51,8 @@ class LocalStorageService {
     this.#data = JSON.parse(
       localStorage.getItem(this.#key) || JSON.stringify(testData)
     );
+    // TODO destroy accidental orphans
+    this.#destroyOrphans();
     this.#update()
     return structuredClone(this.#data);
   }
@@ -95,6 +97,18 @@ class LocalStorageService {
     array.push(...children.map(child => child.id))
     children.forEach(child => this.#findDescendentIds(child.id, flatData, array));
     return array;
+  }
+  #destroyOrphans() {
+    let orphans = this.#findOrphans(this.#data);
+    while(orphans.length) {
+      orphans.forEach(orphan => this.deleteItem(orphan.id));
+      orphans = this.#findOrphans(this.#data);
+    }
+  }
+  #findOrphans(flatData) {
+    const ids = flatData.map(item => item.id);
+    const orphans = flatData.filter(item => !item.isRoot && !ids.includes(item.parent))
+    return orphans;
   }
 }
 
