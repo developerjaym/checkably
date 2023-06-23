@@ -1,3 +1,8 @@
+.header__menu {
+    display: flex;
+    column-gap: var(--narrow);
+}
+
 .checklist__item {
     border-width: 1px 0 0 1px;
     border-style: solid;
@@ -12,7 +17,8 @@
 .summary__container {
     display: inline-flex;
     align-items: center;
-    width: 90%;
+    /*calculating width as 100% of parent container - 1.5rem (roughly width of arrow marker on summary)*/
+    width: calc(100% - 1.5rem);
 }
 
 .summary__container .label {

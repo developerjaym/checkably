@@ -98,9 +98,6 @@ export default function ChecklistTree({
           onDeleted={onChildItemDeleted}
         />
       ))}
-      {/* <button className="button item__add-button small-text" onClick={() => onChildAddedToSelf()}>
-        +Add item under {isRoot ? checklistNode.title : checkable.title}
-      </button> */}
     </details>
   );
 }

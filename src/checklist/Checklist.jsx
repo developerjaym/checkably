@@ -47,8 +47,9 @@ export default function Checklist() {
           <NavLink to="/checklists" className="button button--icon">⭠</NavLink>
         </nav>
         <h2>{root.title}</h2>
-        <menu>
+        <menu className="header__menu">
           <button className="button" onClick={() => setOpenDeleteDialog(true)}><span className="button__icon">🗑</span><span className="big-screen-only">Delete</span></button>
+          <button className="button" onClick={() => setOpenDeleteDialog(true)}><span className="button__icon">✏</span><span className="big-screen-only">Edit</span></button>
         </menu>
       </header>
         <Card className="main__left">
