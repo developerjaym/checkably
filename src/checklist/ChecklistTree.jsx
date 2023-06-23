@@ -54,7 +54,7 @@ export default function ChecklistTree({
   };
 
   return (
-    <details className="checklist__item" open>
+    <details className="checklist__item" open={isRoot || checkable.items.length}>
       <summary className="item__summary">
         <div className="summary__container">
           <label className="label">
@@ -72,6 +72,7 @@ export default function ChecklistTree({
                 readOnly={isRoot}
                 value={checkable.title}
                 onChange={(e) => onSelfTitleUpdated(e.target.value)}
+                autoFocus={!checkable.title}
               />}
             </span>
           </label>

@@ -37,16 +37,16 @@ export default function AddChecklistModal({ open, onClose }) {
         tags: arrayifyTags(newChecklistData.tags),
       })
       .then(({ id }) => navigate(`/checklists/${id}`));
-    closeDialog();
+    closeDialog(e);
     navigate(``);
   };
 
   return (
-    <dialog className="dialog" ref={dialogRef} onSubmit={onCreate}>
+    <dialog className="dialog" ref={dialogRef}>
       <Card>
         <CardHeader title={"Create New Checklist"} />
         <CardBody>
-          <form className="form" ref={formRef}>
+          <form className="form" ref={formRef}  onSubmit={onCreate}>
             <label className="label">
               <span className="label__text">Checklist Title</span>
               <input className="input" type="text" name="title" maxLength={checklistValidationRules.title.maxLength}

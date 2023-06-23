@@ -42,7 +42,7 @@ export default function Checklist() {
   }
   return (
     <>
-      <header className="page__header">
+      <header className="page__header main__header">
         <nav>
           <NavLink to="/checklists" className="button button--icon">⭠</NavLink>
         </nav>
@@ -51,7 +51,7 @@ export default function Checklist() {
           <button className="button" onClick={() => setOpenDeleteDialog(true)}><span className="button__icon">🗑</span><span className="big-screen-only">Delete</span></button>
         </menu>
       </header>
-        <Card>
+        <Card className="main__left">
           <CardHeader title={`Metadata for ${root.title}`} />
           <CardBody>
             <form className="form" onSubmit={onMetadataChanged}>
@@ -94,7 +94,7 @@ export default function Checklist() {
             </form>
           </CardBody>
         </Card>
-        <Card>
+        <Card className="main__right">
           <CardHeader title={`Tree for ${root.title}`} />
           <CardBody>
             <ChecklistTree

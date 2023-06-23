@@ -1,7 +1,7 @@
 import "./Card.css"
 
-export default function Card({children}) {
-    return (<section className="card">
+export default function Card({className, children}) {
+    return (<section className={`card ${className}`}>
         {children}
     </section>)
 }

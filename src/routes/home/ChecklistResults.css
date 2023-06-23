@@ -27,4 +27,6 @@
     grid-template-rows: 1fr;
     grid-gap: 1rem;
     grid-auto-flow: dense;
+
+    grid-column: 1 / 3;
 }
