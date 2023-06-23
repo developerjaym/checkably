@@ -84,7 +84,9 @@ export default function ChecklistTree({
             >
               🗑
             </button>}
-           
+            <button className="button button--icon" title={`Add item under ${isRoot ? checklistNode.title : checkable.title}`} onClick={() => onChildAddedToSelf()}>
+        +
+      </button>
           </menu>
         </div>
       </summary>
@@ -96,9 +98,9 @@ export default function ChecklistTree({
           onDeleted={onChildItemDeleted}
         />
       ))}
-      <button className="button item__add-button small-text" onClick={() => onChildAddedToSelf()}>
+      {/* <button className="button item__add-button small-text" onClick={() => onChildAddedToSelf()}>
         +Add item under {isRoot ? checklistNode.title : checkable.title}
-      </button>
+      </button> */}
     </details>
   );
 }

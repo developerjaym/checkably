@@ -1,7 +1,8 @@
 .checklist__item {
-    border: 1px solid rgba(var(--foreground-rgb), 0.15);
-    padding: var(--narrow);
-    padding-left: var(--wide);
+    border-width: 1px 0 0 1px;
+    border-style: solid;
+    border-color: rgba(var(--foreground-rgb), 0.15);
+    padding: var(--narrow) 0 0 var(--wide);
 }
 
 .item__input {
@@ -31,6 +32,9 @@
 
 .summary__menu {
     padding: 0;
+
+    display: flex;
+    margin: var(--narrow);
 }
 
 .item__add-button {

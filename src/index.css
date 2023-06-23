@@ -169,6 +169,6 @@ main {
   main {
     display: flex;
     flex-direction: column;
-    padding: var(--wide);
+    padding: var(--wide) var(--narrow);
   }
 }
