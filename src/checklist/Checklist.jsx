@@ -28,6 +28,7 @@ export default function Checklist() {
   }, [checklistId, navigate]);
 
   const onDeleted = () => {
+    setOpenDeleteDialog(false)
     navigate("/checklists");
   };
 

@@ -7,7 +7,7 @@ import "./ConfirmDeletionModal.css";
 import storageService from "../../../services/storage/StorageService";
 import { TOAST_MOODS, toastManager } from "../../../toast/ToastService";
 
-export default function ConfirmDeletionModal({open, node, onDeleted}) {
+export default function ConfirmDeletionModal({open, node, onDeleted, onCanceled}) {
     const confirmDeletionDialogRef = useRef(null)
 
     if(open) {
@@ -19,6 +19,7 @@ export default function ConfirmDeletionModal({open, node, onDeleted}) {
     }
       const closeConfirmDeletionDialog = () => {
         confirmDeletionDialogRef.current.close();
+        onCanceled()
       }
       const confirmDeletion = () => {
         closeConfirmDeletionDialog();
@@ -29,7 +30,7 @@ export default function ConfirmDeletionModal({open, node, onDeleted}) {
         .catch((err) => toastManager.push(`Failed: ${err}`, TOAST_MOODS.SAD))
       }
 
-    return(<dialog className="dialog" ref={confirmDeletionDialogRef}>
+    return(<dialog id="delete-dialog" className="dialog" ref={confirmDeletionDialogRef}>
     <Card>
       <CardHeader title={'Confirm'}/>
       <CardBody>

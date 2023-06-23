@@ -27,9 +27,9 @@ export default function UpdateChecklistModal({ metadata, open, onCancel, onSave 
   };
 
   return (
-    <dialog className="dialog" ref={dialogRef}>
+    <dialog id="delete-dialog" className="dialog" ref={dialogRef}>
       <Card>
-        <CardHeader title={"Create New Checklist"} />
+        <CardHeader title={`Update ${metadata.title}`} />
         <CardBody>
           <ChecklistMetadataForm onSubmit={presubmit} defaultValues={metadata}>
           <button className="button button--submit" value="default">
