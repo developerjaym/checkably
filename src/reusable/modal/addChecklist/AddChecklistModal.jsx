@@ -20,6 +20,7 @@ export default function AddChecklistModal({ open, onClose }) {
 
   const closeDialog = (e) => {
     e?.preventDefault();
+    e.target?.parentNode?.parentNode?.reset();
     dialogRef.current.close();
     onClose();
   };
