@@ -2,7 +2,7 @@
     display: flex;
     justify-content: flex-end;
 
-    padding: var(--narrow);
+    padding: var(--narrow) var(--wide) var(--wide) var(--wide);;
     margin: 0;
     column-gap: var(--narrow);
 }
