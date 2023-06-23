@@ -1,15 +1,12 @@
+
 import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import storageService from "../../../services/storage/StorageService";
 import Card from "../../card/Card";
 import CardBody from "../../card/CardBody";
 import CardHeader from "../../card/CardHeader";
 import ChecklistMetadataForm from "../../form/ChecklistMetadataForm";
-import "./AddChecklistModal.css";
 
-export default function AddChecklistModal({ open, onClose }) {
+export default function UpdateChecklistModal({ metadata, open, onCancel, onSave }) {
   const dialogRef = useRef(null);
-  const navigate = useNavigate();
 
   if (open) {
     dialogRef.current?.close();
@@ -19,19 +16,14 @@ export default function AddChecklistModal({ open, onClose }) {
   }
 
   const closeDialog = (e) => {
-    e?.preventDefault();
+    e.preventDefault();
+    e.target?.parentNode?.parentNode?.reset();
     dialogRef.current.close();
-    onClose();
+    onCancel();
   };
-  const onCreate = (newChecklistData) => {
-    storageService
-      .post({
-        ...newChecklistData,
-        isRoot: true,
-      })
-      .then(({ id }) => navigate(`/checklists/${id}`));
-    closeDialog();
-    navigate(``);
+  const presubmit = (newChecklistData) => {
+    dialogRef.current.close();
+    onSave(newChecklistData)
   };
 
   return (
@@ -39,9 +31,10 @@ export default function AddChecklistModal({ open, onClose }) {
       <Card>
         <CardHeader title={"Create New Checklist"} />
         <CardBody>
-          <ChecklistMetadataForm onSubmit={onCreate}>
-            <button className="button button--primary" value="default">
-              Create!
+          <ChecklistMetadataForm onSubmit={presubmit} defaultValues={metadata}>
+          <button className="button button--submit" value="default">
+              <span className="button__icon">💾</span>
+              <span className="big-screen-only">Save</span>
             </button>
             <button className="button" value="cancel" onClick={closeDialog}>
               Never mind!

@@ -66,10 +66,8 @@ body {
 
 
 main {
-  display: grid;
-  grid-template-areas:
-    "header header"
-    "left right";
+  display: flex;
+    flex-direction: column;
   column-gap: var(--wide);
   row-gap: var(--wide);
   padding: var(--wide);
@@ -78,18 +76,6 @@ main {
 
   max-width: 1200px;
   width: calc(100vw - calc(2 * var(--wide)));
-}
-
-.main__header {
-  grid-area: header;
-}
-
-.main__left {
-  grid-area: left;
-}
-
-.main__right {
-  grid-area: right;
 }
 
 .input {
@@ -167,8 +153,6 @@ main {
     display: none;
   }
   main {
-    display: flex;
-    flex-direction: column;
     padding: var(--wide) var(--narrow);
   }
 }

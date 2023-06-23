@@ -62,7 +62,7 @@ export default function ChecklistResults() {
 
   return (
     <>
-        <form className="search main__header" role="search" aria-label="Search through saved checklists" onSubmit={onSearch}>
+        <form className="search" role="search" aria-label="Search through saved checklists" onSubmit={onSearch}>
 
         <label className="label search__label">
           <span className="label__text">🔍</span>
