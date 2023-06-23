@@ -57,25 +57,22 @@ export default function ChecklistTree({
     <details className="checklist__item" open={isRoot || checkable.items.length}>
       <summary className="item__summary">
         <div className="summary__container">
-          <label className="label">
             <input
-              className="input"
+              className="input item__checkbox"
               type="checkbox"
               checked={checkable.checked}
               onChange={(e) => onSelfChecked(e.target.checked)}
+              aria-label={isRoot ? checklistNode.title : checkable.title}
             />
-            <span className="label__text">
-            {isRoot ? <span>{checklistNode.title}</span> :
+            {isRoot ? <span className="item__text">{checklistNode.title}</span> :
               <input
                 type="text"
-                className="input item__input"
+                className="input item__input item__text"
                 readOnly={isRoot}
                 value={checkable.title}
                 onChange={(e) => onSelfTitleUpdated(e.target.value)}
                 autoFocus={!checkable.title}
               />}
-            </span>
-          </label>
           <menu className="summary__menu">
           {isRoot ? null :
           <button

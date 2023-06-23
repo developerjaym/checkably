@@ -64,7 +64,7 @@ export default function Checklist() {
       </header>
       
       <Card>
-        <CardHeader title={`Tree for ${root.title}`} />
+        <CardHeader title={`Checklist`} />
         <CardBody>
           <ChecklistTree
             node={root}

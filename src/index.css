@@ -153,6 +153,8 @@ main {
     display: none;
   }
   main {
-    padding: var(--wide) var(--narrow);
+    padding: var(--narrow) var(--narrow);
+    row-gap: var(--narrow);
+    width: calc(100vw - calc(2 * var(--narrow)));
   }
 }
