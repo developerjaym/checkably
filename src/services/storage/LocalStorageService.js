@@ -9,34 +9,38 @@ const tagSearchMatches = (tags, queryTerm) => {
   return tags.some(tag => textSearchMatches(tag, queryTerm))
 }
 
-const testData = [
+const templates = [
   {
     id: "96ec6268-d1ac-4868-a000-bf35e51c49f1",
-    title: "Sleep",
-    description: "Remember to get some rest",
-    tags: ["todo", "test", "sleep"],
+    title: "Cruise Packing List",
+    description: "Everything you need to pack for a tropical cruise.",
+    tags: ["vacation", "packing", "cruise"],
     checked: false,
     isRoot: true,
+    isTemplate: true
   },
   {
     id: "36cf3af0-cebe-4a78-ba5e-f5ceec3c5636",
-    title: "TODO",
-    description: "This is what I need to do",
-    tags: ["todo", "test"],
+    title: "Grocery Shopping List",
+    description: "Standard items needed from the grocery.",
+    tags: ["grocery", "food", "shopping"],
     checked: false,
     isRoot: true,
+    isTemplate: true
   },
   {
     id: "bfb94f2a-9d2a-464a-b92f-2692568c07f5",
-    title: "fix code",
+    title: "Dairy",
     checked: false,
     parent: "36cf3af0-cebe-4a78-ba5e-f5ceec3c5636",
+    isTemplate: true
   },
   {
     id: "3166b704-7ac6-4925-a8ae-ef6bb5ef14d8",
-    title: "make router work",
+    title: "Cheese",
     checked: false,
     parent: "bfb94f2a-9d2a-464a-b92f-2692568c07f5",
+    isTemplate: true
   },
 ];
 
@@ -49,7 +53,7 @@ class LocalStorageService {
   }
   async read() {
     this.#data = JSON.parse(
-      localStorage.getItem(this.#key) || JSON.stringify(testData)
+      localStorage.getItem(this.#key) || JSON.stringify([])
     );
     // TODO destroy accidental orphans
     this.#destroyOrphans();
@@ -57,12 +61,17 @@ class LocalStorageService {
     return structuredClone(this.#data);
   }
   async search(queryObject) {
-    return this.#data.filter(item => item.isRoot).filter(
+    return await this.read().filter(item => item.isRoot).filter(
+      item => tagSearchMatches(item.tags, queryObject.term) || textSearchMatches(item.title, queryObject.term) || textSearchMatches(item.description, queryObject.term)
+    )
+  }
+  async searchTemplates(queryObject) {
+    return await templates.filter(item => item.isRoot).filter(
       item => tagSearchMatches(item.tags, queryObject.term) || textSearchMatches(item.title, queryObject.term) || textSearchMatches(item.description, queryObject.term)
     )
   }
   async readOne(id) {
-    const checklistTree = unflattenData(await this.read())
+    const checklistTree = unflattenData((await this.read()).concat(templates))
     const root = checklistTree.find((element) => `${element.id}` === id);
     if(!root) {
       throw Error(`Checklist with id ${id} was not found`)

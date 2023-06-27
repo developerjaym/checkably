@@ -9,6 +9,7 @@ import App from "./App";
 import Checklist from './checklist/Checklist';
 import './index.css';
 import ChecklistResults from './routes/home/ChecklistResults';
+import TemplateResults from './routes/templates/results/TemplateResults';
 
 const router = createHashRouter([
   {
@@ -16,18 +17,26 @@ const router = createHashRouter([
     element: <App />,
     children: [
       {
-        path: "/",
+        path: "/my-checklists",
         element: <ChecklistResults />
       },
       {
-        path: "/checklists/:checklistId",
+        path: "/my-checklists/:checklistId",
         element: <Checklist />
+      },
+      {
+        path: "/templates",
+        element: <TemplateResults/>
+      },
+      {
+        path: "/templates/:checklistId",
+        element: <Checklist/>
       },
     ],
   },
   {
     path:"*",
-    element: <Navigate to="/" replace/>
+    element: <Navigate to="/my-checklists" replace/>
   }
 ]);
 

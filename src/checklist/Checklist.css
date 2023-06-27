@@ -1,7 +1,4 @@
-.header__menu {
-    display: flex;
-    column-gap: var(--narrow);
-}
+
 
 .checklist__item {
     border-width: 1px 0 0 1px;

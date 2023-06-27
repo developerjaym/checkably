@@ -6,7 +6,7 @@ export default function ChecklistTree({
   node: checklistNode,
   onChecked,
   onDeleted,
-  isRoot,
+  isRoot
 }) {
   const [checkable, setCheckable] = useState(checklistNode);
   const onSelfChecked = (checked) => {
@@ -59,6 +59,7 @@ export default function ChecklistTree({
         <div className="summary__container">
             <input
               className="input item__checkbox"
+              disabled={checkable.isTemplate}
               type="checkbox"
               checked={checkable.checked}
               onChange={(e) => onSelfChecked(e.target.checked)}
@@ -68,20 +69,20 @@ export default function ChecklistTree({
               <input
                 type="text"
                 className="input item__input item__text"
-                readOnly={isRoot}
+                readOnly={isRoot || checkable.isTemplate}
                 value={checkable.title}
                 onChange={(e) => onSelfTitleUpdated(e.target.value)}
                 autoFocus={!checkable.title}
               />}
           <menu className="summary__menu">
-          {isRoot ? null :
+          {isRoot || checkable.isTemplate ? null :
           <button
               className="button button--icon"
               onClick={() => onSelfDeleted()}
             >
               🗑
             </button>}
-            <button className="button button--icon" title={`Add item under ${isRoot ? checklistNode.title : checkable.title}`} onClick={() => onChildAddedToSelf()}>
+            <button disabled={checkable.isTemplate} className="button button--icon" title={`Add item under ${isRoot ? checklistNode.title : checkable.title}`} onClick={() => onChildAddedToSelf()}>
         +
       </button>
           </menu>

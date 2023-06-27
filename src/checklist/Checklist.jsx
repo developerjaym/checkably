@@ -22,13 +22,13 @@ export default function Checklist() {
       .then((response) => setRoot(response))
       .catch((err) => {
         toastManager.push("Unable to display checklist", TOAST_MOODS.SAD);
-        navigate("/checklists");
+        navigate(-1);
       });
   }, [checklistId, navigate]);
 
   const onDeleted = () => {
-    setOpenDeleteDialog(false)
-    navigate("/checklists");
+    setOpenDeleteDialog(false);
+    navigate(root.isTemplate ? "/templates" : "/my-checklists");
   };
 
   const onMetadataChanged = (newChecklistData) => {
@@ -46,23 +46,34 @@ export default function Checklist() {
     <>
       <header className="page__header">
         <nav>
-          <NavLink to="/checklists" className="button button--icon">
-          ☚
+          <NavLink
+            to={root.isTemplate ? "/templates" : "/my-checklists"}
+            className="button button--icon"
+          >
+            ☚
           </NavLink>
         </nav>
         <h2>{root.title}</h2>
         <menu className="header__menu">
-          <button className="button" onClick={() => setOpenDeleteDialog(true)}>
+          <button
+            className="button"
+            disabled={root.isTemplate}
+            onClick={() => setOpenDeleteDialog(true)}
+          >
             <span className="button__icon">🗑</span>
             <span className="big-screen-only">Delete</span>
           </button>
-          <button className="button" onClick={() => setOpenUpdateDialog(true)}>
+          <button
+            className="button"
+            disabled={root.isTemplate}
+            onClick={() => setOpenUpdateDialog(true)}
+          >
             <span className="button__icon">✏</span>
             <span className="big-screen-only">Edit</span>
           </button>
         </menu>
       </header>
-      
+
       <Card>
         <CardHeader title={`Checklist`} />
         <CardBody>
@@ -84,7 +95,12 @@ export default function Checklist() {
         onDeleted={onDeleted}
         node={root}
       />
-      <UpdateChecklistModal metadata={root} onCancel={() => setOpenUpdateDialog(false)} onSave={onMetadataChanged} open={openUpdateDialog}/>
+      <UpdateChecklistModal
+        metadata={root}
+        onCancel={() => setOpenUpdateDialog(false)}
+        onSave={onMetadataChanged}
+        open={openUpdateDialog}
+      />
     </>
   );
 }

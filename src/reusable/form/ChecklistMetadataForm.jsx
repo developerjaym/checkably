@@ -10,6 +10,7 @@ export default function ChecklistMetadataForm({
   const presubmit = (e) => {
     e.preventDefault();
     const newChecklistData = Object.fromEntries(new FormData(e.target));
+    e.target.reset();
     newChecklistData.tags = arrayifyTags(newChecklistData.tags);
     onSubmit(newChecklistData);
   };

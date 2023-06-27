@@ -9,6 +9,8 @@
   --wide: 16px;
   --radius: 4px;
 
+  --toast-z: 3;
+
   color-scheme: light dark;
   color: rgb(var(--foreground-rgb));
   background-color: rgb(var(--background-rgb));
@@ -50,6 +52,13 @@ body {
 
 .page__header h2 {
   flex-grow: 2;
+  margin: var(--narrow);
+}
+
+.header__menu {
+  display: flex;
+  column-gap: var(--narrow);
+  margin: var(--narrow);
 }
 
 .form {
@@ -63,11 +72,9 @@ body {
   flex-direction: column;
 }
 
-
-
 main {
   display: flex;
-    flex-direction: column;
+  flex-direction: column;
   column-gap: var(--wide);
   row-gap: var(--wide);
   padding: var(--wide);
@@ -82,6 +89,20 @@ main {
   padding: var(--narrow);
   border-radius: var(--radius);
   border: 1px solid rgb(var(--foreground-rgb));
+}
+
+.link {
+
+  color: rgb(var(--foreground-rgb));
+  background-color: rgb(var(--background-rgb));
+
+  display: flex;
+  justify-content: center;
+}
+
+.link--active {
+  color: rgb(var(--accent-foreground-rgb));
+  background-color: rgb(var(--accent-background-rgb));
 }
 
 .button {

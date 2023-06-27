@@ -1,0 +1,22 @@
+.search {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    padding: var(--narrow) 0;
+
+
+}
+
+.search__label {
+    display: flex;
+    column-gap: var(--narrow);
+    align-items: center;
+
+    width: 100%;
+}
+
+.search__label .input {
+    flex-grow: 2;
+}

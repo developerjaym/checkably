@@ -1,16 +1,40 @@
 .app__header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    column-gap: var(--wide);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: var(--narrow);
 
-    box-shadow: 2px 3px 8px 2px var(--shadow);
+  box-shadow: 2px 3px 8px 2px var(--shadow);
 
-    padding: var(--narrow) var(--wide);
-
+  padding: var(--narrow) var(--wide);
 }
 
 .app__header h1 {
-    flex-grow: 2;
+  margin: var(--narrow);
+  flex-grow: 2;
+}
+
+.app__footer {
+  position: fixed;
+  bottom: 0;
+
+  width: 100%;
+  box-shadow: -2px -3px 8px 2px var(--shadow);
+
+}
+
+.app__nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex-grow: 2;
+}
+
+.app__nav .link {
+    width: 100%;
+    padding: var(--wide);
+}
+
+.app__nav .button {
+  margin-left: auto;
 }

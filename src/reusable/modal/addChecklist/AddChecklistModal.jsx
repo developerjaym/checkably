@@ -20,7 +20,7 @@ export default function AddChecklistModal({ open, onClose }) {
 
   const closeDialog = (e) => {
     e?.preventDefault();
-    e.target?.parentNode?.parentNode?.reset();
+    e?.target?.parentNode?.parentNode?.reset();
     dialogRef.current.close();
     onClose();
   };
@@ -30,7 +30,7 @@ export default function AddChecklistModal({ open, onClose }) {
         ...newChecklistData,
         isRoot: true,
       })
-      .then(({ id }) => navigate(`/checklists/${id}`));
+      .then(({ id }) => navigate(`/my-checklists/${id}`));
     closeDialog();
     navigate(``);
   };
