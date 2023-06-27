@@ -3,13 +3,12 @@ import { NavLink, useNavigate, useParams } from "react-router-dom";
 import Card from "../reusable/card/Card";
 import CardBody from "../reusable/card/CardBody";
 import CardHeader from "../reusable/card/CardHeader";
-import ChecklistMetadataForm from "../reusable/form/ChecklistMetadataForm";
 import ConfirmDeletionModal from "../reusable/modal/confirmDeletion/ConfirmDeletionModal";
+import UpdateChecklistModal from "../reusable/modal/updateChecklist/UpdateChecklistModal";
 import storageService from "../services/storage/StorageService";
 import { TOAST_MOODS, toastManager } from "../toast/ToastService";
 import "./Checklist.css";
 import ChecklistTree from "./ChecklistTree";
-import UpdateChecklistModal from "../reusable/modal/updateChecklist/UpdateChecklistModal";
 
 export default function Checklist() {
   const { checklistId } = useParams();
@@ -48,7 +47,7 @@ export default function Checklist() {
       <header className="page__header">
         <nav>
           <NavLink to="/checklists" className="button button--icon">
-            ⭠
+          ☚
           </NavLink>
         </nav>
         <h2>{root.title}</h2>

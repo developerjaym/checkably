@@ -53,7 +53,7 @@ export default function ChecklistResults() {
           <span className="big-screen-only">Delete</span>
         </button>
         <Link className="button" to={`/checklists/${checklistObject.id}`}>
-          <span className="button__icon">➝</span>
+          <span className="button__icon">☛</span>
           <span className="big-screen-only">View</span>
         </Link>
       </CardMenu>
