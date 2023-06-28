@@ -2,8 +2,12 @@ import { NavLink, Outlet } from "react-router-dom";
 import "./App.css";
 import icons from "./icons/Icons";
 import { Toast } from "./toast/Toast";
+import HelpModal from "./reusable/modal/help/HelpModal";
+import { useState } from "react";
 
 function App() {
+
+  const [helpModalOpen, setHelpModalOpen] = useState(false)
 
   const determineNavLinkClassName = ({ isActive, isPending }) =>
     isPending ? "link link--pending" : isActive ? "link link--active" : "link";
@@ -16,7 +20,7 @@ function App() {
         <menu>
         <button
             className="button"
-            onClick={() => console.log('help')}
+            onClick={() => setHelpModalOpen(true)}
           >
             <span className="button__icon">?</span>
             <span className="big-screen-only">Help</span>
@@ -37,6 +41,7 @@ function App() {
         </nav>
       </footer>
       <Toast />
+      <HelpModal open={helpModalOpen} onCanceled={() => setHelpModalOpen(false)}/>
     </>
   );
 }

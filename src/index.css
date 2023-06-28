@@ -38,6 +38,10 @@ body {
   border-radius: var(--radius);
 }
 
+.dialog__paragraph {
+  max-width: 600px;
+}
+
 #root {
   display: flex;
   flex-direction: column;
