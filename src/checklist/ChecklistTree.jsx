@@ -6,7 +6,7 @@ export default function ChecklistTree({
   node: checklistNode,
   onChecked,
   onDeleted,
-  isRoot
+  isRoot,
 }) {
   const [checkable, setCheckable] = useState(checklistNode);
   const onSelfChecked = (checked) => {
@@ -29,7 +29,11 @@ export default function ChecklistTree({
     });
 
     // Consider self checked if self is checked OR if self has items and all items are checked
-    onSelfChecked(checkable.checked || (checkable.items.length && checkable.items.every((item) => item.checked)));
+    onSelfChecked(
+      checkable.checked ||
+        (checkable.items.length &&
+          checkable.items.every((item) => item.checked))
+    );
   };
 
   const onSelfDeleted = () => {
@@ -54,37 +58,51 @@ export default function ChecklistTree({
   };
 
   return (
-    <details className="checklist__item" open={isRoot || checkable.items.length}>
+    <details
+      className="checklist__item"
+      open={isRoot || checkable.items.length}
+    >
       <summary className="item__summary">
         <div className="summary__container">
+          <input
+            className="input item__checkbox"
+            type="checkbox"
+            checked={checkable.checked}
+            onChange={(e) => onSelfChecked(e.target.checked)}
+            aria-label={isRoot ? checklistNode.title : checkable.title}
+          />
+          {isRoot || checkable.isTemplate ? (
+            <span className="item__text">{checklistNode.title}</span>
+          ) : (
             <input
-              className="input item__checkbox"
-              disabled={checkable.isTemplate}
-              type="checkbox"
-              checked={checkable.checked}
-              onChange={(e) => onSelfChecked(e.target.checked)}
-              aria-label={isRoot ? checklistNode.title : checkable.title}
+              type="text"
+              className="input item__input item__text"
+              value={checkable.title}
+              onChange={(e) => onSelfTitleUpdated(e.target.value)}
+              autoFocus={!checkable.title}
             />
-            {isRoot ? <span className="item__text">{checklistNode.title}</span> :
-              <input
-                type="text"
-                className="input item__input item__text"
-                readOnly={isRoot || checkable.isTemplate}
-                value={checkable.title}
-                onChange={(e) => onSelfTitleUpdated(e.target.value)}
-                autoFocus={!checkable.title}
-              />}
+          )}
           <menu className="summary__menu">
-          {isRoot || checkable.isTemplate ? null :
-          <button
-              className="button button--icon"
-              onClick={() => onSelfDeleted()}
-            >
-              🗑
-            </button>}
-            <button disabled={checkable.isTemplate} className="button button--icon" title={`Add item under ${isRoot ? checklistNode.title : checkable.title}`} onClick={() => onChildAddedToSelf()}>
-        +
-      </button>
+            {isRoot || checkable.isTemplate ? null : (
+              <button
+                className="button button--icon"
+                onClick={() => onSelfDeleted()}
+              >
+                🗑
+              </button>
+            )}
+            {checkable.isTemplate ? null : (
+              <button
+                disabled={checkable.isTemplate}
+                className="button button--icon"
+                title={`Add item under ${
+                  isRoot ? checklistNode.title : checkable.title
+                }`}
+                onClick={() => onChildAddedToSelf()}
+              >
+                +
+              </button>
+            )}
           </menu>
         </div>
       </summary>

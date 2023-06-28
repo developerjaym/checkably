@@ -16,6 +16,7 @@ export default function Checklist() {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
   const navigate = useNavigate();
+  const correctBackRoute = root?.isTemplate ? "/templates" : "/my-checklists"; 
   useEffect(() => {
     storageService
       .readOne(checklistId)
@@ -28,7 +29,7 @@ export default function Checklist() {
 
   const onDeleted = () => {
     setOpenDeleteDialog(false);
-    navigate(root.isTemplate ? "/templates" : "/my-checklists");
+    navigate(correctBackRoute);
   };
 
   const onMetadataChanged = (newChecklistData) => {
@@ -47,7 +48,7 @@ export default function Checklist() {
       <header className="page__header">
         <nav>
           <NavLink
-            to={root.isTemplate ? "/templates" : "/my-checklists"}
+            to={correctBackRoute}
             className="button button--icon"
           >
             ☚
@@ -55,27 +56,35 @@ export default function Checklist() {
         </nav>
         <h2>{root.title}</h2>
         <menu className="header__menu">
-          <button
-            className="button"
-            disabled={root.isTemplate}
-            onClick={() => setOpenDeleteDialog(true)}
-          >
-            <span className="button__icon">🗑</span>
-            <span className="big-screen-only">Delete</span>
-          </button>
-          <button
-            className="button"
-            disabled={root.isTemplate}
-            onClick={() => setOpenUpdateDialog(true)}
-          >
-            <span className="button__icon">✏</span>
-            <span className="big-screen-only">Edit</span>
-          </button>
+          {root.isTemplate ? (
+            <button className="button" onClick={() => console.log("clone")}>
+              <span className="button__icon">+</span>
+              <span className="big-screen-only">Clone</span>
+            </button>
+          ) : (
+            <>
+              <button
+                className="button"
+                onClick={() => setOpenDeleteDialog(true)}
+              >
+                <span className="button__icon">🗑</span>
+                <span className="big-screen-only">Delete</span>
+              </button>
+              <button
+                className="button"
+                disabled={root.isTemplate}
+                onClick={() => setOpenUpdateDialog(true)}
+              >
+                <span className="button__icon">✏</span>
+                <span className="big-screen-only">Edit</span>
+              </button>
+            </>
+          )}
         </menu>
       </header>
 
       <Card>
-        <CardHeader title={`Checklist`} />
+        <CardHeader title={root.isTemplate ? 'Template' : 'Checklist'} />
         <CardBody>
           <ChecklistTree
             node={root}

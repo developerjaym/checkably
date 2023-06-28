@@ -17,7 +17,6 @@ export default function TemplateResults() {
   useEffect(() => {
     const load = async () => {
       const roots = await templateLoader();
-      console.log('roots', roots);
       setList(roots);
     };
     load();
@@ -28,7 +27,7 @@ export default function TemplateResults() {
   const onSearch = (e) => {
     e.preventDefault();
     const searchQuery = Object.fromEntries(new FormData(e.target));
-    storageService.search(searchQuery).then((results) => setList(results));
+    storageService.searchTemplates(searchQuery).then((results) => setList(results));
   };
 
   const checklistCards = data.map((checklistObject) => (
