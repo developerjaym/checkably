@@ -40,6 +40,11 @@ export default function Checklist() {
       .then((response) => setRoot(response))
       .then(() => toastManager.push("SAVED", TOAST_MOODS.HAPPY));
   };
+
+  const clone = async () => {
+    const newId = await storageService.clone(root.id);
+    navigate(`/my-checklists/${newId}`)
+  }
   if (!root) {
     return <p>Loading!!!</p>;
   }
@@ -57,7 +62,7 @@ export default function Checklist() {
         <h2>{root.title}</h2>
         <menu className="header__menu">
           {root.isTemplate ? (
-            <button className="button" onClick={() => console.log("clone")}>
+            <button className="button" onClick={clone}>
               <span className="button__icon">+</span>
               <span className="big-screen-only">Clone</span>
             </button>

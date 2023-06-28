@@ -2,12 +2,12 @@ import flattenData from "../../utility/flattenData";
 import unflattenData from "../../utility/unflattenData";
 
 const textSearchMatches = (property, queryTerm) => {
-  return property.toLowerCase().includes(queryTerm.toLowerCase().trim())
-}
+  return property.toLowerCase().includes(queryTerm.toLowerCase().trim());
+};
 
 const tagSearchMatches = (tags, queryTerm) => {
-  return tags.some(tag => textSearchMatches(tag, queryTerm))
-}
+  return tags.some((tag) => textSearchMatches(tag, queryTerm));
+};
 
 const templates = [
   {
@@ -17,7 +17,7 @@ const templates = [
     tags: ["vacation", "packing", "cruise"],
     checked: false,
     isRoot: true,
-    isTemplate: true
+    isTemplate: true,
   },
   {
     id: "36cf3af0-cebe-4a78-ba5e-f5ceec3c5636",
@@ -26,21 +26,21 @@ const templates = [
     tags: ["grocery", "food", "shopping"],
     checked: false,
     isRoot: true,
-    isTemplate: true
+    isTemplate: true,
   },
   {
     id: "bfb94f2a-9d2a-464a-b92f-2692568c07f5",
     title: "Dairy",
     checked: false,
     parent: "36cf3af0-cebe-4a78-ba5e-f5ceec3c5636",
-    isTemplate: true
+    isTemplate: true,
   },
   {
     id: "3166b704-7ac6-4925-a8ae-ef6bb5ef14d8",
     title: "Cheese",
     checked: false,
     parent: "bfb94f2a-9d2a-464a-b92f-2692568c07f5",
-    isTemplate: true
+    isTemplate: true,
   },
 ];
 
@@ -57,33 +57,61 @@ class LocalStorageService {
     );
     // TODO destroy accidental orphans
     this.#destroyOrphans();
-    this.#update()
+    this.#update();
     return structuredClone(this.#data);
   }
   async search(queryObject) {
-    return await this.read().filter(item => item.isRoot).filter(
-      item => tagSearchMatches(item.tags, queryObject.term) || textSearchMatches(item.title, queryObject.term) || textSearchMatches(item.description, queryObject.term)
-    )
+    return await this.read()
+      .filter((item) => item.isRoot)
+      .filter(
+        (item) =>
+          tagSearchMatches(item.tags, queryObject.term) ||
+          textSearchMatches(item.title, queryObject.term) ||
+          textSearchMatches(item.description, queryObject.term)
+      );
   }
   async searchTemplates(queryObject) {
-    return await templates.filter(item => item.isRoot).filter(
-      item => tagSearchMatches(item.tags, queryObject.term) || textSearchMatches(item.title, queryObject.term) || textSearchMatches(item.description, queryObject.term)
-    )
+    return await templates
+      .filter((item) => item.isRoot)
+      .filter(
+        (item) =>
+          tagSearchMatches(item.tags, queryObject.term) ||
+          textSearchMatches(item.title, queryObject.term) ||
+          textSearchMatches(item.description, queryObject.term)
+      );
   }
   async readOne(id) {
-    const checklistTree = unflattenData((await this.read()).concat(templates))
+    const checklistTree = unflattenData((await this.read()).concat(templates));
     const root = checklistTree.find((element) => `${element.id}` === id);
-    if(!root) {
-      throw Error(`Checklist with id ${id} was not found`)
+    if (!root) {
+      throw Error(`Checklist with id ${id} was not found`);
     }
     return structuredClone(root);
   }
+  async clone(id) {
+    const templateTree = unflattenData(templates);
+    const templateRoot = templateTree.find((template) => template.id === id);
+    const templateRootClone = structuredClone(templateRoot);
+    const recursivelyChangeIds = (node, newParentId) => {
+      node.id = crypto.randomUUID();
+      node.isTemplate = false;
+      if (newParentId) {
+        node.parent = newParentId;
+      }
+      node.items.forEach((item) => recursivelyChangeIds(item, node.id));
+    };
+    const recursivelyPost =  (node) => {
+      this.post({...node, items: null})
+      node.items.forEach((item) => recursivelyPost(item));
+    };
+    recursivelyChangeIds(templateRootClone);
+    recursivelyPost(templateRootClone)
+    return templateRootClone.id;
+  }
   async post(value) {
-    value = {id: crypto.randomUUID(), checked: false, title: '', ...value}; // throw some default values in there
-    this.#data.push(
-      value
-    )
-    this.#update()
+    value = { id: crypto.randomUUID(), checked: false, title: "", ...value }; // throw some default values in there
+    this.#data.push(value);
+    this.#update();
     return structuredClone(value);
   }
   async patch(id, patchValue) {
@@ -97,29 +125,35 @@ class LocalStorageService {
   async deleteItem(id) {
     // find all children
     const childrenIds = this.#findDescendentIds(id, this.#data, [id]);
-    this.#data = this.#data.filter(checklist => !childrenIds.includes(checklist.id))
+    this.#data = this.#data.filter(
+      (checklist) => !childrenIds.includes(checklist.id)
+    );
     this.#update();
     return true;
   }
   #update() {
-    localStorage.setItem(this.#key, JSON.stringify(this.#data, null, 2))
+    localStorage.setItem(this.#key, JSON.stringify(this.#data, null, 2));
   }
   #findDescendentIds(parentId, flatData, array) {
-    const children = flatData.filter(item => item.parent === parentId);
-    array.push(...children.map(child => child.id))
-    children.forEach(child => this.#findDescendentIds(child.id, flatData, array));
+    const children = flatData.filter((item) => item.parent === parentId);
+    array.push(...children.map((child) => child.id));
+    children.forEach((child) =>
+      this.#findDescendentIds(child.id, flatData, array)
+    );
     return array;
   }
   #destroyOrphans() {
     let orphans = this.#findOrphans(this.#data);
-    while(orphans.length) {
-      orphans.forEach(orphan => this.deleteItem(orphan.id));
+    while (orphans.length) {
+      orphans.forEach((orphan) => this.deleteItem(orphan.id));
       orphans = this.#findOrphans(this.#data);
     }
   }
   #findOrphans(flatData) {
-    const ids = flatData.map(item => item.id);
-    const orphans = flatData.filter(item => !item.isRoot && !ids.includes(item.parent))
+    const ids = flatData.map((item) => item.id);
+    const orphans = flatData.filter(
+      (item) => !item.isRoot && !ids.includes(item.parent)
+    );
     return orphans;
   }
 }

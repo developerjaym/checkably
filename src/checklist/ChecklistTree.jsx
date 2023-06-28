@@ -71,7 +71,7 @@ export default function ChecklistTree({
             onChange={(e) => onSelfChecked(e.target.checked)}
             aria-label={isRoot ? checklistNode.title : checkable.title}
           />
-          {isRoot || checkable.isTemplate ? (
+          {isRoot || checklistNode.isTemplate ? (
             <span className="item__text">{checklistNode.title}</span>
           ) : (
             <input
@@ -83,7 +83,7 @@ export default function ChecklistTree({
             />
           )}
           <menu className="summary__menu">
-            {isRoot || checkable.isTemplate ? null : (
+            {isRoot || checklistNode.isTemplate ? null : (
               <button
                 className="button button--icon"
                 onClick={() => onSelfDeleted()}
@@ -91,9 +91,9 @@ export default function ChecklistTree({
                 🗑
               </button>
             )}
-            {checkable.isTemplate ? null : (
+            {checklistNode.isTemplate ? null : (
               <button
-                disabled={checkable.isTemplate}
+                disabled={checklistNode.isTemplate}
                 className="button button--icon"
                 title={`Add item under ${
                   isRoot ? checklistNode.title : checkable.title
