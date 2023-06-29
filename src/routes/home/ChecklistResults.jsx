@@ -36,7 +36,9 @@ export default function ChecklistResults() {
   const onSearch = (e) => {
     e.preventDefault();
     const searchQuery = Object.fromEntries(new FormData(e.target));
-    storageService.search({...searchQuery, isTemplate: false}).then((results) => setList(results));
+    storageService
+      .search({ ...searchQuery, isTemplate: false })
+      .then((results) => setList(results));
   };
 
   const checklistCards = data.map((checklistObject) => (
@@ -49,20 +51,24 @@ export default function ChecklistResults() {
         <p>{checklistObject.description}</p>
       </CardBody>
       <CardMenu>
-        <button
-          className="button"
-          onClick={() => {
-            focusedNode.current = checklistObject;
-            setOpenDeleteDialog(true);
-          }}
-        >
-          <span className="button__icon">🗑</span>
-          <span className="big-screen-only">Delete</span>
-        </button>
-        <Link className="button" to={`/my-checklists/${checklistObject.id}`}>
-          <span className="button__icon">☛</span>
-          <span className="big-screen-only">View</span>
-        </Link>
+        <li>
+          <button
+            className="button"
+            onClick={() => {
+              focusedNode.current = checklistObject;
+              setOpenDeleteDialog(true);
+            }}
+          >
+            <span className="button__icon">🗑</span>
+            <span className="big-screen-only">Delete</span>
+          </button>
+        </li>
+        <li>
+          <Link className="button" to={`/my-checklists/${checklistObject.id}`}>
+            <span className="button__icon">☛</span>
+            <span className="big-screen-only">View</span>
+          </Link>
+        </li>
       </CardMenu>
     </Card>
   ));
@@ -72,17 +78,22 @@ export default function ChecklistResults() {
       <header className="page__header">
         <h2>My Checklists</h2>
         <menu className="header__menu">
-          <button
-            className="button"
-            onClick={() => setOpenAddDialog(true)}
-            title="Create Checklist"
-          >
-            <span className="button__icon">+</span>
-            <span className="big-screen-only">Create Checklist</span>
-          </button>
+          <li>
+            <button
+              className="button"
+              onClick={() => setOpenAddDialog(true)}
+              title="Create Checklist"
+            >
+              <span className="button__icon">+</span>
+              <span className="big-screen-only">Create Checklist</span>
+            </button>
+          </li>
         </menu>
       </header>
-      <SearchForm onSearch={onSearch} ariaLabel={"Search through saved checklists"}/>
+      <SearchForm
+        onSearch={onSearch}
+        ariaLabel={"Search through saved checklists"}
+      />
       <div className="results__container">{checklistCards}</div>
 
       <ConfirmDeletionModal

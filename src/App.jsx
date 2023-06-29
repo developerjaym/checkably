@@ -18,6 +18,7 @@ function App() {
         <img src={icons.logo.src} alt={icons.logo.alt} height={32} width={32} />
         <h1>Checkably</h1>
         <menu>
+        <li>
         <button
             className="button"
             onClick={() => setHelpModalOpen(true)}
@@ -25,6 +26,8 @@ function App() {
             <span className="button__icon">?</span>
             <span className="big-screen-only">Help</span>
           </button>
+        </li>
+        
         </menu>
       </header>
       <main>

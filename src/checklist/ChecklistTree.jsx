@@ -84,12 +84,14 @@ export default function ChecklistTree({
           )}
           <menu className="summary__menu">
             {isRoot || checklistNode.isTemplate ? null : (
-              <button
-                className="button button--icon"
-                onClick={() => onSelfDeleted()}
-              >
-                🗑
-              </button>
+              <li>
+                <button
+                  className="button button--icon"
+                  onClick={() => onSelfDeleted()}
+                >
+                  🗑
+                </button>
+              </li>
             )}
             {checklistNode.isTemplate ? null : (
               <button

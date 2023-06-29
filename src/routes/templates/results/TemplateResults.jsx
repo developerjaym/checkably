@@ -12,7 +12,7 @@ import "./TemplateResults.css";
 import { templateLoader } from "./templateLoader";
 
 export default function TemplateResults() {
-    const [list, setList] = useState([]);
+  const [list, setList] = useState([]);
 
   useEffect(() => {
     const load = async () => {
@@ -23,27 +23,27 @@ export default function TemplateResults() {
   }, []);
   const data = unflattenData(list);
 
-
   const onSearch = (e) => {
     e.preventDefault();
     const searchQuery = Object.fromEntries(new FormData(e.target));
-    storageService.search({...searchQuery, isTemplate: true}).then((results) => setList(results));
+    storageService
+      .search({ ...searchQuery, isTemplate: true })
+      .then((results) => setList(results));
   };
 
   const checklistCards = data.map((checklistObject) => (
     <Card key={checklistObject.id}>
-      <CardHeader
-        title={checklistObject.title}
-        icon={icons.logo}
-      />
+      <CardHeader title={checklistObject.title} icon={icons.logo} />
       <CardBody>
         <p>{checklistObject.description}</p>
       </CardBody>
       <CardMenu>
-        <Link className="button" to={`/templates/${checklistObject.id}`}>
-          <span className="button__icon">☛</span>
-          <span className="big-screen-only">View</span>
-        </Link>
+        <li>
+          <Link className="button" to={`/templates/${checklistObject.id}`}>
+            <span className="button__icon">☛</span>
+            <span className="big-screen-only">View</span>
+          </Link>
+        </li>
       </CardMenu>
     </Card>
   ));
@@ -53,19 +53,23 @@ export default function TemplateResults() {
       <header className="page__header">
         <h2>Checklist Templates</h2>
         <menu className="header__menu">
-          <button
-            className="button"
-            onClick={() => console.log("button")}
-            title="Create Checklist"
-          >
-            <span className="button__icon">+</span>
-            <span className="big-screen-only">Create Template</span>
-          </button>
+          <li>
+            <button
+              className="button"
+              onClick={() => console.log("button")}
+              title="Create Checklist"
+            >
+              <span className="button__icon">+</span>
+              <span className="big-screen-only">Create Template</span>
+            </button>
+          </li>
         </menu>
       </header>
-      <SearchForm onSearch={onSearch} ariaLabel={"Search through checklist templates"}/>
+      <SearchForm
+        onSearch={onSearch}
+        ariaLabel={"Search through checklist templates"}
+      />
       <div className="results__container">{checklistCards}</div>
-
     </>
   );
 }

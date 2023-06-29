@@ -7,39 +7,60 @@ import "./ConfirmDeletionModal.css";
 import storageService from "../../../services/storage/StorageService";
 import { TOAST_MOODS, toastManager } from "../../../toast/ToastService";
 
-export default function ConfirmDeletionModal({open, node, onDeleted, onCanceled}) {
-    const confirmDeletionDialogRef = useRef(null)
+export default function ConfirmDeletionModal({
+  open,
+  node,
+  onDeleted,
+  onCanceled,
+}) {
+  const confirmDeletionDialogRef = useRef(null);
 
-    if(open) {
-        confirmDeletionDialogRef.current?.close()
-        confirmDeletionDialogRef.current?.showModal();
-    }
-    else {
-        confirmDeletionDialogRef.current?.close()
-    }
-      const closeConfirmDeletionDialog = () => {
-        confirmDeletionDialogRef.current.close();
-        onCanceled()
-      }
-      const confirmDeletion = () => {
-        closeConfirmDeletionDialog();
-        storageService.deleteItem(node.id).then(
-          () => onDeleted()
-        )
-        .then(() => toastManager.push("Deleted", TOAST_MOODS.NEUTRAL))
-        .catch((err) => toastManager.push(`Failed: ${err}`, TOAST_MOODS.SAD))
-      }
+  if (open) {
+    confirmDeletionDialogRef.current?.close();
+    confirmDeletionDialogRef.current?.showModal();
+  } else {
+    confirmDeletionDialogRef.current?.close();
+  }
+  const closeConfirmDeletionDialog = () => {
+    confirmDeletionDialogRef.current.close();
+    onCanceled();
+  };
+  const confirmDeletion = () => {
+    closeConfirmDeletionDialog();
+    storageService
+      .deleteItem(node.id)
+      .then(() => onDeleted())
+      .then(() => toastManager.push("Deleted", TOAST_MOODS.NEUTRAL))
+      .catch((err) => toastManager.push(`Failed: ${err}`, TOAST_MOODS.SAD));
+  };
 
-    return(<dialog id="delete-dialog" className="dialog" ref={confirmDeletionDialogRef}>
-    <Card>
-      <CardHeader title={'Confirm'}/>
-      <CardBody>
-        <p>Are you sure? Like really really sure you want to delete this?</p>
-      </CardBody>
-      <CardMenu>
-        <button className="button button--primary" onClick={confirmDeletion}>Yes, delete it.</button>
-        <button className="button" onClick={closeConfirmDeletionDialog}>Oops, do not delete!</button>
-      </CardMenu>
-    </Card>
-  </dialog>)
+  return (
+    <dialog
+      id="delete-dialog"
+      className="dialog"
+      ref={confirmDeletionDialogRef}
+    >
+      <Card>
+        <CardHeader title={"Confirm"} />
+        <CardBody>
+          <p>Are you sure? Like really really sure you want to delete this?</p>
+        </CardBody>
+        <CardMenu>
+          <li>
+            <button
+              className="button button--primary"
+              onClick={confirmDeletion}
+            >
+              Yes, delete it.
+            </button>
+          </li>
+          <li>
+            <button className="button" onClick={closeConfirmDeletionDialog}>
+              Oops, do not delete!
+            </button>
+          </li>
+        </CardMenu>
+      </Card>
+    </dialog>
+  );
 }

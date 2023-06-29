@@ -36,6 +36,10 @@ const router = createHashRouter([
         path: "/import",
         element: <h1>Import is under construction</h1>
       },
+      {
+        path:"/",
+        element: <Navigate to="/my-checklists" replace/>
+      }
     ],
   },
   {

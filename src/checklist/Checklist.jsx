@@ -58,11 +58,17 @@ export default function Checklist() {
         </nav>
         <h2>{root.title}</h2>
         <menu className="header__menu">
-          <>
-            <button className="button" onClick={clone} title="Clone this checklist">
+          <li>
+            <button
+              className="button"
+              onClick={clone}
+              title="Clone this checklist"
+            >
               <span className="button__icon">🖇</span>
               <span className="big-screen-only">Clone</span>
             </button>
+          </li>
+          <li>
             <button
               className="button"
               disabled={root.isTemplate}
@@ -72,6 +78,8 @@ export default function Checklist() {
               <span className="button__icon">🗑</span>
               <span className="big-screen-only">Delete</span>
             </button>
+          </li>
+          <li>
             <button
               className="button"
               disabled={root.isTemplate}
@@ -80,7 +88,7 @@ export default function Checklist() {
               <span className="button__icon">✏</span>
               <span className="big-screen-only">Edit</span>
             </button>
-          </>
+          </li>
         </menu>
       </header>
 
