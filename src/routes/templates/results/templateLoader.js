@@ -1,7 +1,8 @@
 import storageService from "../../../services/storage/StorageService";
 
 export async function templateLoader() {
-  return (await storageService.searchTemplates({term: ''})).filter(
+  const data = await storageService.search({term: '', isTemplate: true})
+  return data.filter(
     (checklistObject) => checklistObject.isRoot
   );
 }

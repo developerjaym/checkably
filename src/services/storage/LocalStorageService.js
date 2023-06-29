@@ -1,4 +1,3 @@
-import flattenData from "../../utility/flattenData";
 import unflattenData from "../../utility/unflattenData";
 
 const textSearchMatches = (property, queryTerm) => {
@@ -9,6 +8,10 @@ const tagSearchMatches = (tags, queryTerm) => {
   return tags.some((tag) => textSearchMatches(tag, queryTerm));
 };
 
+const templateSearchMatches = (checklist, queryIsTemplate) => {
+  return Boolean(checklist.isTemplate) === Boolean(queryIsTemplate)
+}
+
 const templates = [
   {
     id: "96ec6268-d1ac-4868-a000-bf35e51c49f1",
@@ -17,7 +20,7 @@ const templates = [
     tags: ["vacation", "packing", "cruise"],
     checked: false,
     isRoot: true,
-    isTemplate: true,
+    isTemplate: true
   },
   {
     id: "36cf3af0-cebe-4a78-ba5e-f5ceec3c5636",
@@ -46,33 +49,24 @@ const templates = [
 
 class LocalStorageService {
   #key;
-  #data;
+  #myChecklists;
+  #templates;
   constructor(key) {
     this.#key = key;
-    this.#data = [];
+    this.#myChecklists = [];
+    this.#templates = templates;
   }
   async read() {
-    this.#data = JSON.parse(
+    this.#myChecklists = JSON.parse(
       localStorage.getItem(this.#key) || JSON.stringify([])
     );
-    // TODO destroy accidental orphans
     this.#destroyOrphans();
     this.#update();
-    return structuredClone(this.#data);
+    return structuredClone(this.#myChecklists.concat(this.#templates));
   }
   async search(queryObject) {
-    return await this.read()
-      .filter((item) => item.isRoot)
-      .filter(
-        (item) =>
-          tagSearchMatches(item.tags, queryObject.term) ||
-          textSearchMatches(item.title, queryObject.term) ||
-          textSearchMatches(item.description, queryObject.term)
-      );
-  }
-  async searchTemplates(queryObject) {
-    return await templates
-      .filter((item) => item.isRoot)
+    const data = await this.read();
+      return data.filter((item) => item.isRoot && templateSearchMatches(item, queryObject.isTemplate))
       .filter(
         (item) =>
           tagSearchMatches(item.tags, queryObject.term) ||
@@ -81,7 +75,7 @@ class LocalStorageService {
       );
   }
   async readOne(id) {
-    const checklistTree = unflattenData((await this.read()).concat(templates));
+    const checklistTree = unflattenData((await this.read()));
     const root = checklistTree.find((element) => `${element.id}` === id);
     if (!root) {
       throw Error(`Checklist with id ${id} was not found`);
@@ -89,9 +83,10 @@ class LocalStorageService {
     return structuredClone(root);
   }
   async clone(id) {
-    const templateTree = unflattenData(templates);
+    const templateTree = await this.readOne(id)
     const templateRoot = templateTree.find((template) => template.id === id);
     const templateRootClone = structuredClone(templateRoot);
+    templateRootClone.title = `[CLONED] ${templateRootClone.title}`
     const recursivelyChangeIds = (node, newParentId) => {
       node.id = crypto.randomUUID();
       node.isTemplate = false;
@@ -110,12 +105,12 @@ class LocalStorageService {
   }
   async post(value) {
     value = { id: crypto.randomUUID(), checked: false, title: "", ...value }; // throw some default values in there
-    this.#data.push(value);
+    this.#myChecklists.push(value);
     this.#update();
     return structuredClone(value);
   }
   async patch(id, patchValue) {
-    const checklist = this.#data.find((checklist) => checklist.id === id);
+    const checklist = this.#myChecklists.find((checklist) => checklist.id === id);
     for (const key in patchValue) {
       checklist[key] = patchValue[key];
     }
@@ -124,15 +119,15 @@ class LocalStorageService {
   }
   async deleteItem(id) {
     // find all children
-    const childrenIds = this.#findDescendentIds(id, this.#data, [id]);
-    this.#data = this.#data.filter(
+    const childrenIds = this.#findDescendentIds(id, this.#myChecklists, [id]);
+    this.#myChecklists = this.#myChecklists.filter(
       (checklist) => !childrenIds.includes(checklist.id)
     );
     this.#update();
     return true;
   }
   #update() {
-    localStorage.setItem(this.#key, JSON.stringify(this.#data, null, 2));
+    localStorage.setItem(this.#key, JSON.stringify(this.#myChecklists, null, 2));
   }
   #findDescendentIds(parentId, flatData, array) {
     const children = flatData.filter((item) => item.parent === parentId);
@@ -143,10 +138,10 @@ class LocalStorageService {
     return array;
   }
   #destroyOrphans() {
-    let orphans = this.#findOrphans(this.#data);
+    let orphans = this.#findOrphans(this.#myChecklists);
     while (orphans.length) {
       orphans.forEach((orphan) => this.deleteItem(orphan.id));
-      orphans = this.#findOrphans(this.#data);
+      orphans = this.#findOrphans(this.#myChecklists);
     }
   }
   #findOrphans(flatData) {

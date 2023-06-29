@@ -27,7 +27,7 @@ export default function TemplateResults() {
   const onSearch = (e) => {
     e.preventDefault();
     const searchQuery = Object.fromEntries(new FormData(e.target));
-    storageService.searchTemplates(searchQuery).then((results) => setList(results));
+    storageService.search({...searchQuery, isTemplate: true}).then((results) => setList(results));
   };
 
   const checklistCards = data.map((checklistObject) => (

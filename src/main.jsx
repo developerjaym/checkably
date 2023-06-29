@@ -32,6 +32,10 @@ const router = createHashRouter([
         path: "/templates/:checklistId",
         element: <Checklist/>
       },
+      {
+        path: "/import",
+        element: <h1>Import is under construction</h1>
+      },
     ],
   },
   {

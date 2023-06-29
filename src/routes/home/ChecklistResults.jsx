@@ -36,7 +36,7 @@ export default function ChecklistResults() {
   const onSearch = (e) => {
     e.preventDefault();
     const searchQuery = Object.fromEntries(new FormData(e.target));
-    storageService.search(searchQuery).then((results) => setList(results));
+    storageService.search({...searchQuery, isTemplate: false}).then((results) => setList(results));
   };
 
   const checklistCards = data.map((checklistObject) => (
