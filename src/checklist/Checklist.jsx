@@ -18,7 +18,6 @@ export default function Checklist() {
   const navigate = useNavigate();
   const correctBackRoute = root?.isTemplate ? "/templates" : "/my-checklists";
   useEffect(() => {
-    console.log("useEffect", checklistId);
     storageService
       .readOne(checklistId)
       .then((response) => setRoot(response))
