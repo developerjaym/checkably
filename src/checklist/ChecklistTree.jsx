@@ -8,9 +8,7 @@ export default function ChecklistTree({
   onDeleted,
   isRoot,
 }) {
-  console.log('checklistNode', JSON.stringify(checklistNode, null, 2));
   const [checkable, setCheckable] = useState(checklistNode);
-  console.log('checkable', JSON.stringify(checkable, null, 2));
   const onSelfChecked = (checked) => {
     storageService.patch(checklistNode.id, { checked }).then((response) => {
       setCheckable({ ...response, items: [...checkable.items] });
