@@ -18,6 +18,7 @@ export default function Checklist() {
   const navigate = useNavigate();
   const correctBackRoute = root?.isTemplate ? "/templates" : "/my-checklists";
   useEffect(() => {
+    console.log("useEffect", checklistId);
     storageService
       .readOne(checklistId)
       .then((response) => setRoot(response))
@@ -96,6 +97,7 @@ export default function Checklist() {
         <CardHeader title={root.isTemplate ? "Template" : "Checklist"} />
         <CardBody>
           <ChecklistTree
+            key={root.id}
             node={root}
             isRoot={true}
             onChecked={(value) => {
@@ -108,12 +110,14 @@ export default function Checklist() {
         </CardBody>
       </Card>
       <ConfirmDeletionModal
+        key={`delete-${root.id}`}
         open={openDeleteDialog}
         onCanceled={() => setOpenDeleteDialog(false)}
         onDeleted={onDeleted}
         node={root}
       />
       <UpdateChecklistModal
+        key={`update-${root.id}`}
         metadata={root}
         onCancel={() => setOpenUpdateDialog(false)}
         onSave={onMetadataChanged}

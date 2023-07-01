@@ -84,8 +84,7 @@ class LocalStorageService {
   }
   async clone(id) {
     const templateTree = await this.readOne(id)
-    const templateRoot = templateTree.find((template) => template.id === id);
-    const templateRootClone = structuredClone(templateRoot);
+    const templateRootClone = structuredClone(templateTree);
     templateRootClone.title = `[CLONED] ${templateRootClone.title}`
     const recursivelyChangeIds = (node, newParentId) => {
       node.id = crypto.randomUUID();

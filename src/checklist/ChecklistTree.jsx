@@ -56,11 +56,10 @@ export default function ChecklistTree({
       onSelfChecked(checkable.items.every((item) => item.checked));
     });
   };
-
   return (
     <details
       className="checklist__item"
-      open={isRoot || checkable.items.length}
+      open={isRoot || checkable?.items?.length}
     >
       <summary className="item__summary">
         <div className="summary__container">
