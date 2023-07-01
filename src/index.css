@@ -92,6 +92,8 @@ main {
 
   max-width: 1200px;
   width: calc(100vw - calc(2 * var(--wide)));
+
+  margin-bottom: calc((2 * var(--wide)) + 1.25rem);
 }
 
 .input {
