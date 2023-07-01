@@ -68,10 +68,9 @@ export default function Checklist() {
               <span className="big-screen-only">Clone</span>
             </button>
           </li>
-          <li>
+          {root.isTemplate ? null : <><li>
             <button
               className="button"
-              disabled={root.isTemplate}
               onClick={() => setOpenDeleteDialog(true)}
               title="Delete this checklist"
             >
@@ -88,7 +87,7 @@ export default function Checklist() {
               <span className="button__icon">✏</span>
               <span className="big-screen-only">Edit</span>
             </button>
-          </li>
+          </li></>}
         </menu>
       </header>
 

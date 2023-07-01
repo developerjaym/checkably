@@ -8,7 +8,9 @@ export default function ChecklistTree({
   onDeleted,
   isRoot,
 }) {
+  console.log('checklistNode', JSON.stringify(checklistNode, null, 2));
   const [checkable, setCheckable] = useState(checklistNode);
+  console.log('checkable', JSON.stringify(checkable, null, 2));
   const onSelfChecked = (checked) => {
     storageService.patch(checklistNode.id, { checked }).then((response) => {
       setCheckable({ ...response, items: [...checkable.items] });
@@ -19,7 +21,8 @@ export default function ChecklistTree({
   const onSelfTitleUpdated = (title) => {
     storageService
       .patch(checklistNode.id, { title })
-      .then((response) => setCheckable({ ...checkable, ...response }));
+      .then((response) => {
+        setCheckable({ ...response, items: [...checkable.items] })});
   };
 
   const onChildItemDeleted = (node) => {
@@ -66,6 +69,7 @@ export default function ChecklistTree({
           <input
             className="input item__checkbox"
             type="checkbox"
+            disabled={checklistNode.isTemplate}
             checked={checkable.checked}
             onChange={(e) => onSelfChecked(e.target.checked)}
             aria-label={isRoot ? checklistNode.title : checkable.title}
