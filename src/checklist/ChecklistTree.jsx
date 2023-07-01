@@ -9,6 +9,7 @@ export default function ChecklistTree({
   isRoot,
 }) {
   const [checkable, setCheckable] = useState(checklistNode);
+  const [detailsOpen, setDetailsOpen] = useState(isRoot || checkable?.items?.length);
   const onSelfChecked = (checked) => {
     storageService.patch(checklistNode.id, { checked }).then((response) => {
       setCheckable({ ...response, items: [...checkable.items] });
@@ -53,17 +54,18 @@ export default function ChecklistTree({
     storageService.post({ parent: checkable.id }).then((newItem) => {
       checkable.items.push(newItem);
       newItem.items = [];
+      setDetailsOpen(true);
       setCheckable({ ...checkable });
       onSelfChecked(checkable.items.every((item) => item.checked));
     });
   };
   return (
-    <details
-      className="checklist__item"
-      open={isRoot || checkable?.items?.length}
+    <div
+      className={"checklist__item"}
     >
-      <summary className="item__summary">
+      <div className="item__summary">
         <div className="summary__container">
+          <button aria-label={detailsOpen ? `Hide subitems.` : 'Show subitems.'} className={`button button--icon summary__button summary__button--${detailsOpen ? 'open' : 'closed'}`} onClick={() => setDetailsOpen(!detailsOpen)}>▼</button>
           <input
             className="input item__checkbox"
             type="checkbox"
@@ -108,7 +110,8 @@ export default function ChecklistTree({
             )}
           </menu>
         </div>
-      </summary>
+      </div>
+      <div className={`item__body item__body--${detailsOpen ? 'open' : 'closed'}`}>
       {checkable.items.map((item) => (
         <ChecklistTree
           key={item.id}
@@ -117,6 +120,7 @@ export default function ChecklistTree({
           onDeleted={onChildItemDeleted}
         />
       ))}
-    </details>
+      </div>
+    </div>
   );
 }

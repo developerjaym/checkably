@@ -19,6 +19,10 @@
     width: calc(100% - 1.5rem);
 }
 
+.item__body--closed {
+    display: none;
+}
+
 .item__text {
     flex-grow: 2;
 }
@@ -33,3 +37,36 @@
 .item__add-button {
     margin-left: 2.25rem;
 }
+
+.summary__button {
+    padding: var(--narrow) !important;
+}
+
+.summary__button--closed {
+    transform: rotate(-90deg);
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+    .item__body--open {
+        animation: expand var(--animation-duration) linear;
+    }
+  }
+  
+  @keyframes expand {
+    0% {
+      transform: translateY(-50%) scaleY(0);
+    }
+    100% {
+      transform: translateY(0) scaleY(1);
+    }
+  }
+  
+  @keyframes slide-out {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(100vw)
+    }
+  }

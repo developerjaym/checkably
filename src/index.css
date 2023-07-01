@@ -4,6 +4,7 @@
   --accent-background-rgb: 74, 48, 141;
   --accent-foreground-rgb: 255, 255, 255;
   --shadow: rgba(var(--foreground-rgb), 0.15);
+  --animation-duration: 0.25s;
 
   --narrow: 4px;
   --wide: 16px;
@@ -187,3 +188,5 @@ main {
     width: calc(100vw - calc(2 * var(--narrow)));
   }
 }
+
+
