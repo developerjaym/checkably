@@ -61,12 +61,13 @@
       transform: translateY(0) scaleY(1);
     }
   }
-  
-  @keyframes slide-out {
-    0% {
-      transform: translateX(0);
+
+  @media print {
+    .summary {
+      display: initial;
     }
-    100% {
-      transform: translateX(100vw)
+    .item__body {
+        display: initial !important;
     }
   }
+  

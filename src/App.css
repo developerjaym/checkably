@@ -38,3 +38,12 @@
 .app__nav .button {
   margin-left: auto;
 }
+
+@media print {
+  .app__header {
+    box-shadow: none;
+  }
+  .app__header img {
+    filter: grayscale();
+  }
+}

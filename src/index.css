@@ -189,4 +189,9 @@ main {
   }
 }
 
+@media print {
+  .button, footer {
+    display: none;
+  }
+}
 

@@ -9,4 +9,10 @@
     box-shadow: 2px 3px 8px 2px var(--shadow);
   }
   
+  @media print {
+    .card {
+      box-shadow: none;
+      border: 1px solid rgb(var(--foreground-rgb));
+    }
+  }
  
