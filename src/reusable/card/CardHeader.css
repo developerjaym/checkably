@@ -8,3 +8,9 @@
     align-items: center;
     column-gap: var(--wide);
   }
+
+  @media print {
+    .card__header {
+      display: none;
+    }
+  }

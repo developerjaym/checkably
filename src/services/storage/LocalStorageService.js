@@ -1,4 +1,5 @@
 import unflattenData from "../../utility/unflattenData";
+import templates from "./localTemplates";
 
 const textSearchMatches = (property, queryTerm) => {
   return property.toLowerCase().includes(queryTerm.toLowerCase().trim());
@@ -11,104 +12,6 @@ const tagSearchMatches = (tags, queryTerm) => {
 const templateSearchMatches = (checklist, queryIsTemplate) => {
   return Boolean(checklist.isTemplate) === Boolean(queryIsTemplate);
 };
-
-const templates = [
-  {
-    id: "96ec6268-d1ac-4868-a000-bf35e51c49f1",
-    title: "Cruise Packing List",
-    description: "Everything you need to pack for a tropical cruise.",
-    tags: ["vacation", "packing", "cruise"],
-    checked: false,
-    isRoot: true,
-    isTemplate: true,
-  },
-  {
-    id: "7c6aab59-e237-4f1e-b249-d7e224494aee",
-    title: "Medications",
-    checked: false,
-    parent: "96ec6268-d1ac-4868-a000-bf35e51c49f1",
-    isTemplate: true,
-  },
-  {
-    id: "955e37fd-443b-4569-bba3-5c6e57509614",
-    title: "Toiletries",
-    checked: false,
-    parent: "96ec6268-d1ac-4868-a000-bf35e51c49f1",
-    isTemplate: true,
-  },
-  {
-    id: "1f0e267b-3fa7-4fb8-a8be-1acec5830e27",
-    title: "Documents",
-    checked: false,
-    parent: "96ec6268-d1ac-4868-a000-bf35e51c49f1",
-    isTemplate: true,
-  },
-  {
-    id: "3c1b0420-372e-46f0-a2d3-8ce249b0cd00",
-    title: "Passport 1",
-    checked: false,
-    parent: "1f0e267b-3fa7-4fb8-a8be-1acec5830e27",
-    isTemplate: true,
-  },
-  {
-    id: "286fe654-6982-45e0-9533-3169c1d54301",
-    title: "Passport 2",
-    checked: false,
-    parent: "1f0e267b-3fa7-4fb8-a8be-1acec5830e27",
-    isTemplate: true,
-  },
-  {
-    id: "1179a0e6-c18a-411d-a13e-f7d99bf18f48",
-    title: "Passport 3",
-    checked: false,
-    parent: "1f0e267b-3fa7-4fb8-a8be-1acec5830e27",
-    isTemplate: true,
-  },
-  {
-    id: "af8304ff-e6cb-4338-ae57-9cb3a4f572f0",
-    title: "Passport 4",
-    checked: false,
-    parent: "1f0e267b-3fa7-4fb8-a8be-1acec5830e27",
-    isTemplate: true,
-  },
-  {
-    id: "36cf3af0-cebe-4a78-ba5e-f5ceec3c5636",
-    title: "Grocery Shopping List",
-    description: "Standard items needed from the grocery.",
-    tags: ["grocery", "food", "shopping"],
-    checked: false,
-    isRoot: true,
-    isTemplate: true,
-  },
-  {
-    id: "bfb94f2a-9d2a-464a-b92f-2692568c07f5",
-    title: "Dairy",
-    checked: false,
-    parent: "36cf3af0-cebe-4a78-ba5e-f5ceec3c5636",
-    isTemplate: true,
-  },
-  {
-    id: "3166b704-7ac6-4925-a8ae-ef6bb5ef14d8",
-    title: "Cheese",
-    checked: false,
-    parent: "bfb94f2a-9d2a-464a-b92f-2692568c07f5",
-    isTemplate: true,
-  },
-  {
-    id: "06113abb-b87e-4465-ac7d-a3fd9fe437c2",
-    title: "Milk",
-    checked: false,
-    parent: "bfb94f2a-9d2a-464a-b92f-2692568c07f5",
-    isTemplate: true,
-  },
-  {
-    id: "8298e2a1-dbb6-4eb5-917f-8edd6237f499",
-    title: "Yogurt",
-    checked: false,
-    parent: "bfb94f2a-9d2a-464a-b92f-2692568c07f5",
-    isTemplate: true,
-  },
-];
 
 class LocalStorageService {
   #key;
