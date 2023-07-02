@@ -9,8 +9,8 @@ const tagSearchMatches = (tags, queryTerm) => {
 };
 
 const templateSearchMatches = (checklist, queryIsTemplate) => {
-  return Boolean(checklist.isTemplate) === Boolean(queryIsTemplate)
-}
+  return Boolean(checklist.isTemplate) === Boolean(queryIsTemplate);
+};
 
 const templates = [
   {
@@ -20,7 +20,7 @@ const templates = [
     tags: ["vacation", "packing", "cruise"],
     checked: false,
     isRoot: true,
-    isTemplate: true
+    isTemplate: true,
   },
   {
     id: "7c6aab59-e237-4f1e-b249-d7e224494aee",
@@ -129,7 +129,11 @@ class LocalStorageService {
   }
   async search(queryObject) {
     const data = await this.read();
-      return data.filter((item) => item.isRoot && templateSearchMatches(item, queryObject.isTemplate))
+    return data
+      .filter(
+        (item) =>
+          item.isRoot && templateSearchMatches(item, queryObject.isTemplate)
+      )
       .filter(
         (item) =>
           tagSearchMatches(item.tags, queryObject.term) ||
@@ -138,6 +142,16 @@ class LocalStorageService {
       );
   }
   async readOne(id) {
+    const all = await this.read();
+    const root = all.find((node) => node.id === id);
+    if (!root) {
+      throw Error(`Checklist with id ${id} was not found`);
+    }
+    root.items = all.filter((node) => node.parent === root.id);
+
+    return structuredClone(root);
+  }
+  async readOneDeep(id) {
     const checklistTree = unflattenData((await this.read()));
     const root = checklistTree.find((element) => `${element.id}` === id);
     if (!root) {
@@ -146,9 +160,9 @@ class LocalStorageService {
     return structuredClone(root);
   }
   async clone(id) {
-    const templateTree = await this.readOne(id)
+    const templateTree = await this.readOneDeep(id);
     const templateRootClone = structuredClone(templateTree);
-    templateRootClone.title = `[CLONED] ${templateRootClone.title}`
+    templateRootClone.title = `[CLONED] ${templateRootClone.title}`;
     const recursivelyChangeIds = (node, newParentId) => {
       node.id = crypto.randomUUID();
       node.isTemplate = false;
@@ -157,12 +171,12 @@ class LocalStorageService {
       }
       node.items.forEach((item) => recursivelyChangeIds(item, node.id));
     };
-    const recursivelyPost =  (node) => {
-      this.post({...node, items: null})
+    const recursivelyPost = (node) => {
+      this.post({ ...node, items: null });
       node.items.forEach((item) => recursivelyPost(item));
     };
     recursivelyChangeIds(templateRootClone);
-    recursivelyPost(templateRootClone)
+    recursivelyPost(templateRootClone);
     return templateRootClone.id;
   }
   async post(value) {
@@ -172,7 +186,9 @@ class LocalStorageService {
     return structuredClone(value);
   }
   async patch(id, patchValue) {
-    const checklist = this.#myChecklists.find((checklist) => checklist.id === id);
+    const checklist = this.#myChecklists.find(
+      (checklist) => checklist.id === id
+    );
     for (const key in patchValue) {
       checklist[key] = patchValue[key];
     }
@@ -189,7 +205,10 @@ class LocalStorageService {
     return true;
   }
   #update() {
-    localStorage.setItem(this.#key, JSON.stringify(this.#myChecklists, null, 2));
+    localStorage.setItem(
+      this.#key,
+      JSON.stringify(this.#myChecklists, null, 2)
+    );
   }
   #findDescendentIds(parentId, flatData, array) {
     const children = flatData.filter((item) => item.parent === parentId);

@@ -13,14 +13,22 @@
 
 .toast {
     padding: var(--narrow);
-    background-color: yellow;
-    color: black;
+    background-color: var(--neutral-background);
+    color: rgb(var(--foreground-rgb));
     text-align: center;
     margin: 0;
 
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 2px 3px 8px 2px var(--shadow);
+}
+.toast--happy {
+    background-color: var(--happy-background);
+}
+.toast--sad {
+    background-color: var(--sad-background);
+
 }
 .toast p {
     margin-left: auto;
@@ -28,3 +36,24 @@
 .toast__button {
     margin-left: auto;
 }
+
+@media print {
+    .toast__container {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .toast {
+        animation: toast-in var(--animation-duration) linear;
+    }
+  }
+  
+  @keyframes toast-in {
+    0% {
+      transform: translateY(50%) scaleY(0);
+    }
+    100% {
+      transform: translateY(0) scaleY(1);
+    }
+  }

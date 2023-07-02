@@ -3,6 +3,9 @@
   --foreground-rgb: 255, 255, 255;
   --accent-background-rgb: 74, 48, 141;
   --accent-foreground-rgb: 255, 255, 255;
+  --warning-background: firebrick;
+  --happy-background: darkolivegreen;
+  --neutral-background: rgb(var(--background-rgb));
   --shadow: rgba(var(--foreground-rgb), 0.15);
   --animation-duration: 0.25s;
 
@@ -135,6 +138,7 @@ main {
 }
 .button--icon {
   border: none;
+  background: none;
 }
 .button--submit {
   align-self: flex-end;
@@ -177,6 +181,8 @@ main {
   :root {
     --background-rgb: 250, 250, 250;
     --foreground-rgb: 25, 25, 25;
+    --warning-background: rgb(211, 143, 143);
+    --happy-background: rgb(169, 215, 88);
   }
 }
 

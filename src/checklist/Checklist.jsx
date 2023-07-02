@@ -95,9 +95,8 @@ export default function Checklist() {
         <CardHeader title={root.isTemplate ? "Template" : "Checklist"} />
         <CardBody>
           <ChecklistTree
-            key={root.id}
-            node={root}
-            isRoot={true}
+            key={`${root.title}-${root.id}`}
+            id={root.id}
             onChecked={(value) => {
               console.log("the whole thing's checked value", value);
             }}
@@ -112,7 +111,7 @@ export default function Checklist() {
         open={openDeleteDialog}
         onCanceled={() => setOpenDeleteDialog(false)}
         onDeleted={onDeleted}
-        node={root}
+        id={root.id}
       />
       <UpdateChecklistModal
         key={`update-${root.id}`}

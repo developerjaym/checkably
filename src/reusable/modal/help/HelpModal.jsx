@@ -27,7 +27,7 @@ export default function HelpModal({ open, onCanceled }) {
           <p className="dialog__paragraph">
             You can create a checklist by hitting the &apos;+Create Checklist'
             button from the &apos;My Checklists&apos; page or by hitting the
-            &apos;+Clone&apos; button on the &apos;Templates&apos; page. Either
+            &apos;🖇Clone&apos; button on the &apos;Templates&apos; page. Either
             way, you&apos;ll end up with a checklist you can use to keep track
             of your most important work.{" "}
           </p>

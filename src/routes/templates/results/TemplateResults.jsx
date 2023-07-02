@@ -52,7 +52,7 @@ export default function TemplateResults() {
     <>
       <header className="page__header">
         <h2>Checklist Templates</h2>
-        <menu className="header__menu">
+        {null && <menu className="header__menu">
           <li>
             <button
               className="button"
@@ -63,7 +63,7 @@ export default function TemplateResults() {
               <span className="big-screen-only">Create Template</span>
             </button>
           </li>
-        </menu>
+        </menu>}
       </header>
       <SearchForm
         onSearch={onSearch}

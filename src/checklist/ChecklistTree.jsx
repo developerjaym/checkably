@@ -1,17 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import storageService from "../services/storage/StorageService";
 import "./Checklist.css";
 
 export default function ChecklistTree({
-  node: checklistNode,
+  id,
   onChecked,
-  onDeleted,
-  isRoot,
+  onDeleted
 }) {
-  const [checkable, setCheckable] = useState(checklistNode);
-  const [detailsOpen, setDetailsOpen] = useState(isRoot || checkable?.items?.length);
+  const [checkable, setCheckable] = useState(null);
+  useEffect(() => {
+    const getCheckable = async () => {
+      const thisNode = await storageService.readOne(id);
+      setDetailsOpen(thisNode.isRoot || thisNode?.items?.length)
+      setCheckable(thisNode)
+    }
+    getCheckable();
+  }, [id]);
+  const [detailsOpen, setDetailsOpen] = useState(checkable?.isRoot || checkable?.items?.length);
   const onSelfChecked = (checked) => {
-    storageService.patch(checklistNode.id, { checked }).then((response) => {
+    storageService.patch(id, { checked }).then((response) => {
       setCheckable({ ...response, items: [...checkable.items] });
       onChecked(checkable.id, checked);
     });
@@ -19,7 +26,7 @@ export default function ChecklistTree({
 
   const onSelfTitleUpdated = (title) => {
     storageService
-      .patch(checklistNode.id, { title })
+      .patch(id, { title })
       .then((response) => {
         setCheckable({ ...response, items: [...checkable.items] })});
   };
@@ -39,7 +46,7 @@ export default function ChecklistTree({
   };
 
   const onSelfDeleted = () => {
-    if (isRoot) {
+    if (checkable.isRoot) {
       return;
     }
     storageService.deleteItem(checkable.id).then(() => onDeleted(checkable));
@@ -59,6 +66,9 @@ export default function ChecklistTree({
       onSelfChecked(checkable.items.every((item) => item.checked));
     });
   };
+  if(!checkable) {
+    return <h1>Loading...</h1>
+  }
   return (
     <div
       className={"checklist__item"}
@@ -69,13 +79,13 @@ export default function ChecklistTree({
           <input
             className="input item__checkbox"
             type="checkbox"
-            disabled={checklistNode.isTemplate}
+            disabled={checkable.isTemplate}
             checked={checkable.checked}
             onChange={(e) => onSelfChecked(e.target.checked)}
-            aria-label={isRoot ? checklistNode.title : checkable.title}
+            aria-label={checkable.isRoot ? checkable.title : checkable.title}
           />
-          {isRoot || checklistNode.isTemplate ? (
-            <span className="item__text">{checklistNode.title}</span>
+          {checkable.isRoot || checkable.isTemplate ? (
+            <span className="item__text">{checkable.title}</span>
           ) : (
             <input
               type="text"
@@ -86,7 +96,7 @@ export default function ChecklistTree({
             />
           )}
           <menu className="summary__menu">
-            {isRoot || checklistNode.isTemplate ? null : (
+            {checkable.isRoot || checkable.isTemplate ? null : (
               <li>
                 <button
                   className="button button--icon"
@@ -96,12 +106,12 @@ export default function ChecklistTree({
                 </button>
               </li>
             )}
-            {checklistNode.isTemplate ? null : (
+            {checkable.isTemplate ? null : (
               <button
-                disabled={checklistNode.isTemplate}
+                disabled={checkable.isTemplate}
                 className="button button--icon"
                 title={`Add item under ${
-                  isRoot ? checklistNode.title : checkable.title
+                  checkable.isRoot ? checkable.title : checkable.title
                 }`}
                 onClick={() => onChildAddedToSelf()}
               >
@@ -115,7 +125,7 @@ export default function ChecklistTree({
       {checkable.items.map((item) => (
         <ChecklistTree
           key={item.id}
-          node={item}
+          id={item.id}
           onChecked={onChildChecked}
           onDeleted={onChildItemDeleted}
         />
