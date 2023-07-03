@@ -11,12 +11,16 @@
     width: 75%;
 }
 
+.item__summary:hover {
+    background-color: rgb(var(--accent-background-rgb));
+    color: rgb(var(--accent-foreground-rgb));
+}
+
 .summary__container {
     display: inline-flex;
     align-items: center;
     column-gap: var(--narrow);
-    /*calculating width as 100% of parent container - 1.5rem (roughly width of arrow marker on summary)*/
-    width: calc(100% - 1.5rem);
+    width: 100%;
 }
 
 .item__body--closed {
