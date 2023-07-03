@@ -100,6 +100,9 @@ export default function ChecklistTree({
               <li>
                 <button
                   className="button button--icon"
+                  title={`Delete ${
+                  checkable.isRoot ? checkable.title : checkable.title
+                }${checkable?.items?.length ? ' and its subitems' : ''}`}
                   onClick={() => onSelfDeleted()}
                 >
                   🗑
