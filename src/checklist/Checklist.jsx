@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
-import Card from "../reusable/card/Card";
-import CardBody from "../reusable/card/CardBody";
-import CardHeader from "../reusable/card/CardHeader";
 import ConfirmDeletionModal from "../reusable/modal/confirmDeletion/ConfirmDeletionModal";
 import UpdateChecklistModal from "../reusable/modal/updateChecklist/UpdateChecklistModal";
 import storageService from "../services/storage/StorageService";
@@ -68,44 +65,43 @@ export default function Checklist() {
               <span className="big-screen-only">Clone</span>
             </button>
           </li>
-          {root.isTemplate ? null : <><li>
-            <button
-              className="button"
-              onClick={() => setOpenDeleteDialog(true)}
-              title="Delete this checklist"
-            >
-              <span className="button__icon">🗑</span>
-              <span className="big-screen-only">Delete</span>
-            </button>
-          </li>
-          <li>
-            <button
-              className="button"
-              disabled={root.isTemplate}
-              onClick={() => setOpenUpdateDialog(true)}
-            >
-              <span className="button__icon">✏</span>
-              <span className="big-screen-only">Edit</span>
-            </button>
-          </li></>}
+          {root.isTemplate ? null : (
+            <>
+              <li>
+                <button
+                  className="button"
+                  onClick={() => setOpenDeleteDialog(true)}
+                  title="Delete this checklist"
+                >
+                  <span className="button__icon">🗑</span>
+                  <span className="big-screen-only">Delete</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  className="button"
+                  disabled={root.isTemplate}
+                  onClick={() => setOpenUpdateDialog(true)}
+                >
+                  <span className="button__icon">✏</span>
+                  <span className="big-screen-only">Edit</span>
+                </button>
+              </li>
+            </>
+          )}
         </menu>
       </header>
 
-      <Card>
-        <CardHeader title={root.isTemplate ? "Template" : "Checklist"} />
-        <CardBody>
-          <ChecklistTree
-            key={`${root.title}-${root.id}`}
-            id={root.id}
-            onChecked={(value) => {
-              console.log("the whole thing's checked value", value);
-            }}
-            onDeleted={() => {
-              console.log("whole thing deleted");
-            }}
-          />
-        </CardBody>
-      </Card>
+      <ChecklistTree
+        key={`${root.title}-${root.id}`}
+        id={root.id}
+        onChecked={(value) => {
+          console.log("the whole thing's checked value", value);
+        }}
+        onDeleted={() => {
+          console.log("whole thing deleted");
+        }}
+      />
       <ConfirmDeletionModal
         key={`delete-${root.id}`}
         open={openDeleteDialog}
