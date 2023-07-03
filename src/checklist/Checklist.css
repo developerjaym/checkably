@@ -12,8 +12,7 @@
 }
 
 .item__summary:hover {
-    background-color: rgb(var(--accent-background-rgb));
-    color: rgb(var(--accent-foreground-rgb));
+    background-color: rgba(var(--foreground-rgb),.15);
 }
 
 .summary__container {
