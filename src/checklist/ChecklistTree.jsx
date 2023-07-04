@@ -10,11 +10,13 @@ export default function ChecklistTree({
   onDeleted
 }) {
   const [checkable, setCheckable] = useState(null);
+  const [title, setTitle] = useState('');
   useEffect(() => {
     const getCheckable = async () => {
       const thisNode = await storageService.readOne(id);
       setDetailsOpen(thisNode.isRoot || thisNode?.items?.length)
       setCheckable(thisNode)
+      setTitle(thisNode.title);
     }
     getCheckable();
   }, [id]);
@@ -27,10 +29,14 @@ export default function ChecklistTree({
   };
 
   const onSelfTitleUpdated = (title) => {
+    setTitle(title);
+  }
+
+  const onTitleCommitted = (title) => {
     storageService
       .patch(id, { title })
-      .then((response) => {
-        setCheckable({ ...response, items: [...checkable.items] })});
+      // .then((response) => {
+      //   setCheckable({ ...response, items: [...checkable.items] })});
   };
 
   const onChildItemDeleted = (node) => {
@@ -91,9 +97,10 @@ export default function ChecklistTree({
             <input
               type="text"
               className="input item__input item__text"
-              value={checkable.title}
+              value={title}
               onChange={(e) => onSelfTitleUpdated(e.target.value)}
-              autoFocus={!checkable.title}
+              autoFocus={checkable?.title === ''}
+              onBlur={() => onTitleCommitted(title)}
             />
           )}
           <menu className="summary__menu">
