@@ -7,7 +7,7 @@
 
   box-shadow: 2px 3px 8px 2px var(--shadow);
 
-  padding: var(--narrow) var(--wide);
+  padding: var(--narrow) var(--narrow);
 }
 
 .app__header h1 {
