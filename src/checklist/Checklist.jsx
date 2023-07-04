@@ -81,9 +81,10 @@ export default function Checklist() {
                 <button
                   className="button"
                   disabled={root.isTemplate}
+                  title="Edit name, description, and tags"
                   onClick={() => setOpenUpdateDialog(true)}
                 >
-                  <span className="button__icon">✏</span>
+                  <span className="button__icon button__icon--pencil">✏</span>
                   <span className="big-screen-only">Edit</span>
                 </button>
               </li>

@@ -1,11 +1,15 @@
-
 import { useRef } from "react";
 import Card from "../../card/Card";
 import CardBody from "../../card/CardBody";
 import CardHeader from "../../card/CardHeader";
 import ChecklistMetadataForm from "../../form/ChecklistMetadataForm";
 
-export default function UpdateChecklistModal({ metadata, open, onCancel, onSave }) {
+export default function UpdateChecklistModal({
+  metadata,
+  open,
+  onCancel,
+  onSave,
+}) {
   const dialogRef = useRef(null);
 
   if (open) {
@@ -23,7 +27,7 @@ export default function UpdateChecklistModal({ metadata, open, onCancel, onSave 
   };
   const presubmit = (newChecklistData) => {
     dialogRef.current.close();
-    onSave(newChecklistData)
+    onSave(newChecklistData);
   };
 
   return (
@@ -32,7 +36,7 @@ export default function UpdateChecklistModal({ metadata, open, onCancel, onSave 
         <CardHeader title={`Update ${metadata.title}`} />
         <CardBody>
           <ChecklistMetadataForm onSubmit={presubmit} defaultValues={metadata}>
-          <button className="button button--submit" value="default">
+            <button className="button button--submit" value="default">
               <span className="button__icon">💾</span>
               <span className="big-screen-only">Save</span>
             </button>

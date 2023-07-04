@@ -1,76 +1,77 @@
-
-
 .checklist__item {
-    border-width: 1px 0 0 1px;
-    border-style: solid;
-    border-color: rgba(var(--foreground-rgb), 0.15);
-    padding: var(--narrow) 0 0 var(--wide);
+  border-width: 1px 0 0 1px;
+  border-style: solid;
+  border-color: rgba(var(--foreground-rgb), 0.15);
+  padding: 0 0 0 var(--wide);
 }
 
 .item__input {
-    width: 75%;
+  width: 75%;
+}
+
+.item__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: var(--narrow);
+  padding: var(--narrow) var(--narrow) var(--narrow) var(--wide);
+  margin-left: calc(-1 * var(--wide));
 }
 
 .item__summary:hover {
-    background-color: var(--shadow);
-}
-
-.summary__container {
-    display: inline-flex;
-    align-items: center;
-    column-gap: var(--narrow);
-    width: 100%;
+  background-color: var(--shadow);
 }
 
 .item__body--closed {
-    display: none;
+  display: none;
 }
 
 .item__text {
-    flex-grow: 2;
+  flex-grow: 2;
 }
 
 .summary__menu {
-    padding: 0;
-
-    display: flex;
-    margin: var(--narrow);
+  padding: 0;
+  display: flex;
+  margin: 0;
 }
 
 .item__add-button {
-    margin-left: 2.25rem;
+  margin-left: 2.25rem;
 }
 
 .summary__button {
-    padding: var(--narrow) !important;
+  padding: var(--narrow) !important;
 }
 
 .summary__button--closed {
-    transform: rotate(-90deg);
+  transform: rotate(-90deg);
 }
 
-
 @media (prefers-reduced-motion: no-preference) {
-    .item__body--open {
-        animation: expand var(--animation-duration) linear;
-    }
+  .item__body--open {
+    animation: expand var(--animation-duration) linear;
   }
-  
-  @keyframes expand {
-    0% {
-      transform: translateY(-50%) scaleY(0);
-    }
-    100% {
-      transform: translateY(0) scaleY(1);
-    }
-  }
+}
 
-  @media print {
-    .summary {
-      display: initial;
-    }
-    .item__body {
-        display: initial !important;
-    }
+@keyframes expand {
+  0% {
+    transform: translateY(-50%) scaleY(0);
   }
-  
+  100% {
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+@media print {
+  .summary {
+    display: initial;
+  }
+  .item__body {
+    display: initial !important;
+  }
+  input {
+    border: none !important;
+    accent-color: rgb(var(--background-rgb)) !important;
+  }
+}

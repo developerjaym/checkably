@@ -1,6 +1,6 @@
+import "./ChecklistMetadataForm.css";
 import { checklistValidationRules } from "../../services/validators/checklistValidator";
 import arrayifyTags from "../../utility/arrayifyTags";
-import CardMenu from "../card/CardMenu";
 
 export default function ChecklistMetadataForm({
   defaultValues = { title: "", tags: [], description: "" },
@@ -52,7 +52,7 @@ export default function ChecklistMetadataForm({
           defaultValue={defaultValues.description}
         />
       </label>
-      <CardMenu>{children}</CardMenu>
+      <div className="checklist-form__buttons">{children}</div>
     </form>
   );
 }
