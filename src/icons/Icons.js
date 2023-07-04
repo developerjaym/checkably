@@ -2,7 +2,7 @@
 
 const icons = {
     logo: {
-        src: "./logo.jpeg",
+        src: "./logo.png",
         alt: "Clip art of checklist"
     },
     checked: {

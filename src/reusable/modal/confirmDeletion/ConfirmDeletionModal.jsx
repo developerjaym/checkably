@@ -9,7 +9,7 @@ import { TOAST_MOODS, toastManager } from "../../../toast/ToastService";
 
 export default function ConfirmDeletionModal({
   open,
-  node,
+  id,
   onDeleted,
   onCanceled,
 }) {
@@ -28,7 +28,7 @@ export default function ConfirmDeletionModal({
   const confirmDeletion = () => {
     closeConfirmDeletionDialog();
     storageService
-      .deleteItem(node.id)
+      .deleteItem(id)
       .then(() => onDeleted())
       .then(() => toastManager.push("Deleted", TOAST_MOODS.NEUTRAL))
       .catch((err) => toastManager.push(`Failed: ${err}`, TOAST_MOODS.SAD));

@@ -9,6 +9,12 @@
     column-gap: var(--wide);
   }
 
+  .header__img {
+    background: rgb(var(--accent-foreground-rgb));
+    padding: var(--narrow);
+    border-radius: var(--radius);
+  }
+
   @media print {
     .card__header {
       display: none;

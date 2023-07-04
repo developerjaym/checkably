@@ -100,7 +100,7 @@ export default function ChecklistResults() {
         open={openDeleteDialog}
         onCanceled={() => setOpenDeleteDialog(false)}
         onDeleted={onDeleted}
-        node={focusedNode.current}
+        id={focusedNode.current?.id}
       />
 
       <AddChecklistModal
