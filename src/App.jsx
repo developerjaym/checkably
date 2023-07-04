@@ -15,9 +15,9 @@ function App() {
   return (
     <>
       <header className="app__header">
-        <img src={icons.logo.src} alt={icons.logo.alt} height={32} width={32} />
+        <img src={icons.logo.src} alt={icons.logo.alt} height={36} width={36} />
         <h1>Checkably</h1>
-        <menu>
+        <menu className="header__menu">
         <li>
         <button
             className="button"
