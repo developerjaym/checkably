@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import storageService from "../services/storage/StorageService";
 import "./Checklist.css";
+
+const ChecklistMemo = memo(ChecklistTree, (oldProps, newProps) => oldProps.id === newProps.id)
 
 export default function ChecklistTree({
   id,
@@ -124,7 +126,7 @@ export default function ChecklistTree({
       </div>
       <div className={`item__body item__body--${detailsOpen ? 'open' : 'closed'}`}>
       {checkable.items.map((item) => (
-        <ChecklistTree
+        <ChecklistMemo
           key={item.id}
           id={item.id}
           onChecked={onChildChecked}
