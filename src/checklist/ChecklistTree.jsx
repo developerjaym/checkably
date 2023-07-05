@@ -95,6 +95,7 @@ export default function ChecklistTree({
               onChange={(e) => onSelfTitleUpdated(e.target.value)}
               autoFocus={checkable?.title === ''}
               onBlur={() => onTitleCommitted(title)}
+              aria-label="Checklist item title"
             />
           )}
           <menu className="summary__menu">

@@ -49,8 +49,9 @@ export default function Checklist() {
     <>
       <header className="page__header">
         <nav>
-          <NavLink to={correctBackRoute} className="button button--icon">
-            ☚
+          <NavLink to={correctBackRoute} className="button button--icon" aria-label="Go back to previous page.">
+            <span className="button__icon">&lt;</span>
+            <span className="big-screen-only">Back</span>
           </NavLink>
         </nav>
         <h2>{root.title}</h2>

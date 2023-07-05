@@ -40,7 +40,7 @@ export default function TemplateResults() {
       <CardMenu>
         <li>
           <Link className="button" to={`/templates/${checklistObject.id}`}>
-            <span className="button__icon">☛</span>
+            <span className="button__icon">&gt;</span>
             <span className="big-screen-only">View</span>
           </Link>
         </li>
