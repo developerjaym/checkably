@@ -12,11 +12,14 @@ import unflattenData from "../../utility/unflattenData";
 import "./ChecklistResults.css";
 import { homeLoader } from "./homeLoader";
 import SearchForm from "../../reusable/form/search/SearchForm";
+import Logo from "../../reusable/logo/Logo";
+import HelpModal from "../../reusable/modal/help/HelpModal";
 
 export default function ChecklistResults() {
   const [list, setList] = useState([]);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [openAddDialog, setOpenAddDialog] = useState(false);
+  const [helpModalOpen, setHelpModalOpen] = useState(false);
 
   const focusedNode = useRef(null);
   useEffect(() => {
@@ -76,16 +79,24 @@ export default function ChecklistResults() {
   return (
     <>
       <header className="page__header">
-        <h2>My Checklists</h2>
+        <Logo />
+
+        <h2 className="page__title">My Checklists</h2>
         <menu className="header__menu">
           <li>
             <button
-              className="button"
+              className="button button--toolbar"
               onClick={() => setOpenAddDialog(true)}
               title="Create Checklist"
             >
               <span className="button__icon">+</span>
               <span className="big-screen-only">Create Checklist</span>
+            </button>
+          </li>
+          <li>
+            <button className="button button--toolbar" onClick={() => setHelpModalOpen(true)}>
+              <span className="button__icon">?</span>
+              <span className="big-screen-only">Help</span>
             </button>
           </li>
         </menu>
@@ -106,6 +117,11 @@ export default function ChecklistResults() {
       <AddChecklistModal
         open={openAddDialog}
         onClose={() => setOpenAddDialog(false)}
+      />
+
+      <HelpModal
+        open={helpModalOpen}
+        onCanceled={() => setHelpModalOpen(false)}
       />
     </>
   );

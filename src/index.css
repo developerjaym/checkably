@@ -53,20 +53,26 @@ body {
 }
 
 .page__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-areas: "logo title" "toolbar toolbar";
+  grid-template-columns:  max-content 1fr;
 }
 
-.page__header h2 {
-  flex-grow: 2;
+.page__title {
   margin: var(--narrow);
+  grid-area: title;
+  justify-self: start;
+  align-self: center;
+}
+
+.logo {
+  grid-area: logo;
 }
 
 .header__menu {
+  grid-area: toolbar;
   display: flex;
-  column-gap: var(--narrow);
-  margin: var(--narrow);
+  margin: 0;
   padding: 0;
 }
 
@@ -142,6 +148,13 @@ main {
   border: none;
   background: none;
 }
+.button--toolbar {
+  border-style: solid;
+  border-color: rgb(var(--foreground-rgb));
+  border-width: 0 1px 0 0;
+  border-radius: 0;
+  padding: var(--narrow) var(--wide);
+}
 .button--submit {
   align-self: flex-end;
 }
@@ -200,6 +213,9 @@ main {
     padding: var(--narrow) var(--narrow);
     row-gap: var(--narrow);
     width: calc(100vw - calc(2 * var(--narrow)));
+  }
+  .button--toolbar {
+    padding: var(--narrow);
   }
 }
 

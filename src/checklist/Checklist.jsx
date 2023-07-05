@@ -6,6 +6,7 @@ import storageService from "../services/storage/StorageService";
 import { TOAST_MOODS, toastManager } from "../toast/ToastService";
 import "./Checklist.css";
 import ChecklistTree from "./ChecklistTree";
+import Logo from "../reusable/logo/Logo";
 
 export default function Checklist() {
   const { checklistId } = useParams();
@@ -47,18 +48,19 @@ export default function Checklist() {
   }
   return (
     <>
-      <header className="page__header">
-        <nav>
-          <NavLink to={correctBackRoute} className="button button--icon" aria-label="Go back to previous page.">
+        <header className="page__header">
+        <Logo />
+        <h2 className="page__title">{root.title}</h2>
+        <menu className="header__menu">
+          <li>
+          <NavLink to={correctBackRoute} className="button button--toolbar" aria-label="Go back to previous page.">
             <span className="button__icon">&lt;</span>
             <span className="big-screen-only">Back</span>
           </NavLink>
-        </nav>
-        <h2>{root.title}</h2>
-        <menu className="header__menu">
+          </li>
           <li>
             <button
-              className="button"
+              className="button button--toolbar"
               onClick={clone}
               title="Clone this checklist"
             >
@@ -70,7 +72,7 @@ export default function Checklist() {
             <>
               <li>
                 <button
-                  className="button"
+                  className="button button--toolbar"
                   onClick={() => setOpenDeleteDialog(true)}
                   title="Delete this checklist"
                 >
@@ -80,7 +82,7 @@ export default function Checklist() {
               </li>
               <li>
                 <button
-                  className="button"
+                  className="button button--toolbar"
                   disabled={root.isTemplate}
                   title="Edit name, description, and tags"
                   onClick={() => setOpenUpdateDialog(true)}

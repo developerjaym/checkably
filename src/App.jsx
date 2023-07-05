@@ -1,35 +1,18 @@
 import { NavLink, Outlet } from "react-router-dom";
 import "./App.css";
-import icons from "./icons/Icons";
 import { Toast } from "./toast/Toast";
 import HelpModal from "./reusable/modal/help/HelpModal";
 import { useState } from "react";
 
 function App() {
 
-  const [helpModalOpen, setHelpModalOpen] = useState(false)
 
   const determineNavLinkClassName = ({ isActive, isPending }) =>
     isPending ? "link link--pending" : isActive ? "link link--active" : "link";
 
   return (
     <>
-      <header className="app__header">
-        <img src={icons.logo.src} alt={icons.logo.alt} height={36} width={36} />
-        <h1>Checkably</h1>
-        <menu className="header__menu">
-        <li>
-        <button
-            className="button"
-            onClick={() => setHelpModalOpen(true)}
-          >
-            <span className="button__icon">?</span>
-            <span className="big-screen-only">Help</span>
-          </button>
-        </li>
-        
-        </menu>
-      </header>
+      
       <main>
         <Outlet />
       </main>
@@ -44,7 +27,7 @@ function App() {
         </nav>
       </footer>
       <Toast />
-      <HelpModal open={helpModalOpen} onCanceled={() => setHelpModalOpen(false)}/>
+      {/* <HelpModal open={helpModalOpen} onCanceled={() => setHelpModalOpen(false)}/> */}
     </>
   );
 }
