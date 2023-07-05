@@ -97,10 +97,8 @@ export default function Checklist() {
         key={`${root.title}-${root.id}`}
         id={root.id}
         onChecked={(value) => {
-          console.log("the whole thing's checked value", value);
         }}
         onDeleted={() => {
-          console.log("whole thing deleted");
         }}
       />
       <ConfirmDeletionModal

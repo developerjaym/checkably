@@ -52,18 +52,6 @@ export default function TemplateResults() {
     <>
       <header className="page__header">
         <h2>Checklist Templates</h2>
-        {null && <menu className="header__menu">
-          <li>
-            <button
-              className="button"
-              onClick={() => console.log("button")}
-              title="Create Checklist"
-            >
-              <span className="button__icon">+</span>
-              <span className="big-screen-only">Create Template</span>
-            </button>
-          </li>
-        </menu>}
       </header>
       <SearchForm
         onSearch={onSearch}

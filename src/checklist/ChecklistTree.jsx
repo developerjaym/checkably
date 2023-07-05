@@ -1,8 +1,6 @@
-import { memo, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import storageService from "../services/storage/StorageService";
 import "./Checklist.css";
-
-const ChecklistMemo = memo(ChecklistTree, (oldProps, newProps) => oldProps.id === newProps.id)
 
 export default function ChecklistTree({
   id,
@@ -35,15 +33,11 @@ export default function ChecklistTree({
   const onTitleCommitted = (title) => {
     storageService
       .patch(id, { title })
-      // .then((response) => {
-      //   setCheckable({ ...response, items: [...checkable.items] })});
   };
 
   const onChildItemDeleted = (node) => {
     checkable.items = checkable.items.filter((i) => i.id !== node.id);
-    setCheckable({
-      ...checkable,
-    });
+    setCheckable({ ...checkable, items: [...checkable.items] });
 
     // Consider self checked if self is checked OR if self has items and all items are checked
     onSelfChecked(
@@ -70,7 +64,7 @@ export default function ChecklistTree({
       checkable.items.push(newItem);
       newItem.items = [];
       setDetailsOpen(true);
-      setCheckable({ ...checkable });
+      setCheckable({ ...checkable, items: [...checkable.items] });
       onSelfChecked(checkable.items.every((item) => item.checked));
     });
   };
@@ -133,7 +127,7 @@ export default function ChecklistTree({
       </div>
       <div className={`item__body item__body--${detailsOpen ? 'open' : 'closed'}`}>
       {checkable.items.map((item) => (
-        <ChecklistMemo
+        <ChecklistTree
           key={item.id}
           id={item.id}
           onChecked={onChildChecked}
