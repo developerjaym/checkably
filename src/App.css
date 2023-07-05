@@ -10,6 +10,12 @@
   padding: var(--narrow) var(--narrow);
 }
 
+.app__header img {
+  padding: var(--narrow);
+  border-radius: var(--radius);
+  background-color: rgb(var(--accent-foreground-rgb));
+}
+
 .app__header h1 {
   margin: var(--narrow);
   flex-grow: 2;
