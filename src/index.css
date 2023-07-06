@@ -46,10 +46,6 @@ body {
   max-width: 30rem;
 }
 
-.dialog__paragraph {
- : 600px;
-}
-
 #root {
   display: flex;
   flex-direction: column;
@@ -67,7 +63,7 @@ body {
 }
 
 .page__title {
-  margin: 0 calc(var(--narrow) + var(--wide));
+  margin: var(--narrow) calc(var(--narrow) + var(--wide));
   grid-area: title;
   justify-self: start;
   align-self: center;
@@ -227,7 +223,7 @@ main {
     padding: 0 var(--wide);
   }
   .page__title {
-    margin: 0 var(--narrow);
+    margin: 0 var(--wide);
   }
 }
 
