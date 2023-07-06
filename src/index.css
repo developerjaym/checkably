@@ -42,8 +42,12 @@ body {
   border-radius: var(--radius);
 }
 
+.dialog .card {
+  max-width: 30rem;
+}
+
 .dialog__paragraph {
-  max-width: 600px;
+ : 600px;
 }
 
 #root {
@@ -54,12 +58,16 @@ body {
 
 .page__header {
   display: grid;
-  grid-template-areas: "logo title" "toolbar toolbar";
+  grid-template-areas: "logo title" "logo toolbar";
   grid-template-columns:  max-content 1fr;
+  align-items: center;
+  padding: var(--narrow);
+  box-shadow: 1px 1px 8px 1px var(--shadow);
+
 }
 
 .page__title {
-  margin: var(--narrow);
+  margin: 0 calc(var(--narrow) + var(--wide));
   grid-area: title;
   justify-self: start;
   align-self: center;
@@ -99,11 +107,10 @@ main {
   padding: var(--wide);
 
   align-self: center;
-
-  max-width: 1200px;
-  width: calc(100vw - calc(2 * var(--wide)));
+  width: 100vw;
 
   margin-bottom: calc((2 * var(--wide)) + 1.25rem);
+  max-width: 1200px;
 }
 
 .input {
@@ -178,6 +185,10 @@ main {
   border-width: 1.5px;
 }
 
+.button--toolbar:hover {
+  background-color: rgba(var(--foreground-rgb), 0.15);
+}
+
 .button__icon {
   min-height: 26px;
   min-width: 26px;
@@ -198,7 +209,7 @@ main {
 
 @media print, (prefers-color-scheme: light) {
   :root {
-    --background-rgb: 250, 250, 250;
+    --background-rgb: 255, 255, 255;
     --foreground-rgb: 25, 25, 25;
     --warning-background: rgb(211, 143, 143);
     --happy-background: rgb(169, 215, 88);
@@ -206,16 +217,17 @@ main {
 }
 
 @media screen and (max-width: 900px) {
+  :root {
+    --wide: 12px;
+  }
   .big-screen-only {
     display: none;
   }
-  main {
-    padding: var(--narrow) var(--narrow);
-    row-gap: var(--narrow);
-    width: calc(100vw - calc(2 * var(--narrow)));
-  }
   .button--toolbar {
-    padding: var(--narrow);
+    padding: 0 var(--wide);
+  }
+  .page__title {
+    margin: 0 var(--narrow);
   }
 }
 

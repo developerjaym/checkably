@@ -5,17 +5,12 @@ import HelpModal from "./reusable/modal/help/HelpModal";
 import { useState } from "react";
 
 function App() {
-
-
   const determineNavLinkClassName = ({ isActive, isPending }) =>
     isPending ? "link link--pending" : isActive ? "link link--active" : "link";
 
   return (
     <>
-      
-      <main>
-        <Outlet />
-      </main>
+      <Outlet />
       <footer className="app__footer">
         <nav className="app__nav">
           <NavLink to={"/templates"} className={determineNavLinkClassName}>

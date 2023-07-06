@@ -94,18 +94,23 @@ export default function ChecklistResults() {
             </button>
           </li>
           <li>
-            <button className="button button--toolbar" onClick={() => setHelpModalOpen(true)}>
+            <button
+              className="button button--toolbar"
+              onClick={() => setHelpModalOpen(true)}
+            >
               <span className="button__icon">?</span>
               <span className="big-screen-only">Help</span>
             </button>
           </li>
         </menu>
       </header>
-      <SearchForm
-        onSearch={onSearch}
-        ariaLabel={"Search through saved checklists"}
-      />
-      <div className="results__container">{checklistCards}</div>
+      <main>
+        <SearchForm
+          onSearch={onSearch}
+          ariaLabel={"Search through saved checklists"}
+        />
+        <div className="results__container">{checklistCards}</div>
+      </main>
 
       <ConfirmDeletionModal
         open={openDeleteDialog}

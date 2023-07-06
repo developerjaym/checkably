@@ -10,9 +10,12 @@ import storageService from "../../../services/storage/StorageService";
 import unflattenData from "../../../utility/unflattenData";
 import "./TemplateResults.css";
 import { templateLoader } from "./templateLoader";
+import Logo from "../../../reusable/logo/Logo";
+import HelpModal from "../../../reusable/modal/help/HelpModal";
 
 export default function TemplateResults() {
   const [list, setList] = useState([]);
+  const [helpModalOpen, setHelpModalOpen] = useState(false);
 
   useEffect(() => {
     const load = async () => {
@@ -51,13 +54,31 @@ export default function TemplateResults() {
   return (
     <>
       <header className="page__header">
-        <h2>Checklist Templates</h2>
+        <Logo />
+        <h2 className="page__title">Checklist Templates</h2>
+        <menu className="header__menu">
+          <li>
+            <button
+              className="button button--toolbar"
+              onClick={() => setHelpModalOpen(true)}
+            >
+              <span className="button__icon">?</span>
+              <span className="big-screen-only">Help</span>
+            </button>
+          </li>
+        </menu>
       </header>
-      <SearchForm
-        onSearch={onSearch}
-        ariaLabel={"Search through checklist templates"}
+      <main>
+        <SearchForm
+          onSearch={onSearch}
+          ariaLabel={"Search through checklist templates"}
+        />
+        <div className="results__container">{checklistCards}</div>
+      </main>
+      <HelpModal
+        open={helpModalOpen}
+        onCanceled={() => setHelpModalOpen(false)}
       />
-      <div className="results__container">{checklistCards}</div>
     </>
   );
 }

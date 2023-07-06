@@ -7,12 +7,15 @@ import { TOAST_MOODS, toastManager } from "../toast/ToastService";
 import "./Checklist.css";
 import ChecklistTree from "./ChecklistTree";
 import Logo from "../reusable/logo/Logo";
+import HelpModal from "../reusable/modal/help/HelpModal";
 
 export default function Checklist() {
   const { checklistId } = useParams();
   const [root, setRoot] = useState(null);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
+  const [helpModalOpen, setHelpModalOpen] = useState(false);
+
   const navigate = useNavigate();
   const correctBackRoute = root?.isTemplate ? "/templates" : "/my-checklists";
   useEffect(() => {
@@ -48,15 +51,19 @@ export default function Checklist() {
   }
   return (
     <>
-        <header className="page__header">
+      <header className="page__header">
         <Logo />
         <h2 className="page__title">{root.title}</h2>
         <menu className="header__menu">
           <li>
-          <NavLink to={correctBackRoute} className="button button--toolbar" aria-label="Go back to previous page.">
-            <span className="button__icon">&lt;</span>
-            <span className="big-screen-only">Back</span>
-          </NavLink>
+            <NavLink
+              to={correctBackRoute}
+              className="button button--toolbar"
+              aria-label="Go back to previous page."
+            >
+              <span className="button__icon">&lt;</span>
+              <span className="big-screen-only">Back</span>
+            </NavLink>
           </li>
           <li>
             <button
@@ -93,17 +100,25 @@ export default function Checklist() {
               </li>
             </>
           )}
+          <li>
+            <button
+              className="button button--toolbar"
+              onClick={() => setHelpModalOpen(true)}
+            >
+              <span className="button__icon">?</span>
+              <span className="big-screen-only">Help</span>
+            </button>
+          </li>
         </menu>
       </header>
-
-      <ChecklistTree
-        key={`${root.title}-${root.id}`}
-        id={root.id}
-        onChecked={(value) => {
-        }}
-        onDeleted={() => {
-        }}
-      />
+      <main>
+        <ChecklistTree
+          key={`${root.title}-${root.id}`}
+          id={root.id}
+          onChecked={(value) => {}}
+          onDeleted={() => {}}
+        />
+      </main>
       <ConfirmDeletionModal
         key={`delete-${root.id}`}
         open={openDeleteDialog}
@@ -117,6 +132,10 @@ export default function Checklist() {
         onCancel={() => setOpenUpdateDialog(false)}
         onSave={onMetadataChanged}
         open={openUpdateDialog}
+      />
+      <HelpModal
+        open={helpModalOpen}
+        onCanceled={() => setHelpModalOpen(false)}
       />
     </>
   );
