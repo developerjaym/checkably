@@ -25,7 +25,7 @@ export default function HelpModal({ open, onCanceled }) {
         <CardHeader title={"Help"} />
         <CardBody>
           <p className="dialog__paragraph">
-            You can create a checklist by hitting the &apos;+Create <span className="big-screen-only">Checklist</span>'
+            You can create a checklist by hitting the &apos;+ <span className="big-screen-only">Create Checklist</span>'
             button from the &apos;My Checklists&apos; page or by hitting the
             &apos;🖇<span className="big-screen-only">Clone</span>&apos; button on the &apos;Templates&apos; page. Either
             way, you&apos;ll end up with a checklist you can use to keep track

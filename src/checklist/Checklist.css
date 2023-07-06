@@ -41,7 +41,8 @@
 }
 
 .summary__button {
-  padding: var(--narrow) !important;
+  font-size: 0.5rem !important;
+  padding: calc(var(--narrow) + 0.25rem) !important;
 }
 
 .summary__button--closed {
