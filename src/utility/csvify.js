@@ -1,28 +1,25 @@
-import flattenData from "./flattenData.js";
 export default function csvify (tree) {
-    /**
-     * {
-    id: "f9e6974f-6fdf-46b3-abc3-aed64c2d0e7a",
-    checked: false,
-    title: "Cruise Packing List",
-    description: "Everything you need to pack for a tropical cruise.",
-    tags: ["VACATION", "PACKING", "CRUISE"],
-    isRoot: true,
-    isTemplate: true,
-    items: null,
-  },
-     */
-    // flatten
     // make headers
-    // make rows
+    // convert node to row
+    //  convert child nodes to rows
     // join rows
-    const flatData = flattenData(tree)
 
     const csvRows = [];
-    const headers = ["CHECKED", "TITLE"];
+    const headers = ["Checkably", cellify(tree.description)];
     csvRows.push(headers.join(','));
-    flatData.map(row => ([row.checked ? '"✓"' : '', cellify(row.title)].join(','))).forEach((row) => csvRows.push(row))
+    csvRows.push(...nodeToRows(tree, 0));
     return csvRows.join('\n')
+}
+
+function nodeToRows(node, depth = 0) {
+  const csvRows = []
+  csvRows.push(rowify(node, depth));
+  node.items.forEach(item => csvRows.push(...nodeToRows(item, depth + 1)))
+  return csvRows;
+}
+
+function rowify(datum, depth = 0) {
+  return [...new Array(depth).fill(' '), datum.checked ? '"✓"' : '▢', cellify(datum.title)].join(',')
 }
 
 function cellify(cellString) {

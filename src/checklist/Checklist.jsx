@@ -55,7 +55,6 @@ export default function Checklist() {
     const csvData = csvify(deepTree);
     downloadButtonRef.current.href = blobify(csvData, 'text/csv');
     downloadButtonRef.current.download = `CHECKABLY_${root.title}.csv`;
-    console.log(csvData)
   }
 
   const clone = async () => {
