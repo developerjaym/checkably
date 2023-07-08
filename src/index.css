@@ -103,7 +103,7 @@ main {
   padding: var(--wide);
 
   align-self: center;
-  width: 100vw;
+  width: calc(100vw - 2rem); /*Edge likes to include big scroll bar*/
 
   margin-bottom: calc((2 * var(--wide)) + 1.25rem);
   max-width: 1200px;
@@ -123,6 +123,7 @@ main {
 
   display: flex;
   justify-content: center;
+  cursor: pointer;
 }
 
 .link--active {
@@ -215,6 +216,10 @@ main {
 @media screen and (max-width: 900px) {
   :root {
     --wide: 12px;
+  }
+  main {
+    width: 100vw;
+    padding: var(--wide) var(--narrow);
   }
   .big-screen-only {
     display: none;
