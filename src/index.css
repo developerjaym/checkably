@@ -233,6 +233,9 @@ main {
 }
 
 @media print {
+  * {
+    filter: grayscale();
+  }
   .button, footer {
     display: none;
   }
