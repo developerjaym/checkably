@@ -1,8 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import "./App.css";
 import { Toast } from "./toast/Toast";
-import HelpModal from "./reusable/modal/help/HelpModal";
-import { useState } from "react";
 
 function App() {
   const determineNavLinkClassName = ({ isActive, isPending }) =>

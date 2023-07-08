@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import ConfirmDeletionModal from "../reusable/modal/confirmDeletion/ConfirmDeletionModal";
 import UpdateChecklistModal from "../reusable/modal/updateChecklist/UpdateChecklistModal";
@@ -8,6 +8,8 @@ import "./Checklist.css";
 import ChecklistTree from "./ChecklistTree";
 import Logo from "../reusable/logo/Logo";
 import HelpModal from "../reusable/modal/help/HelpModal";
+import csvify from "../utility/csvify";
+import blobify from "../utility/blobify";
 
 export default function Checklist() {
   const { checklistId } = useParams();
@@ -15,6 +17,7 @@ export default function Checklist() {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
   const [helpModalOpen, setHelpModalOpen] = useState(false);
+  const downloadButtonRef = useRef(null);
 
   const navigate = useNavigate();
   const correctBackRoute = root?.isTemplate ? "/templates" : "/my-checklists";
@@ -41,6 +44,19 @@ export default function Checklist() {
       .then((response) => setRoot(response))
       .then(() => toastManager.push("SAVED", TOAST_MOODS.HAPPY));
   };
+
+  const downloadCSV = async () => {
+    // get csv data
+    // convert csv data to blob
+    // get url for blob
+    // set download button's href as that url
+    // set the download button's download property as a nice name for the file
+    const deepTree = await storageService.readOneDeep(checklistId);
+    const csvData = csvify(deepTree);
+    downloadButtonRef.current.href = blobify(csvData, 'text/csv');
+    downloadButtonRef.current.download = `CHECKABLY_${root.title}.csv`;
+    console.log(csvData)
+  }
 
   const clone = async () => {
     const newId = await storageService.clone(root.id);
@@ -100,6 +116,16 @@ export default function Checklist() {
               </li>
             </>
           )}
+          <li>
+            <a
+              ref={downloadButtonRef}
+              className="button button--toolbar"
+              onClick={() => downloadCSV()}
+            >
+              <span className="button__icon">⭳</span>
+              <span className="big-screen-only">Download</span>
+            </a>
+          </li>
           <li>
             <button
               className="button button--toolbar"
