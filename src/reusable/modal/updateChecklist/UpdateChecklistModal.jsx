@@ -3,6 +3,7 @@ import Card from "../../card/Card";
 import CardBody from "../../card/CardBody";
 import CardHeader from "../../card/CardHeader";
 import ChecklistMetadataForm from "../../form/ChecklistMetadataForm";
+import unicodeSymbols from "../../../icons/UnicodeSymbols"
 
 export default function UpdateChecklistModal({
   metadata,
@@ -11,6 +12,7 @@ export default function UpdateChecklistModal({
   onSave,
 }) {
   const dialogRef = useRef(null);
+  
 
   if (open) {
     dialogRef.current?.close();
@@ -37,7 +39,7 @@ export default function UpdateChecklistModal({
         <CardBody>
           <ChecklistMetadataForm onSubmit={presubmit} defaultValues={metadata}>
             <button className="button button--submit" value="default">
-              <span className="button__icon">💾</span>
+              <span className="button__icon">{unicodeSymbols.SAVE}</span>
               <span className="big-screen-only">Save</span>
             </button>
             <button className="button" value="cancel" onClick={closeDialog}>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import storageService from "../services/storage/StorageService";
 import "./Checklist.css";
+import unicodeSymbols from "../icons/UnicodeSymbols";
 
 export default function ChecklistTree({
   id,
@@ -108,7 +109,7 @@ export default function ChecklistTree({
                 }${checkable?.items?.length ? ' and its subitems' : ''}`}
                   onClick={() => onSelfDeleted()}
                 >
-                  🗑
+                  {unicodeSymbols.DELETE}
                 </button>
               </li>
             )}
@@ -121,7 +122,7 @@ export default function ChecklistTree({
                 }`}
                 onClick={() => onChildAddedToSelf()}
               >
-                +
+                {unicodeSymbols.ADD}
               </button>
             )}
           </menu>

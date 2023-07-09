@@ -14,6 +14,7 @@ import { homeLoader } from "./homeLoader";
 import SearchForm from "../../reusable/form/search/SearchForm";
 import Logo from "../../reusable/logo/Logo";
 import HelpModal from "../../reusable/modal/help/HelpModal";
+import unicodeSymbols from "../../icons/UnicodeSymbols";
 
 export default function ChecklistResults() {
   const [list, setList] = useState([]);
@@ -62,13 +63,13 @@ export default function ChecklistResults() {
               setOpenDeleteDialog(true);
             }}
           >
-            <span className="button__icon">🗑</span>
+            <span className="button__icon">{unicodeSymbols.DELETE}</span>
             <span className="big-screen-only">Delete</span>
           </button>
         </li>
         <li>
           <Link className="button" to={`/my-checklists/${checklistObject.id}`}>
-            <span className="button__icon">&gt;</span>
+            <span className="button__icon">{unicodeSymbols.FORWARD}</span>
             <span className="big-screen-only">View</span>
           </Link>
         </li>
@@ -89,7 +90,7 @@ export default function ChecklistResults() {
               onClick={() => setOpenAddDialog(true)}
               title="Create Checklist"
             >
-              <span className="button__icon">+</span>
+              <span className="button__icon">{unicodeSymbols.ADD}</span>
               <span className="big-screen-only">Create Checklist</span>
             </button>
           </li>
@@ -98,7 +99,7 @@ export default function ChecklistResults() {
               className="button button--toolbar"
               onClick={() => setHelpModalOpen(true)}
             >
-              <span className="button__icon">?</span>
+              <span className="button__icon">{unicodeSymbols.HELP}</span>
               <span className="big-screen-only">Help</span>
             </button>
           </li>

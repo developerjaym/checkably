@@ -12,6 +12,7 @@ import "./TemplateResults.css";
 import { templateLoader } from "./templateLoader";
 import Logo from "../../../reusable/logo/Logo";
 import HelpModal from "../../../reusable/modal/help/HelpModal";
+import unicodeSymbols from "../../../icons/UnicodeSymbols";
 
 export default function TemplateResults() {
   const [list, setList] = useState([]);
@@ -43,7 +44,7 @@ export default function TemplateResults() {
       <CardMenu>
         <li>
           <Link className="button" to={`/templates/${checklistObject.id}`}>
-            <span className="button__icon">&gt;</span>
+            <span className="button__icon">{unicodeSymbols.FORWARD}</span>
             <span className="big-screen-only">View</span>
           </Link>
         </li>
@@ -62,7 +63,7 @@ export default function TemplateResults() {
               className="button button--toolbar"
               onClick={() => setHelpModalOpen(true)}
             >
-              <span className="button__icon">?</span>
+              <span className="button__icon">{unicodeSymbols.HELP}</span>
               <span className="big-screen-only">Help</span>
             </button>
           </li>

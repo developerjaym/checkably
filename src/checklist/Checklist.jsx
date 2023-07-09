@@ -10,6 +10,7 @@ import Logo from "../reusable/logo/Logo";
 import HelpModal from "../reusable/modal/help/HelpModal";
 import csvify from "../utility/csvify";
 import blobify from "../utility/blobify";
+import unicodeSymbols from "../icons/UnicodeSymbols";
 
 export default function Checklist() {
   const { checklistId } = useParams();
@@ -76,7 +77,7 @@ export default function Checklist() {
               className="button button--toolbar"
               aria-label="Go back to previous page."
             >
-              <span className="button__icon">&lt;</span>
+              <span className="button__icon">{unicodeSymbols.BACK}</span>
               <span className="big-screen-only">Back</span>
             </NavLink>
           </li>
@@ -86,7 +87,7 @@ export default function Checklist() {
               onClick={clone}
               title="Clone this checklist"
             >
-              <span className="button__icon">🖇</span>
+              <span className="button__icon">{unicodeSymbols.CLONE}</span>
               <span className="big-screen-only">Clone</span>
             </button>
           </li>
@@ -98,7 +99,7 @@ export default function Checklist() {
                   onClick={() => setOpenDeleteDialog(true)}
                   title="Delete this checklist"
                 >
-                  <span className="button__icon">🗑</span>
+                  <span className="button__icon">{unicodeSymbols.DELETE}</span>
                   <span className="big-screen-only">Delete</span>
                 </button>
               </li>
@@ -109,7 +110,7 @@ export default function Checklist() {
                   title="Edit name, description, and tags"
                   onClick={() => setOpenUpdateDialog(true)}
                 >
-                  <span className="button__icon button__icon--pencil">✏</span>
+                  <span className="button__icon button__icon--pencil">{unicodeSymbols.EDIT}</span>
                   <span className="big-screen-only">Edit</span>
                 </button>
               </li>
@@ -121,7 +122,7 @@ export default function Checklist() {
               className="button button--toolbar"
               onClick={() => downloadCSV()}
             >
-              <span className="button__icon">⭳</span>
+              <span className="button__icon">{unicodeSymbols.DOWNLOAD}</span>
               <span className="big-screen-only">Download</span>
             </a>
           </li>
@@ -130,7 +131,7 @@ export default function Checklist() {
               className="button button--toolbar"
               onClick={() => setHelpModalOpen(true)}
             >
-              <span className="button__icon">?</span>
+              <span className="button__icon">{unicodeSymbols.HELP}</span>
               <span className="big-screen-only">Help</span>
             </button>
           </li>
