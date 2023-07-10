@@ -121,6 +121,7 @@ export default function Checklist() {
               ref={downloadButtonRef}
               className="button button--toolbar"
               onClick={() => downloadCSV()}
+              title="Download this checklist as a CSV file"
             >
               <span className="button__icon">{unicodeSymbols.DOWNLOAD}</span>
               <span className="big-screen-only">Download</span>
@@ -130,6 +131,7 @@ export default function Checklist() {
             <button
               className="button button--toolbar"
               onClick={() => setHelpModalOpen(true)}
+              title="See information about how to use this app"
             >
               <span className="button__icon">{unicodeSymbols.HELP}</span>
               <span className="big-screen-only">Help</span>
