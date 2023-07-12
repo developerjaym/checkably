@@ -9,10 +9,9 @@
     column-gap: var(--wide);
   }
 
-  .header__img {
-    background: rgb(var(--accent-foreground-rgb));
-    padding: var(--narrow);
-    border-radius: var(--radius);
+  .icon--header {
+    width: 24px;
+    height: 24px;
   }
 
   @media print {
