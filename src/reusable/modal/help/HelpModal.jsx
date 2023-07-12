@@ -26,14 +26,32 @@ export default function HelpModal({ open, onCanceled }) {
       <Card>
         <CardHeader title={"Help"} icon={icons.help} />
         <CardBody>
-          <p className="dialog__paragraph">
-            You can create a checklist by hitting the <div className="button-replica"><Icon icon={icons.add} className="button__icon"/> <span className="big-screen-only">Create Checklist</span></div>
-            button from the &apos;My Checklists&apos; page.</p> 
-            <p className="dialog__paragraph">You can also hit the
-            <div className="button-replica"><Icon icon={icons.clone} className="button__icon"/> <span className="big-screen-only">Clone</span></div> button on the &apos;Templates&apos; page. Either
-            way, you&apos;ll end up with a checklist you can use to keep track
-            of your most important work.
-          </p>
+          <div className="dialog__paragraph">
+            You can create a checklist by hitting the{" "}
+            <div
+              className="button-replica"
+              role="img"
+              aria-description="Picture of the 'Create Checklist' button"
+            >
+              <Icon icon={icons.add} className="button__icon" />{" "}
+              <span className="big-screen-only">Create Checklist</span>
+            </div>
+            button from the &apos;My Checklists&apos; page.
+          </div>
+          <div className="dialog__paragraph">
+            You can also hit the
+            <div
+              className="button-replica"
+              role="img"
+              aria-description="Picture of the 'Clone' button"
+            >
+              <Icon icon={icons.clone} className="button__icon" />{" "}
+              <span className="big-screen-only">Clone</span>
+            </div>{" "}
+            button on the &apos;Templates&apos; page. Either way, you&apos;ll
+            end up with a checklist you can use to keep track of your most
+            important work.
+          </div>
         </CardBody>
         <CardMenu>
           <li>
