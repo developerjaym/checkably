@@ -133,7 +133,7 @@ main {
   background-color: rgb(var(--accent-background-rgb));
 }
 
-.link--active path, .button--submit path, .icon--header path {
+.link--active path, .button--submit path, .icon--header path, .button--primary path {
   fill: rgb(var(--accent-foreground-rgb)) !important;
 }
 
@@ -194,6 +194,10 @@ main {
   background-color: rgba(var(--foreground-rgb), 0.15);
 }
 
+.button:disabled {
+  filter: grayscale();
+}
+
 .button__icon {
   min-height: 26px;
   min-width: 26px;
@@ -239,6 +243,12 @@ main {
   }
   .page__title {
     margin: 0 var(--wide);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  :root {
+    --wide: 8px;
   }
 }
 

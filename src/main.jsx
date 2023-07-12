@@ -10,6 +10,7 @@ import Checklist from './checklist/Checklist';
 import './index.css';
 import ChecklistResults from './routes/home/ChecklistResults';
 import TemplateResults from './routes/templates/results/TemplateResults';
+import Import from './routes/import/Import';
 
 const router = createHashRouter([
   {
@@ -33,8 +34,8 @@ const router = createHashRouter([
         element: <Checklist/>
       },
       {
-        path: "/import",
-        element: <h1>Import is under construction</h1>
+        path: "/import/:importId",
+        element: <Import/>
       },
       {
         path:"/",

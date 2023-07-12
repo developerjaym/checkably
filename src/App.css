@@ -27,18 +27,18 @@
 
   width: 100%;
   box-shadow: -1px -1px 8px 1px var(--shadow);
-
 }
 
 .app__nav {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  flex-grow: 2;
+  column-gap: 1px;
+  background-color: rgb(var(--foreground-rgb));
 }
 
 .app__nav .link {
-    width: 100%;
-    padding: var(--wide);
+  width: 100%;
+  padding: var(--wide);
 }
 
 .app__nav .button {

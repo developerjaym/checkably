@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
+import icons from "../icons/Icons";
+import Icon from "../reusable/icon/Icon";
 import storageService from "../services/storage/StorageService";
 import "./Checklist.css";
-import unicodeSymbols from "../icons/UnicodeSymbols";
-import Icon from "../reusable/icon/Icon";
-import icons from "../icons/Icons";
 
 export default function ChecklistTree({
   id,

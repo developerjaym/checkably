@@ -27,7 +27,7 @@
     background-color: var(--happy-background);
 }
 .toast--sad {
-    background-color: var(--sad-background);
+    background-color: var(--warning-background);
 
 }
 .toast p {

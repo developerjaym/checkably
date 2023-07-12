@@ -1,5 +1,16 @@
 import unflattenData from "../../utility/unflattenData";
 import templates from "./localTemplates";
+const recursivelyChangeIds = (node, newParentId) => {
+  node.id = crypto.randomUUID();
+  node.isTemplate = false;
+  if (newParentId) {
+    node.parent = newParentId;
+  }
+  if(!node.items) {
+    console.log("error here?", JSON.stringify(node, null, 2));
+  }
+  node.items.forEach((item) => recursivelyChangeIds(item, node.id));
+};
 
 const textSearchMatches = (property, queryTerm) => {
   return property.toLowerCase().includes(queryTerm.toLowerCase().trim());
@@ -62,24 +73,19 @@ class LocalStorageService {
     }
     return structuredClone(root);
   }
+  async import(data) {
+    const tree = unflattenData(data)[0];
+    recursivelyChangeIds(tree);
+    this.#recursivelyPost(tree);
+    return tree.id;
+  }
   async clone(id) {
     const templateTree = await this.readOneDeep(id);
     const templateRootClone = structuredClone(templateTree);
     templateRootClone.title = `[CLONED] ${templateRootClone.title}`;
-    const recursivelyChangeIds = (node, newParentId) => {
-      node.id = crypto.randomUUID();
-      node.isTemplate = false;
-      if (newParentId) {
-        node.parent = newParentId;
-      }
-      node.items.forEach((item) => recursivelyChangeIds(item, node.id));
-    };
-    const recursivelyPost = (node) => {
-      this.post({ ...node, items: null });
-      node.items.forEach((item) => recursivelyPost(item));
-    };
+    
     recursivelyChangeIds(templateRootClone);
-    recursivelyPost(templateRootClone);
+    this.#recursivelyPost(templateRootClone);
     return templateRootClone.id;
   }
   async post(value) {
@@ -106,6 +112,10 @@ class LocalStorageService {
     );
     this.#update();
     return true;
+  }
+  #recursivelyPost(node) {
+    this.post({ ...node, items: null });
+    node.items.forEach((item) => this.#recursivelyPost(item));
   }
   #update() {
     localStorage.setItem(

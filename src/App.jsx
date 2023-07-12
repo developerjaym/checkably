@@ -24,7 +24,6 @@ function App() {
         </nav>
       </footer>
       <Toast />
-      {/* <HelpModal open={helpModalOpen} onCanceled={() => setHelpModalOpen(false)}/> */}
     </>
   );
 }

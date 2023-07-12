@@ -22,7 +22,7 @@ export default function HelpModal({ open, onCanceled }) {
   };
 
   return (
-    <dialog id="delete-dialog" className="dialog" ref={dialogRef}>
+    <dialog id="help-dialog" className="dialog" ref={dialogRef}>
       <Card>
         <CardHeader title={"Help"} icon={icons.help} />
         <CardBody>

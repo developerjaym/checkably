@@ -1,18 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
+import icons from "../icons/Icons";
+import Icon from "../reusable/icon/Icon";
+import Logo from "../reusable/logo/Logo";
 import ConfirmDeletionModal from "../reusable/modal/confirmDeletion/ConfirmDeletionModal";
+import HelpModal from "../reusable/modal/help/HelpModal";
+import ShareModal from "../reusable/modal/share/ShareModal";
 import UpdateChecklistModal from "../reusable/modal/updateChecklist/UpdateChecklistModal";
 import storageService from "../services/storage/StorageService";
 import { TOAST_MOODS, toastManager } from "../toast/ToastService";
+import blobify from "../utility/blobify";
+import csvify from "../utility/csvify";
 import "./Checklist.css";
 import ChecklistTree from "./ChecklistTree";
-import Logo from "../reusable/logo/Logo";
-import HelpModal from "../reusable/modal/help/HelpModal";
-import csvify from "../utility/csvify";
-import blobify from "../utility/blobify";
-import unicodeSymbols from "../icons/UnicodeSymbols";
-import Icon from "../reusable/icon/Icon";
-import icons from "../icons/Icons";
+import flattenData from "../utility/flattenData";
 
 export default function Checklist() {
   const { checklistId } = useParams();
@@ -20,10 +21,12 @@ export default function Checklist() {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [openUpdateDialog, setOpenUpdateDialog] = useState(false);
   const [helpModalOpen, setHelpModalOpen] = useState(false);
+  const [shareModalOpen, setShareModalOpen] = useState(false);
   const downloadButtonRef = useRef(null);
 
   const navigate = useNavigate();
   const correctBackRoute = root?.isTemplate ? "/templates" : "/my-checklists";
+  
   useEffect(() => {
     storageService
       .readOne(checklistId)
@@ -132,6 +135,16 @@ export default function Checklist() {
           <li>
             <button
               className="button button--toolbar"
+              onClick={() => setShareModalOpen(true)}
+              title="Share a copy of this checklist"
+            >
+              <Icon icon={icons.share} className="button__icon"/>
+              <span className="big-screen-only">Share</span>
+            </button>
+          </li>
+          <li>
+            <button
+              className="button button--toolbar"
               onClick={() => setHelpModalOpen(true)}
               title="See information about how to use this app"
             >
@@ -167,6 +180,7 @@ export default function Checklist() {
         open={helpModalOpen}
         onCanceled={() => setHelpModalOpen(false)}
       />
+      <ShareModal id={root?.id} open={shareModalOpen} onCanceled={() => setShareModalOpen(false)}/>
     </>
   );
 }

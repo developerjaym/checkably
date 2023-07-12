@@ -1,0 +1,7 @@
+.share__container {
+    display: flex;
+}
+
+.share__link {
+    flex-grow: 2;
+}

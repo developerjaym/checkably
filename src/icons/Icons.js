@@ -65,6 +65,14 @@ const icons = {
         src: "./cancel.svg",
         alt: "X"
     },
+    share: {
+        src: "./share.svg",
+        alt: "Share icon"
+    },
+    clipboard: {
+        src: "./copy.svg",
+        alt: "Clipboard"
+    },
 }
 
 export default icons;
