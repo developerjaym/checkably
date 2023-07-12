@@ -6,9 +6,12 @@ import CardBody from "../../card/CardBody";
 import CardHeader from "../../card/CardHeader";
 import ChecklistMetadataForm from "../../form/ChecklistMetadataForm";
 import "./AddChecklistModal.css";
+import Icon from "../../icon/Icon";
+import icons from "../../../icons/Icons";
 
 export default function AddChecklistModal({ open, onClose }) {
   const dialogRef = useRef(null);
+  const formRef = useRef(null);
   const navigate = useNavigate();
 
   if (open) {
@@ -20,7 +23,7 @@ export default function AddChecklistModal({ open, onClose }) {
 
   const closeDialog = (e) => {
     e?.preventDefault();
-    e?.target?.parentNode?.parentNode?.reset();
+    formRef.current.reset()
     dialogRef.current.close();
     onClose();
   };
@@ -40,12 +43,14 @@ export default function AddChecklistModal({ open, onClose }) {
       <Card>
         <CardHeader title={"Create New Checklist"} />
         <CardBody>
-          <ChecklistMetadataForm onSubmit={onCreate}>
-            <button className="button button--primary" value="default">
-              Create!
+          <ChecklistMetadataForm onSubmit={onCreate} formRef={formRef}>
+          <button className="button button--submit" value="default">
+              <Icon icon={icons.ok} className="button__icon" />
+              <span className="big-screen-only">Save</span>
             </button>
             <button className="button" value="cancel" onClick={closeDialog}>
-              Never mind!
+              <Icon icon={icons.cancel} className="button__icon" />
+              <span className="big-screen-only">Never mind!</span>
             </button>
           </ChecklistMetadataForm>
         </CardBody>

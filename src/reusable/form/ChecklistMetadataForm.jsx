@@ -6,6 +6,7 @@ export default function ChecklistMetadataForm({
   defaultValues = { title: "", tags: [], description: "" },
   onSubmit,
   children,
+  formRef
 }) {
   const presubmit = (e) => {
     e.preventDefault();
@@ -16,7 +17,7 @@ export default function ChecklistMetadataForm({
   };
 
   return (
-    <form className="form" onSubmit={presubmit}>
+    <form className="form" onSubmit={presubmit} ref={formRef}>
       <label className="label">
         <span className="label__text">Checklist Title</span>
         <input

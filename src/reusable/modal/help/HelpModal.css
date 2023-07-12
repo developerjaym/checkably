@@ -1,0 +1,18 @@
+
+.dialog__paragraph {
+    line-height: 1.5rem;
+}
+.button-replica {
+    display: inline-flex !important;
+    margin: 0 var(--narrow) 0 var(--narrow);
+    padding: calc(var(--narrow) / 2) !important;
+    column-gap: calc(var(--narrow) / 2) !important;
+    font-size: 0.72rem !important;
+}
+
+.button-replica .icon {
+    min-width: 1rem;
+    width: 1rem;
+    min-height: 1rem;
+    height: 1rem;
+}

@@ -13,6 +13,7 @@ import { templateLoader } from "./templateLoader";
 import Logo from "../../../reusable/logo/Logo";
 import HelpModal from "../../../reusable/modal/help/HelpModal";
 import unicodeSymbols from "../../../icons/UnicodeSymbols";
+import Icon from "../../../reusable/icon/Icon";
 
 export default function TemplateResults() {
   const [list, setList] = useState([]);
@@ -37,14 +38,14 @@ export default function TemplateResults() {
 
   const checklistCards = data.map((checklistObject) => (
     <Card key={checklistObject.id}>
-      <CardHeader title={checklistObject.title} icon={icons.logo} />
+      <CardHeader title={checklistObject.title} icon={icons.template} />
       <CardBody>
         <p>{checklistObject.description}</p>
       </CardBody>
       <CardMenu>
         <li>
           <Link className="button" to={`/templates/${checklistObject.id}`}>
-            <span className="button__icon">{unicodeSymbols.FORWARD}</span>
+          <Icon icon={icons.forward} className="button__icon"/>
             <span className="big-screen-only">View</span>
           </Link>
         </li>
@@ -64,7 +65,7 @@ export default function TemplateResults() {
               onClick={() => setHelpModalOpen(true)}
               title="See information about how to use this app"
             >
-              <span className="button__icon">{unicodeSymbols.HELP}</span>
+             <Icon icon={icons.help} className="button__icon"/>
               <span className="big-screen-only">Help</span>
             </button>
           </li>

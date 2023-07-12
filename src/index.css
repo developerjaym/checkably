@@ -124,6 +124,8 @@ main {
   display: flex;
   justify-content: center;
   cursor: pointer;
+  align-items: center;
+  column-gap: var(--wide);
 }
 
 .link--active {
@@ -131,7 +133,11 @@ main {
   background-color: rgb(var(--accent-background-rgb));
 }
 
-.button {
+.link--active path, .button--submit path, .icon--header path {
+  fill: rgb(var(--accent-foreground-rgb)) !important;
+}
+
+.button, .button-replica {
   background-color: rgb(var(--background-rgb));
   color: rgb(var(--foreground-rgb));
 
@@ -151,7 +157,9 @@ main {
 .button--icon {
   border: none;
   background: none;
+  padding: var(--narrow);
 }
+
 .button--toolbar {
   border-style: solid;
   border-color: rgb(var(--foreground-rgb));
@@ -189,15 +197,17 @@ main {
 .button__icon {
   min-height: 26px;
   min-width: 26px;
-  font-weight: 900;
+  height: 26px;
+  width: 26px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.button__icon--pencil {
-  transform: rotate(125deg);
+.button__icon--dense {
+  min-height: 20px;
+  min-width: 20px;
 }
 
 .small-text {

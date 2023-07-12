@@ -11,6 +11,8 @@ import HelpModal from "../reusable/modal/help/HelpModal";
 import csvify from "../utility/csvify";
 import blobify from "../utility/blobify";
 import unicodeSymbols from "../icons/UnicodeSymbols";
+import Icon from "../reusable/icon/Icon";
+import icons from "../icons/Icons";
 
 export default function Checklist() {
   const { checklistId } = useParams();
@@ -77,7 +79,7 @@ export default function Checklist() {
               className="button button--toolbar"
               aria-label="Go back to previous page."
             >
-              <span className="button__icon">{unicodeSymbols.BACK}</span>
+              <Icon icon={icons.back} className="button__icon"/>
               <span className="big-screen-only">Back</span>
             </NavLink>
           </li>
@@ -87,7 +89,7 @@ export default function Checklist() {
               onClick={clone}
               title="Clone this checklist"
             >
-              <span className="button__icon">{unicodeSymbols.CLONE}</span>
+              <Icon icon={icons.clone} className="button__icon"/>
               <span className="big-screen-only">Clone</span>
             </button>
           </li>
@@ -99,7 +101,7 @@ export default function Checklist() {
                   onClick={() => setOpenDeleteDialog(true)}
                   title="Delete this checklist"
                 >
-                  <span className="button__icon">{unicodeSymbols.DELETE}</span>
+                  <Icon icon={icons.delete} className="button__icon"/>
                   <span className="big-screen-only">Delete</span>
                 </button>
               </li>
@@ -110,7 +112,7 @@ export default function Checklist() {
                   title="Edit name, description, and tags"
                   onClick={() => setOpenUpdateDialog(true)}
                 >
-                  <span className="button__icon button__icon--pencil">{unicodeSymbols.EDIT}</span>
+                <Icon icon={icons.edit} className="button__icon"/>
                   <span className="big-screen-only">Edit</span>
                 </button>
               </li>
@@ -123,7 +125,7 @@ export default function Checklist() {
               onClick={() => downloadCSV()}
               title="Download this checklist as a CSV file"
             >
-              <span className="button__icon">{unicodeSymbols.DOWNLOAD}</span>
+              <Icon icon={icons.download} className="button__icon"/>
               <span className="big-screen-only">Download</span>
             </a>
           </li>
@@ -133,7 +135,7 @@ export default function Checklist() {
               onClick={() => setHelpModalOpen(true)}
               title="See information about how to use this app"
             >
-              <span className="button__icon">{unicodeSymbols.HELP}</span>
+              <Icon icon={icons.help} className="button__icon"/>
               <span className="big-screen-only">Help</span>
             </button>
           </li>

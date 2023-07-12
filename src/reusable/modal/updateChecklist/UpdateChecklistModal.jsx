@@ -3,7 +3,9 @@ import Card from "../../card/Card";
 import CardBody from "../../card/CardBody";
 import CardHeader from "../../card/CardHeader";
 import ChecklistMetadataForm from "../../form/ChecklistMetadataForm";
-import unicodeSymbols from "../../../icons/UnicodeSymbols"
+import unicodeSymbols from "../../../icons/UnicodeSymbols";
+import Icon from "../../icon/Icon";
+import icons from "../../../icons/Icons";
 
 export default function UpdateChecklistModal({
   metadata,
@@ -12,7 +14,7 @@ export default function UpdateChecklistModal({
   onSave,
 }) {
   const dialogRef = useRef(null);
-  
+  const formRef = useRef(null);
 
   if (open) {
     dialogRef.current?.close();
@@ -23,7 +25,7 @@ export default function UpdateChecklistModal({
 
   const closeDialog = (e) => {
     e.preventDefault();
-    e.target?.parentNode?.parentNode?.reset();
+    formRef.current.reset();
     dialogRef.current.close();
     onCancel();
   };
@@ -37,13 +39,18 @@ export default function UpdateChecklistModal({
       <Card>
         <CardHeader title={`Update ${metadata.title}`} />
         <CardBody>
-          <ChecklistMetadataForm onSubmit={presubmit} defaultValues={metadata}>
+          <ChecklistMetadataForm
+            onSubmit={presubmit}
+            defaultValues={metadata}
+            formRef={formRef}
+          >
             <button className="button button--submit" value="default">
-              <span className="button__icon">{unicodeSymbols.SAVE}</span>
+              <Icon icon={icons.ok} className="button__icon" />
               <span className="big-screen-only">Save</span>
             </button>
             <button className="button" value="cancel" onClick={closeDialog}>
-              Never mind!
+              <Icon icon={icons.cancel} className="button__icon" />
+              <span className="big-screen-only">Never mind!</span>
             </button>
           </ChecklistMetadataForm>
         </CardBody>

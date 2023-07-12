@@ -1,3 +1,5 @@
+import icons from "../../../icons/Icons";
+import Icon from "../../icon/Icon";
 import "./SearchForm.css";
 
 export default function SearchForm({onSearch, ariaLabel}) {
@@ -9,7 +11,7 @@ export default function SearchForm({onSearch, ariaLabel}) {
         onSubmit={onSearch}
       >
         <label className="label search__label">
-          <span className="label__text">🔍</span>
+        <Icon icon={icons.search} className="button__icon"/>
           <input className="input input--search" type="search" name="term" />
         </label>
       </form>)
