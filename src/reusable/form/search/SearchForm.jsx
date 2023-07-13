@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import icons from "../../../icons/Icons";
 import Icon from "../../icon/Icon";
 import "./SearchForm.css";
-import { datetimeMaker, ticker } from "../../../utility/Ticker";
 
 export default function SearchForm({
   onSearch,
@@ -16,7 +15,7 @@ export default function SearchForm({
   const onSubmit = (e) => {
     // if user hits enter, cancel any scheduled callback, call the callback
     e.preventDefault();
-    ticker.cancelTask(tickerId);
+    clearTimeout(tickerId);
     onSearch({
       ...additionalParameters,
       ...Object.fromEntries(new FormData(e.target)),
@@ -25,13 +24,13 @@ export default function SearchForm({
   const onChange = (key, newValue) => {
     // if user has typed something, cancel any existing scheduled callback, schedule the callback in x milliseconds
     setSearchQuery({ ...searchQuery, [key]: newValue });
-    ticker.cancelTask(tickerId);
-    const taskId = ticker.push(() => {
+    clearTimeout(tickerId);
+    const taskId = setTimeout(() => {
       onSearch({
         ...additionalParameters,
         ...Object.fromEntries(new FormData(formRef.current)),
       });
-    }, datetimeMaker(100));
+    }, 100);
     setTickerId(taskId);
   };
   return (

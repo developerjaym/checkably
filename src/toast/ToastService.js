@@ -1,16 +1,10 @@
-import { ticker, datetimeMaker } from "../utility/Ticker";
-
-
 class ToastManager {
   #subscribers;
   #toasts;
-  #ticker;
   static timeout = 5000;
   constructor() {
     this.#subscribers = {};
     this.#toasts = [];
-    this.#ticker = ticker;
-    this.#ticker.start();
   }
   subscribe(subscriber) {
     const id = crypto.randomUUID();
@@ -24,28 +18,27 @@ class ToastManager {
     const toast = {
       id: crypto.randomUUID(),
       message,
-      mood,
-      expiration: this.#createExpirationDate(),
+      mood
     };
-    this.#toasts.push(toast);
-    Object.values(this.#subscribers).forEach((subscriber) =>
-      subscriber(structuredClone(this.#toasts))
-    );
-    this.#ticker.push(() => {
+    // assign toast the id returned by setTimeout so it can be canceled later if user hits X
+    toast.id = setTimeout(() => {
       this.#toasts = this.#toasts.filter((element) => element.id !== toast.id);
       Object.values(this.#subscribers).forEach((subscriber) =>
         subscriber(structuredClone(this.#toasts))
       );
-    }, toast.expiration);
+    }, ToastManager.timeout);
+
+    this.#toasts.push(toast);
+    Object.values(this.#subscribers).forEach((subscriber) =>
+      subscriber(structuredClone(this.#toasts))
+    );
+    
   }
   cancel(toastId) {
     this.#toasts = this.#toasts.filter((element) => element.id !== toastId);
     Object.values(this.#subscribers).forEach((subscriber) =>
       subscriber(structuredClone(this.#toasts))
     );
-  }
-  #createExpirationDate() {
-    return datetimeMaker(ToastManager.timeout);
   }
 }
 
