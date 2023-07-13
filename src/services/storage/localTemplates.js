@@ -7,6 +7,7 @@ const templates = [
     tags: ["VACATION", "PACKING", "CRUISE"],
     isRoot: true,
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -15,6 +16,7 @@ const templates = [
     title: "Medications",
     parent: "f9e6974f-6fdf-46b3-abc3-aed64c2d0e7a",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -23,6 +25,7 @@ const templates = [
     title: "Swim",
     parent: "f9e6974f-6fdf-46b3-abc3-aed64c2d0e7a",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -31,6 +34,7 @@ const templates = [
     title: "Swimwears",
     parent: "9b3dda57-f870-4195-8c29-6f7a2e02def0",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -39,6 +43,7 @@ const templates = [
     title: "Towels",
     parent: "9b3dda57-f870-4195-8c29-6f7a2e02def0",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -47,6 +52,7 @@ const templates = [
     title: "Toiletries",
     parent: "f9e6974f-6fdf-46b3-abc3-aed64c2d0e7a",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -55,6 +61,7 @@ const templates = [
     title: "Toothbrushes",
     parent: "64e7b886-f8fe-47c9-8578-964b729db03d",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -63,6 +70,7 @@ const templates = [
     title: "Toothpastes",
     parent: "64e7b886-f8fe-47c9-8578-964b729db03d",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -71,6 +79,7 @@ const templates = [
     title: "Toothpaste 1",
     parent: "0be0633c-35f2-4876-93de-79b564479599",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -79,6 +88,7 @@ const templates = [
     title: "Toothpaste 2",
     parent: "0be0633c-35f2-4876-93de-79b564479599",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -87,6 +97,7 @@ const templates = [
     title: "Toothpaste 3",
     parent: "0be0633c-35f2-4876-93de-79b564479599",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -95,6 +106,7 @@ const templates = [
     title: "Deodorants",
     parent: "64e7b886-f8fe-47c9-8578-964b729db03d",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -103,6 +115,7 @@ const templates = [
     title: "Documents",
     parent: "f9e6974f-6fdf-46b3-abc3-aed64c2d0e7a",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -111,6 +124,7 @@ const templates = [
     title: "Passport 1",
     parent: "06889f06-dd04-4a11-843d-c32317e65438",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -119,6 +133,7 @@ const templates = [
     title: "Passport 2",
     parent: "06889f06-dd04-4a11-843d-c32317e65438",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -127,6 +142,7 @@ const templates = [
     title: "Passport 3",
     parent: "06889f06-dd04-4a11-843d-c32317e65438",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -135,6 +151,7 @@ const templates = [
     title: "Passport 4",
     parent: "06889f06-dd04-4a11-843d-c32317e65438",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -143,6 +160,7 @@ const templates = [
     title: "Painkillers",
     parent: "c1100adb-8359-45b5-aef9-1e5cf4919e66",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "4190ac91-8f35-435f-94c0-14b2134274d4",
@@ -150,6 +168,7 @@ const templates = [
     title: "Anti-Diarrhea",
     parent: "c1100adb-8359-45b5-aef9-1e5cf4919e66",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "7ef87527-774a-45fe-b696-939562b1a075",
@@ -157,6 +176,7 @@ const templates = [
     title: "Prescription",
     parent: "c1100adb-8359-45b5-aef9-1e5cf4919e66",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "0ad23460-1771-4732-a220-2498bb2424a1",
@@ -164,6 +184,7 @@ const templates = [
     title: "Prescription Documentation",
     parent: "7ef87527-774a-45fe-b696-939562b1a075",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "a6d3bea9-196e-4403-a046-040af2f20f95",
@@ -171,6 +192,7 @@ const templates = [
     title: "Boarding Passes",
     parent: "06889f06-dd04-4a11-843d-c32317e65438",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "e09109a5-23f5-401b-b002-af45a1878977",
@@ -178,6 +200,7 @@ const templates = [
     title: "Cruise Confirmation Numbers",
     parent: "06889f06-dd04-4a11-843d-c32317e65438",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "be56a12a-0287-4c12-a7f1-a029f6a6094a",
@@ -185,6 +208,7 @@ const templates = [
     title: "Covid Cards",
     parent: "06889f06-dd04-4a11-843d-c32317e65438",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "2dcee5a3-9bb5-4597-9f46-a1c3bc2f9a2e",
@@ -192,6 +216,7 @@ const templates = [
     title: "Clothing",
     parent: "f9e6974f-6fdf-46b3-abc3-aed64c2d0e7a",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "28318c5a-b98e-418f-9d6a-f6b47103cf51",
@@ -199,6 +224,7 @@ const templates = [
     title: "Formal Wear",
     parent: "2dcee5a3-9bb5-4597-9f46-a1c3bc2f9a2e",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "e53caa55-3cca-4620-bf55-00ba1b650be3",
@@ -206,6 +232,7 @@ const templates = [
     title: "Underwear",
     parent: "2dcee5a3-9bb5-4597-9f46-a1c3bc2f9a2e",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "26279e00-f5c2-4171-8d25-489fac606333",
@@ -213,6 +240,7 @@ const templates = [
     title: "Socks",
     parent: "2dcee5a3-9bb5-4597-9f46-a1c3bc2f9a2e",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "ef186845-60e0-4619-a4bd-9428b9a0a4e6",
@@ -220,6 +248,7 @@ const templates = [
     title: "Shoes",
     parent: "2dcee5a3-9bb5-4597-9f46-a1c3bc2f9a2e",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "1a1c054f-d786-4139-8cb6-fe4b626d08a5",
@@ -227,6 +256,7 @@ const templates = [
     title: "Formal Shoes",
     parent: "28318c5a-b98e-418f-9d6a-f6b47103cf51",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "bf121242-3e0f-47c2-a0b5-44db2ab6febb",
@@ -234,6 +264,7 @@ const templates = [
     title: "Suit",
     parent: "28318c5a-b98e-418f-9d6a-f6b47103cf51",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "87cfd553-dbd0-4e30-acdb-0e5dcb677c6c",
@@ -241,6 +272,7 @@ const templates = [
     title: "Dress",
     parent: "28318c5a-b98e-418f-9d6a-f6b47103cf51",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "8a0f3713-f156-497f-a177-f2ac7746586b",
@@ -248,6 +280,7 @@ const templates = [
     title: "Shirts",
     parent: "2dcee5a3-9bb5-4597-9f46-a1c3bc2f9a2e",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "9a2ffec8-caf1-4549-a765-6e429c029a1d",
@@ -255,6 +288,7 @@ const templates = [
     title: "Jackets",
     parent: "2dcee5a3-9bb5-4597-9f46-a1c3bc2f9a2e",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "1add0bad-091c-49cd-96b7-0f2768c19c56",
@@ -262,6 +296,7 @@ const templates = [
     title: "Poncho",
     parent: "2dcee5a3-9bb5-4597-9f46-a1c3bc2f9a2e",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "ebed75f9-d50e-46fa-81a9-53a13ccb552b",
@@ -269,6 +304,7 @@ const templates = [
     title: "Baby",
     parent: "f9e6974f-6fdf-46b3-abc3-aed64c2d0e7a",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "46b5d399-dae5-47da-b5de-fff314d8961a",
@@ -276,6 +312,7 @@ const templates = [
     title: "Stroller",
     parent: "ebed75f9-d50e-46fa-81a9-53a13ccb552b",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "32a347a3-59ec-4148-8522-c8954f85f3c4",
@@ -283,6 +320,7 @@ const templates = [
     title: "Carseat",
     parent: "ebed75f9-d50e-46fa-81a9-53a13ccb552b",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "b598d299-1a02-4192-86fb-84539c54ff36",
@@ -290,6 +328,7 @@ const templates = [
     title: "Toys",
     parent: "ebed75f9-d50e-46fa-81a9-53a13ccb552b",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "01035d8b-7ccd-4d6f-86d2-65a4b037e687",
@@ -297,6 +336,7 @@ const templates = [
     title: "Pacifiers",
     parent: "ebed75f9-d50e-46fa-81a9-53a13ccb552b",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "67bc6ef3-57cd-4a0d-b5d0-5208ab5a4eac",
@@ -304,6 +344,7 @@ const templates = [
     title: "Bottles",
     parent: "ebed75f9-d50e-46fa-81a9-53a13ccb552b",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "7dce28ef-983f-43f9-8ec3-6d5e96cbc88a",
@@ -311,6 +352,7 @@ const templates = [
     title: "Milk",
     parent: "ebed75f9-d50e-46fa-81a9-53a13ccb552b",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "6e719305-f865-4b64-9d0e-85266300b52d",
@@ -318,6 +360,7 @@ const templates = [
     title: "Snacks",
     parent: "ebed75f9-d50e-46fa-81a9-53a13ccb552b",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "f10f0a6f-8ead-4bb6-a01a-bf783ae8d29c",
@@ -325,6 +368,7 @@ const templates = [
     title: "Diapers",
     parent: "ebed75f9-d50e-46fa-81a9-53a13ccb552b",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "f60fc880-2b82-47e1-9e2a-f04d4c4a2d6d",
@@ -332,6 +376,7 @@ const templates = [
     title: "Wipes",
     parent: "ebed75f9-d50e-46fa-81a9-53a13ccb552b",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "eb04022f-a0ab-4780-bdb8-75a54648d076",
@@ -339,6 +384,7 @@ const templates = [
     title: "Sun Protection",
     parent: "f9e6974f-6fdf-46b3-abc3-aed64c2d0e7a",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "b6a15381-a2fa-45cf-9bd6-bf998c4188c1",
@@ -346,6 +392,7 @@ const templates = [
     title: "Sunscreen",
     parent: "eb04022f-a0ab-4780-bdb8-75a54648d076",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "481ace96-e249-4561-abd0-d49ba6e3bbee",
@@ -353,6 +400,7 @@ const templates = [
     title: "Sunglasses",
     parent: "eb04022f-a0ab-4780-bdb8-75a54648d076",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "a7633a82-acd4-4918-a325-57bd048a85e2",
@@ -360,6 +408,7 @@ const templates = [
     title: "Floss",
     parent: "64e7b886-f8fe-47c9-8578-964b729db03d",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "542a960e-e7f2-4db0-9636-ee48cddb44d0",
@@ -369,6 +418,7 @@ const templates = [
     tags: ["GROCERY", "FOOD", "SHOPPING"],
     isRoot: true,
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -377,6 +427,7 @@ const templates = [
     title: "Dairy",
     parent: "542a960e-e7f2-4db0-9636-ee48cddb44d0",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -385,6 +436,7 @@ const templates = [
     title: "Cheese",
     parent: "0d79ee5f-919c-471e-90d1-76e3d7e8b12f",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -393,6 +445,7 @@ const templates = [
     title: "Milk",
     parent: "0d79ee5f-919c-471e-90d1-76e3d7e8b12f",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -401,6 +454,7 @@ const templates = [
     title: "Yogurt",
     parent: "0d79ee5f-919c-471e-90d1-76e3d7e8b12f",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
     items: null,
   },
   {
@@ -409,6 +463,7 @@ const templates = [
     title: "Produce",
     parent: "542a960e-e7f2-4db0-9636-ee48cddb44d0",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "d84ebd9c-73b9-40d8-b526-9ec5764f417f",
@@ -416,6 +471,7 @@ const templates = [
     title: "Bananas",
     parent: "c0926d66-730e-4dff-a196-5fbff496d457",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "fe3fd30a-03e5-4440-8d16-e32dc2fc2731",
@@ -423,6 +479,7 @@ const templates = [
     title: "Apples",
     parent: "c0926d66-730e-4dff-a196-5fbff496d457",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "f98d1ad8-7354-4d66-b5f9-1f1aa3d2135b",
@@ -430,6 +487,7 @@ const templates = [
     title: "Strawberries",
     parent: "c0926d66-730e-4dff-a196-5fbff496d457",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "68dbb270-7942-4c05-adfe-7d7709e83ed1",
@@ -437,6 +495,7 @@ const templates = [
     title: "Potatoes",
     parent: "c0926d66-730e-4dff-a196-5fbff496d457",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "1e4a78a0-1e0a-48de-a09f-45462bda870c",
@@ -444,6 +503,7 @@ const templates = [
     title: "Salad",
     parent: "c0926d66-730e-4dff-a196-5fbff496d457",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "46c8e234-a401-495c-af83-46da37cdb620",
@@ -451,6 +511,7 @@ const templates = [
     title: "Meat",
     parent: "542a960e-e7f2-4db0-9636-ee48cddb44d0",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "d97aa773-09a6-49bc-a7a0-8d0d9eb133eb",
@@ -458,6 +519,7 @@ const templates = [
     title: "Ground Beef",
     parent: "46c8e234-a401-495c-af83-46da37cdb620",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "21c926e9-f877-4fc3-96e2-f27327592614",
@@ -465,6 +527,7 @@ const templates = [
     title: "Chicken",
     parent: "46c8e234-a401-495c-af83-46da37cdb620",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "ea7fd096-5053-4a45-b08e-3c3bf0c1dad2",
@@ -472,6 +535,7 @@ const templates = [
     title: "Pork",
     parent: "46c8e234-a401-495c-af83-46da37cdb620",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "fd1827f6-b9a4-4d4c-9cff-6b1b0c356f86",
@@ -479,6 +543,7 @@ const templates = [
     title: "Bread",
     parent: "542a960e-e7f2-4db0-9636-ee48cddb44d0",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "247952df-85ae-4dfb-a337-7dc34fc8b341",
@@ -486,6 +551,7 @@ const templates = [
     title: "Sandwich Bread",
     parent: "fd1827f6-b9a4-4d4c-9cff-6b1b0c356f86",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "a8eafc67-0909-47af-893d-c5e417425e10",
@@ -493,6 +559,7 @@ const templates = [
     title: "Rolls",
     parent: "fd1827f6-b9a4-4d4c-9cff-6b1b0c356f86",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "3bf65235-9c70-4cec-afc5-0ffc925bb343",
@@ -500,6 +567,7 @@ const templates = [
     title: "Non-Perishable",
     parent: "542a960e-e7f2-4db0-9636-ee48cddb44d0",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "cff5f4cb-5b2d-46a6-87ac-ec503e3f3fdc",
@@ -507,6 +575,7 @@ const templates = [
     title: "Pasta",
     parent: "3bf65235-9c70-4cec-afc5-0ffc925bb343",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "2b3391a4-9d71-4b49-a38a-1056cfcaa70b",
@@ -514,6 +583,7 @@ const templates = [
     title: "Tomato Sauce",
     parent: "3bf65235-9c70-4cec-afc5-0ffc925bb343",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "2fc60c84-0e0d-4ef2-9475-cfb3ef99d406",
@@ -521,6 +591,7 @@ const templates = [
     title: "Canned Beans",
     parent: "3bf65235-9c70-4cec-afc5-0ffc925bb343",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "ffafd293-ddb0-41fa-b766-3bc4cc12fb5b",
@@ -528,6 +599,7 @@ const templates = [
     title: "Canned Corn",
     parent: "3bf65235-9c70-4cec-afc5-0ffc925bb343",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "6eeb8b2e-6500-4067-aed1-98dfaf6cfabe",
@@ -535,6 +607,7 @@ const templates = [
     title: "Carrots",
     parent: "c0926d66-730e-4dff-a196-5fbff496d457",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "aadcc6a8-37f2-48fa-8539-48836b76c9a7",
@@ -542,6 +615,7 @@ const templates = [
     title: "Granola Bars",
     parent: "3bf65235-9c70-4cec-afc5-0ffc925bb343",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "5aaff189-3f65-40a7-92eb-271d57539f88",
@@ -549,6 +623,7 @@ const templates = [
     title: "Cereal",
     parent: "3bf65235-9c70-4cec-afc5-0ffc925bb343",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "d38dff10-b3df-4c80-b78a-c49d1f34a8b2",
@@ -556,6 +631,7 @@ const templates = [
     title: "Shredded",
     parent: "55b97fbc-6917-40ee-944f-def83af38d56",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
   {
     id: "dc0c1ece-93bb-49c0-9af0-048dab952c7c",
@@ -563,6 +639,7 @@ const templates = [
     title: "Sliced",
     parent: "55b97fbc-6917-40ee-944f-def83af38d56",
     isTemplate: true,
+    timestamp: "1970-01-01T00:00:00.000Z",
   },
 ];
 

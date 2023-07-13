@@ -13,7 +13,6 @@ import blobify from "../utility/blobify";
 import csvify from "../utility/csvify";
 import "./Checklist.css";
 import ChecklistTree from "./ChecklistTree";
-import flattenData from "../utility/flattenData";
 
 export default function Checklist() {
   const { checklistId } = useParams();
