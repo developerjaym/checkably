@@ -6,6 +6,8 @@ import CardMenu from "../../card/CardMenu";
 import "./ConfirmDeletionModal.css";
 import storageService from "../../../services/storage/StorageService";
 import { TOAST_MOODS, toastManager } from "../../../toast/ToastService";
+import icons from "../../../icons/Icons";
+import Icon from "../../icon/Icon";
 
 export default function ConfirmDeletionModal({
   open,
@@ -41,22 +43,21 @@ export default function ConfirmDeletionModal({
       ref={confirmDeletionDialogRef}
     >
       <Card>
-        <CardHeader title={"Confirm"} />
+        <CardHeader title={"Confirm"} icon={icons.delete}/>
         <CardBody>
           <p>Are you sure? Like really really sure you want to delete this?</p>
         </CardBody>
         <CardMenu>
           <li>
-            <button
-              className="button button--primary"
-              onClick={confirmDeletion}
-            >
-              Yes, delete it.
+            <button className="button button--primary" onClick={confirmDeletion}>
+              <Icon icon={icons.delete} className="button__icon" />
+              <span className="big-screen-only">Yes, delete it.</span>
             </button>
           </li>
           <li>
             <button className="button" onClick={closeConfirmDeletionDialog}>
-              Oops, do not delete!
+              <Icon icon={icons.cancel} className="button__icon" />
+              <span className="big-screen-only">Oops, never mind!</span>
             </button>
           </li>
         </CardMenu>

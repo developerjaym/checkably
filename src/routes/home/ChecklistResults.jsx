@@ -5,17 +5,16 @@ import Card from "../../reusable/card/Card";
 import CardBody from "../../reusable/card/CardBody";
 import CardHeader from "../../reusable/card/CardHeader";
 import CardMenu from "../../reusable/card/CardMenu";
+import SearchForm from "../../reusable/form/search/SearchForm";
+import Icon from "../../reusable/icon/Icon";
+import Logo from "../../reusable/logo/Logo";
 import AddChecklistModal from "../../reusable/modal/addChecklist/AddChecklistModal";
 import ConfirmDeletionModal from "../../reusable/modal/confirmDeletion/ConfirmDeletionModal";
+import HelpModal from "../../reusable/modal/help/HelpModal";
 import storageService from "../../services/storage/StorageService";
 import unflattenData from "../../utility/unflattenData";
 import "./ChecklistResults.css";
 import { homeLoader } from "./homeLoader";
-import SearchForm from "../../reusable/form/search/SearchForm";
-import Logo from "../../reusable/logo/Logo";
-import HelpModal from "../../reusable/modal/help/HelpModal";
-import unicodeSymbols from "../../icons/UnicodeSymbols";
-import Icon from "../../reusable/icon/Icon";
 
 export default function ChecklistResults() {
   const [list, setList] = useState([]);

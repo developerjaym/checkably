@@ -6,14 +6,45 @@ const recursivelyChangeIds = (node, newParentId) => {
   if (newParentId) {
     node.parent = newParentId;
   }
-  if(!node.items) {
+  if (!node.items) {
     console.log("error here?", JSON.stringify(node, null, 2));
   }
   node.items.forEach((item) => recursivelyChangeIds(item, node.id));
 };
 
-const textSearchMatches = (property, queryTerm) => {
-  return property.toLowerCase().includes(queryTerm.toLowerCase().trim());
+const scoreChecklist = (queryObject) => (item) => {
+  let score = 0;
+
+  // tag
+  if (tagSearchMatches(item.tags, queryObject.term)) {
+    score += 10;
+  }
+
+  // title
+  if (textSearchMatches(item.title, queryObject.term, true)) {
+    score += 25;
+  }
+  else if (textSearchMatches(item.title, queryObject.term, false)) {
+    score += 5;
+  }
+
+  // description
+  if (textSearchMatches(item.description, queryObject.term, false)) {
+    score += 5;
+  }
+
+  // completion
+  if(item.checked) {
+    score -= 5;
+  }
+
+  return {item, score}
+}
+
+const textSearchMatches = (property, queryTerm, exact = false) => {
+  return exact
+    ? property.toLowerCase() === queryTerm.toLowerCase().trim()
+    : property.toLowerCase().includes(queryTerm.toLowerCase().trim());
 };
 
 const tagSearchMatches = (tags, queryTerm) => {
@@ -53,7 +84,10 @@ class LocalStorageService {
           tagSearchMatches(item.tags, queryObject.term) ||
           textSearchMatches(item.title, queryObject.term) ||
           textSearchMatches(item.description, queryObject.term)
-      );
+      )
+      .map(scoreChecklist(queryObject)).sort(
+        (searchScoreA, searchScoreB) =>  searchScoreB.score - searchScoreA.score
+      ).map(searchScore => searchScore.item);
   }
   async readOne(id) {
     const all = await this.read();
@@ -66,7 +100,7 @@ class LocalStorageService {
     return structuredClone(root);
   }
   async readOneDeep(id) {
-    const checklistTree = unflattenData((await this.read()));
+    const checklistTree = unflattenData(await this.read());
     const root = checklistTree.find((element) => `${element.id}` === id);
     if (!root) {
       throw Error(`Checklist with id ${id} was not found`);
@@ -83,7 +117,7 @@ class LocalStorageService {
     const templateTree = await this.readOneDeep(id);
     const templateRootClone = structuredClone(templateTree);
     templateRootClone.title = `[CLONED] ${templateRootClone.title}`;
-    
+
     recursivelyChangeIds(templateRootClone);
     this.#recursivelyPost(templateRootClone);
     return templateRootClone.id;
