@@ -1,10 +1,11 @@
-const datetimeMaker = (addSeconds) => {
+const datetimeMaker = (addMilliseconds) => {
     const date = new Date();
-    date.setSeconds(date.getSeconds() + addSeconds);
+    date.setMilliseconds(date.getMilliseconds() + addMilliseconds);
     return date;
   };
   
   class Ticker {
+    static CLEANUP_INTERVAL;
     #intervalInMS;
     #intervalId;
     #tasks;
@@ -17,7 +18,7 @@ const datetimeMaker = (addSeconds) => {
     start() {
       this.#paused = false;
       this.#intervalId = setInterval(() => this.#doTasks(), this.#intervalInMS);
-      this.push(() => this.#cleanUp(), datetimeMaker(1));
+      this.push(() => this.#cleanUp(), datetimeMaker(Ticker.CLEANUP_INTERVAL));
     }
     push(action, scheduledTime, id = crypto.randomUUID()) {
       this.#tasks.push({ id, action, scheduledTime, done: false });
@@ -40,7 +41,7 @@ const datetimeMaker = (addSeconds) => {
         // just cleanup task left
         this.cancel();
       } else {
-          this.push(() => this.#cleanUp(), datetimeMaker(1));
+          this.push(() => this.#cleanUp(), datetimeMaker(Ticker.CLEANUP_INTERVAL));
       }
     }
     #doTasks() {

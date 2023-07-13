@@ -5,7 +5,7 @@ class ToastManager {
   #subscribers;
   #toasts;
   #ticker;
-  static timeout = 5;
+  static timeout = 5000;
   constructor() {
     this.#subscribers = {};
     this.#toasts = [];

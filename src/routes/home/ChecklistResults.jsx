@@ -21,8 +21,6 @@ export default function ChecklistResults() {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [openAddDialog, setOpenAddDialog] = useState(false);
   const [helpModalOpen, setHelpModalOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState({term: '', isTemplate: false})
-  const [previousSearchTime, setPreviousSearchTime] = useState()
 
   const focusedNode = useRef(null);
   useEffect(() => {
