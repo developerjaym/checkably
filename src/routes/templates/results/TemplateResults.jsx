@@ -27,9 +27,7 @@ export default function TemplateResults() {
   }, []);
   const data = unflattenData(list);
 
-  const onSearch = (e) => {
-    e.preventDefault();
-    const searchQuery = Object.fromEntries(new FormData(e.target));
+  const onSearch = (searchQuery) => {
     storageService
       .search({ ...searchQuery, isTemplate: true })
       .then((results) => setList(results));

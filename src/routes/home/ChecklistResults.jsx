@@ -21,6 +21,8 @@ export default function ChecklistResults() {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [openAddDialog, setOpenAddDialog] = useState(false);
   const [helpModalOpen, setHelpModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState({term: '', isTemplate: false})
+  const [previousSearchTime, setPreviousSearchTime] = useState()
 
   const focusedNode = useRef(null);
   useEffect(() => {
@@ -37,11 +39,9 @@ export default function ChecklistResults() {
     homeLoader().then((newList) => setList(newList));
   };
 
-  const onSearch = (e) => {
-    e.preventDefault();
-    const searchQuery = Object.fromEntries(new FormData(e.target));
+  const onSearch = (searchQuery) => {
     storageService
-      .search({ ...searchQuery, isTemplate: false })
+      .search({...searchQuery, isTemplate: false})
       .then((results) => setList(results));
   };
 
