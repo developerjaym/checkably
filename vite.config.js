@@ -12,32 +12,32 @@ const manifestForPlugin = {
 		description: "A checklist app.",
 		icons: [
 			{
-				src: "./logo.png",
+				src: "./pwa/maskable_icon_x192.png",
 				sizes: "192x192",
 				type: "image/png",
+        purpose: "maskable",
 			},
 			{
-				src: "./logo.png",
+				src: "./pwa/maskable_icon_x512.png",
 				sizes: "512x512",
 				type: "image/png",
+        purpose: "maskable",
 			},
 			{
-				src: "./logo.png",
-				sizes: "180x180",
+				src: "./pwa/maskable_icon_x384.png",
+				sizes: "384x384",
 				type: "image/png",
-				purpose: "apple touch icon",
+				purpose: "maskable",
 			},
-			{
+      {
 				src: "./logo.png",
-				sizes: "225x225",
-				type: "image/png",
-				purpose: "any maskable",
+				sizes: "512x512",
+				type: "image/png"
 			},
 		],
 		theme_color: "black",
 		background_color: "black",
 		display: "standalone",
-		// scope: "/",
 		start_url: ".",
 		orientation: "portrait",
 	},
