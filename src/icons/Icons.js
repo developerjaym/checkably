@@ -6,71 +6,71 @@ const icons = {
         alt: "Clip art of checklist"
     },
     add: {
-        src: "./add.svg",
+        src: "./icons/add.svg",
         alt: "Plus sign"
     },
     checked: {
-        src: "./checked.svg",
+        src: "./icons/checked.svg",
         alt: "Checked box"
     },
     clone: {
-        src: "./clone.svg",
+        src: "./icons/clone.svg",
         alt: "Dashed square over solid square"
     },
     upload: {
-        src: "./upload.svg",
+        src: "./icons/upload.svg",
         alt: "Cloud with downward pointing arrow"
     },
     download: {
-        src: "./download.svg",
+        src: "./icons/download.svg",
         alt: "Cloud with upward pointing arrow"
     },
     search: {
-        src: "./search.svg",
+        src: "./icons/search.svg",
         alt: "Magnifying glass"
     },
     help: {
-        src: "./help.svg",
+        src: "./icons/help.svg",
         alt: "Question mark"
     },
     forward: {
-        src: "./arrow_right.svg",
+        src: "./icons/arrow_right.svg",
         alt: "Right-pointing arrow"
     },
     back: {
-        src: "./arrow_left.svg",
+        src: "./icons/arrow_left.svg",
         alt: "Left-pointing arrow"
     },
     delete: {
-        src: "./delete.svg",
+        src: "./icons/delete.svg",
         alt: "Trash can"
     },
     template: {
-        src: "./template.svg",
+        src: "./icons/template.svg",
         alt: "Dashed square"
     },
     checklist: {
-        src: "./check_list_box.svg",
+        src: "./icons/check_list_box.svg",
         alt: "Checklist"
     },
     edit: {
-        src: "./edit.svg",
+        src: "./icons/edit.svg",
         alt: "Pencil"
     },
     ok: {
-        src: "./check_mark.svg",
+        src: "./icons/check_mark.svg",
         alt: "Check mark"
     },
     cancel: {
-        src: "./cancel.svg",
+        src: "./icons/cancel.svg",
         alt: "X"
     },
     share: {
-        src: "./share.svg",
+        src: "./icons/share.svg",
         alt: "Share icon"
     },
     clipboard: {
-        src: "./copy.svg",
+        src: "./icons/copy.svg",
         alt: "Clipboard"
     },
 }
