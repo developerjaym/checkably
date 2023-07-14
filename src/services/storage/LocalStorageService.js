@@ -143,6 +143,9 @@ class LocalStorageService {
     const checklist = this.#myChecklists.find(
       (checklist) => checklist.id === id
     );
+    if(!checklist) {
+      return;
+    }
     for (const key in patchValue) {
       checklist[key] = patchValue[key];
     }
