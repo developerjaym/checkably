@@ -8,6 +8,7 @@
   --neutral-background: rgb(var(--background-rgb));
   --shadow: rgba(var(--foreground-rgb), 0.15);
   --animation-duration: 0.25s;
+  --decoration-duration: 2s;
 
   --narrow: 4px;
   --wide: 16px;

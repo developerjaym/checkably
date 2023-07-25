@@ -3,6 +3,7 @@ import "./App.css";
 import { Toast } from "./toast/Toast";
 import Icon from "./reusable/icon/Icon";
 import icons from "./icons/Icons";
+import Decoration from "./reusable/decoration/Decoration";
 
 function App() {
   const determineNavLinkClassName = ({ isActive, isPending }) =>
@@ -24,6 +25,7 @@ function App() {
         </nav>
       </footer>
       <Toast />
+      <Decoration/>
     </>
   );
 }

@@ -13,6 +13,7 @@ import blobify from "../utility/blobify";
 import csvify from "../utility/csvify";
 import "./Checklist.css";
 import ChecklistTree from "./ChecklistTree";
+import { DECORATION_TYPES, decorationManager } from "../reusable/decoration/DecorationService";
 
 export default function Checklist() {
   const { checklistId } = useParams();
@@ -157,7 +158,7 @@ export default function Checklist() {
         <ChecklistTree
           key={`${root.title}-${root.id}`}
           id={root.id}
-          onChecked={(value) => {}}
+          onChecked={(value, checked) => {checked ? decorationManager.push(DECORATION_TYPES.CONFETTI): null}}
           onDeleted={() => {}}
         />
       </main>
